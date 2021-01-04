@@ -1,0 +1,25 @@
+.container3 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 150px;
+    bottom: 0;
+    margin: auto;
+    width: 600px;
+    height: 300px;
+
+    text-align: center;
+}
+
+.upper {
+    /*border: 2px solid black;*/
+    width: 10%;
+    height: 27%;
+}
+
+.lower {
+    /*border: 2px solid black;*/
+    width: 10%;
+    height: 6%;
+}
+
