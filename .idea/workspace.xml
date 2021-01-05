@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="" />
+    <list default="true" id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,10 +15,14 @@
   <component name="ComposerSettings">
     <execution />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GithubDefaultAccount">
     <option name="defaultAccountId" value="9ea76cbf-5204-4462-ba06-6045999abeab" />
   </component>
   <component name="ProjectId" id="1lqY7xgfajBzoF1rvXMa4njjsHb" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -79,6 +88,9 @@
       <workItem from="1609540116491" duration="3980000" />
       <workItem from="1609718356765" duration="6598000" />
       <workItem from="1609762149161" duration="5000" />
+      <workItem from="1609799734747" duration="61000" />
+      <workItem from="1609850423328" duration="86000" />
+      <workItem from="1609850641740" duration="1027000" />
     </task>
     <servers />
   </component>

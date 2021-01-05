@@ -282,6 +282,18 @@ function get_tradee_coin() {
     return mysqli_fetch_array($result)[0];
 }
 
+function array_unique_own($array) {
+    $new_array = [];
+    foreach ($array as $ar) {
+        if (!array_search($ar, $new_array)) {
+            if ($ar != "") {
+                array_push($new_array, $ar);
+            }
+        }
+    }
+    return $new_array;
+}
+
 function add_coin($user, $champion) {
     $conn = OpenCon();
     $sql = "SELECT inventory FROM user WHERE username = '$user'";
@@ -290,6 +302,19 @@ function add_coin($user, $champion) {
     $result = $result . $champion . ", ";
     $sql = "UPDATE user SET inventory = '$result' WHERE username = '$user'";
     mysqli_query($conn, $sql);
+
+    $sql = "SELECT inventory FROM user WHERE username = '$user'";
+
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result)[0];
+    $result = str_replace(", ", ",", $result);
+    $champions = explode(",", $result);
+    $unique_arr = array_unique_own($champions);
+    $unique = count($unique_arr);
+
+    $sql = "UPDATE user SET `unique` = '$unique' WHERE username = '$user'";
+    mysqli_query($conn, $sql);
+
     CloseCon($conn);
 }
 

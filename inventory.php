@@ -8,6 +8,7 @@ if (!isset($_COOKIE["spin-initiated"])) {
 }
 include "db_connect.php";
 include "externalPHPfiles/clear_data.php";
+include "externalPHPfiles/championDAO.php";
 clear_trades();
 ?>
 <!DOCTYPE html>
@@ -64,6 +65,13 @@ clear_trades();
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
         <input type="submit" name="lgt-button" value="Kijelentkezés">
     </form>
+    <?php
+    if (isset($_POST["delete"])) {
+        include "externalPHPfiles/inventory_selling.php";
+        remove_from_inventory($_SESSION["username"], $_POST["item_num"], true);
+        header("Location: inventory.php");
+    }
+    ?>
 
 </aside>
 <div style="position: relative; left: 15%;">
@@ -71,7 +79,7 @@ clear_trades();
     <?php
     $inventory = explode(",", get_inventory());
     $champions = array();
-    include "externalPHPfiles/championDAO.php";
+
     foreach ($inventory as $item) {
         array_push($champions, array("Hős" => $item, "Ritkaság" => get_rarity_by_champion($item)));
     }
@@ -124,12 +132,7 @@ clear_trades();
         </table>
     <?php endif; ?>
 
-    <?php
-        if (isset($_POST["delete"])) {
-            include "externalPHPfiles/inventory_selling.php";
-            remove_from_inventory($_SESSION["username"], $_POST["item_num"], true);
-        }
-    ?>
+
 
 </div>
 

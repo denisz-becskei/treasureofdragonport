@@ -91,6 +91,9 @@ if (get_status() != 1 && get_status() != 2) {
             <label for="post_news">Hír közzététele:</label>
             <input name="post_news" id="post_news" type="text">
             <br>
+            <label for="add_coin">Érme hozzáadása:</label>
+            <input name="add_coin" id="add_coin" type="text">
+            <br>
             <input type="submit" name="modification-btn" value="Módosítások elvégzése">
         </fieldset>
     </form>
@@ -106,8 +109,9 @@ include "externalPHPfiles/achievement_handler.php";
         $complete_achievement = $_POST["complete_achievement"];
         $uncomplete_achievement = $_POST["uncomplete_achievement"];
         $post_news = $_POST["post_news"];
+        $add_coin = $_POST["add_coin"];
 
-        $editing_data = [false, false, false, false, false, false, false];
+        $editing_data = [false, false, false, false, false, false, false, false];
         $status_to_give = 0;
 
         if ($spins_to_add != "") {
@@ -138,6 +142,10 @@ include "externalPHPfiles/achievement_handler.php";
 
         if ($post_news != "") {
             $editing_data[6] = true;
+        }
+
+        if ($add_coin != "") {
+            $editing_data[7] = true;
         }
 
         $conn = OpenCon();
@@ -188,6 +196,10 @@ include "externalPHPfiles/achievement_handler.php";
         if ($editing_data[6]) {
             include "externalPHPfiles/news.php";
             add_news($post_news);
+        }
+        if ($editing_data[7]) {
+            include "externalPHPfiles/trading_functionality.php";
+            add_coin($user_to_edit, $add_coin);
         }
         CloseCon($conn);
         header("Location: admin_panel.php");
