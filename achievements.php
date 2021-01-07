@@ -73,6 +73,21 @@ clear_trades();
         filter: grayscale(100%);
     }
 
+    .side_button {
+        border: 1px solid black;
+        width: calc(100% - 2px);
+        padding: 20px 0 20px 0;
+    }
+
+    .side_button:hover {
+        background-color: white;
+    }
+
+    a {
+        display: block;
+        width: 100%;
+    }
+
 </style>
 
 <body style="overflow-x: hidden">
@@ -82,33 +97,21 @@ clear_trades();
     echo "<h1 style='font-size: 24pt'>".get_felhasznalonev()."</h1><img src='".$avatars_coded[get_avatar()]."' alt='avatar' style='height: 100px;'><h2 style='font-size: 16px;'>".get_ign()."<img alt='max_rank' src='".select_image_by_rank()."' style='width: 30px; position:absolute; top: 200px;'></h2><h2 style='font-size: 16px;'><img src='https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png' alt='credits' width='20px' style='position: relative; top: 2px;'>".get_credits()."  <img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' alt='credits' width='20px' style='position: relative; top: 2px;'> ".get_coronia()."</h2>"; ?>
 
     <?php
-    $is_admin = (get_status() == 1 || get_status() == 2) ? "<input style='color: red' type='submit' name='redir-admin' value='Admin Panel'>" : "";
+    $is_admin = (get_status() == 1 || get_status() == 2) ? "<div class='side_button'><a style='text-decoration: none; color: red;' href='admin_panel.php'>Admin Panel</a></div>" : "";
 
-    echo
-    "<form action='achievements.php' method='POST'>
-        <input type='submit' name='redir-index' value='Kezdőlap'>
-        <input type='submit' name='redir-wheel' value='Szerencsekerék'>
-        <input type='submit' name='redir-trading' value='Éremcsere'>
-        <input type='submit' name='redir-inventory' value='Aranyzsák'>
-        <input type='submit' name='redir-leaderboard' value='Ranglista'>
-        <input type='submit' name='redir-achievements' value='Mérföldkövek'>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='index.php'>Kezdőlap</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='wheel.php'>Szerencsekerék</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='trading_actions.php'>Éremcsere</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='inventory.php'>Aranyzsák</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='leaderboard.php'>Ranglista</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
-    echo "<input type='submit' name='redir-settings' value='Beállítások'>
-    </form>";
-
-    if (isset($_POST["redir-index"])) {header("Location: index.php");}
-    if (isset($_POST["redir-wheel"])) {header("Location: wheel.php");}
-    if (isset($_POST["redir-trading"])) {header("Location: trading_actions.php");}
-    if (isset($_POST["redir-inventory"])) {header("Location: inventory.php");}
-    if (isset($_POST["redir-leaderboard"])) {header("Location: leaderboard.php");}
-    if (isset($_POST["redir-achievements"])) {header("Location: achievements.php");}
-    if (isset($_POST["redir-settings"])) {header("Location: settings.php");}
-    if (isset($_POST["redir-admin"])) {header("Location: admin_panel.php");}
+    echo "<div class='side_button'><a style='text-decoration: none; color: black;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
-        <input type="submit" name="lgt-button" value="Kijelentkezés">
+        <div class="side_button"><input style="background-color: transparent; border: none; padding: 0; margin: 0;" type="submit" name="lgt-button" value="Kijelentkezés"></div>
     </form>
 
 </aside>

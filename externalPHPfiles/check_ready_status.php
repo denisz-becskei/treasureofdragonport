@@ -16,4 +16,5 @@ if ($result["trader_ready"] == 1 && $result["tradee_ready"] == 1) {
 }
 
 CloseCon($conn);
+sleep(3);
 header("Location: ../finish_trade.php");

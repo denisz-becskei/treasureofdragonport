@@ -1,5 +1,7 @@
 <?php
 
+include "inventory_selling.php";
+
 function is_exists($code) {
     $conn = OpenCon();
 
@@ -282,18 +284,6 @@ function get_tradee_coin() {
     return mysqli_fetch_array($result)[0];
 }
 
-function array_unique_own($array) {
-    $new_array = [];
-    foreach ($array as $ar) {
-        if (!array_search($ar, $new_array)) {
-            if ($ar != "") {
-                array_push($new_array, $ar);
-            }
-        }
-    }
-    return $new_array;
-}
-
 function add_coin($user, $champion) {
     $conn = OpenCon();
     $sql = "SELECT inventory FROM user WHERE username = '$user'";
@@ -325,7 +315,6 @@ function swap() {
     $result = $conn->query($sql);
     $result = mysqli_fetch_array($result);
 
-    include "inventory_selling.php";
     remove_from_inventory($result["trader"], $result["trader_coin_index"], false);
     remove_from_inventory($result["tradee"], $result["tradee_coin_index"], false);
     add_coin($result["trader"], $result["tradee_coin"]);

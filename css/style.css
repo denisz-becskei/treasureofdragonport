@@ -40,14 +40,3 @@ body {
     position: relative;
     left: 15%;
 }
-
-.index_aside input {
-    width: 100%;
-    height: 50px;
-    background-color: transparent;
-    border-bottom: 1px solid gray;
-}
-
-.index_aside input:hover {
-    background-color: white;
-}

@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="">
+    <list default="true" id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="Fixed issue with inventory selling">
+      <change afterPath="$PROJECT_DIR$/scripts/nav.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/current_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/current_trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/check_ready_status.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/check_ready_status.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finish_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/finish_trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initiated_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/initiated_trade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_actions.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_actions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_init.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_init.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_join.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_join.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wheel_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel_result.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +29,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,11 +112,36 @@
       <workItem from="1609762149161" duration="5000" />
       <workItem from="1609799734747" duration="61000" />
       <workItem from="1609850423328" duration="86000" />
-      <workItem from="1609850641740" duration="1027000" />
+      <workItem from="1609850641740" duration="8519000" />
+      <workItem from="1610030330448" duration="6140000" />
     </task>
+    <task id="LOCAL-00001" summary="Fixed issue with inventory selling">
+      <created>1609851927381</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609851927381</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fixed issue with inventory selling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed issue with inventory selling" />
   </component>
 </project>
