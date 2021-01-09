@@ -1,0 +1,27 @@
+.inventory-title {
+    border: 2px solid white;
+    font-size: 26px;
+    width: 320px;
+}
+
+.inventory-title2 {
+    border: 2px solid white;
+    font-size: 26px;
+    width: 120px;
+}
+
+.inventory-items {
+    border: 2px solid white;
+    font-size: 25px;
+    text-align: center;
+    width: 320px;
+    height: 120px;
+}
+
+.inventory-items2 {
+    border: 2px solid white;
+    font-size: 20px;
+    text-align: center;
+    width: 120px;
+    height: 120px;
+}

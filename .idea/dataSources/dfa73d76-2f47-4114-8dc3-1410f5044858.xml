@@ -1195,7 +1195,12 @@
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X&apos;</DefaultExpression>
     </column>
-    <key id="365" parent="337" name="PRIMARY">
+    <column id="365" parent="337" name="dark_mode">
+      <Position>14</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="366" parent="337" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

@@ -40,6 +40,9 @@ session_start();
                     Válassz egyet!
                 </option>
                 <option>
+                    Unranked
+                </option>
+                <option>
                     Bronze
                 </option>
                 <option>

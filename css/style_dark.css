@@ -1,5 +1,6 @@
 body {
     background-color: rgb(57, 57, 57);
+    color: white;
 }
 
 .container {
@@ -11,7 +12,7 @@ body {
     margin: auto;
     width: 250px;
     height: 150px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 20%;
 
     text-align: center;
@@ -26,7 +27,7 @@ body {
     margin: auto;
     width: 300px;
     height: 120px;
-    border: 2px solid black;
+    border: 2px solid white;
     border-radius: 20%;
 
     text-align: center;
@@ -36,13 +37,42 @@ body {
     color: gray;
 }
 
-.index_aside input {
-    width: 100%;
-    height: 75px;
-    background-color: transparent;
-    border-bottom: 1px solid gray;
+.container_push {
+    position: relative;
+    left: 15%;
 }
 
-.index_aside input:hover {
-    background-color: white;
+.side_button {
+    border: 1px solid white;
+    width: calc(100% - 2px);
+}
+
+.side_button:hover {
+    background-color: lightgray;
+}
+
+.side_button a {
+    color: white;
+}
+
+.side_button input[type="submit"]{
+    color: white;
+}
+
+.news {
+    background-color: gray;
+}
+
+.index_aside::-webkit-scrollbar {
+    display: none;
+}
+
+.index_aside {
+    scrollbar-width: none;
+}
+
+.logout {
+    height: 62px;
+    font-family: "Times New Roman", "serif";
+    font-size: 16px;
 }

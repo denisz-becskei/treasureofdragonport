@@ -3,6 +3,8 @@ session_start();
 include "../db_connect.php";
 include "achievement_handler.php";
 
+setcookie("spin-initiated", false, time() + 86400);
+
 function strip($string) {
     $new_string = [];
     for ($i = 0; $i < strlen($string); $i++) {

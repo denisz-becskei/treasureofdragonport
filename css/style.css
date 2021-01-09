@@ -40,3 +40,39 @@ body {
     position: relative;
     left: 15%;
 }
+
+.side_button {
+    border: 1px solid black;
+    width: calc(100% - 2px);
+}
+
+
+.side_button:hover {
+    background-color: white;
+}
+
+.side_button a {
+    color: black;
+}
+
+.side_button input[type="submit"]{
+    color: black;
+}
+
+.news {
+    background-color: lightgray;
+}
+
+.index_aside::-webkit-scrollbar {
+    display: none;
+}
+
+.index_aside {
+    scrollbar-width: none;
+}
+
+.logout {
+    height: 62px;
+    font-family: "Times New Roman", "serif";
+    font-size: 16px;
+}

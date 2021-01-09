@@ -73,6 +73,8 @@ function select_image_by_rank() {
             return "https://static.wikia.nocookie.net/paladins_gamepedia/images/9/9c/RankIcon_Master.png";
         case "Grandmaster":
             return "https://static.wikia.nocookie.net/paladins_gamepedia/images/8/86/RankIcon_Grandmaster.png";
+        case "Unranked":
+            return "https://www.halberesford.com/content/images/2018/07/null.png";
         default:
             return "WTF NO GOOD";
     }

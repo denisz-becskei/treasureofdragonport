@@ -169,6 +169,12 @@ async function spin() {
             let num2 = Math.floor(Math.random() * entire_array.length);
             let num3 = Math.floor(Math.random() * entire_array.length);
 
+            if(i === 0) {
+                item_image1.style.mixBlendMode = "normal";
+                item_image2.style.mixBlendMode = "normal";
+                item_image3.style.mixBlendMode = "normal";
+            }
+
             item_image1.src = get_image_for_name(entire_array[num1]);
             item_image2.src = get_image_for_name(entire_array[num2]);
             item_image3.src = get_image_for_name(entire_array[num3]);

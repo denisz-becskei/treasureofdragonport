@@ -1,3 +1,3 @@
 <?php
 
-header("Location: ../current_trade.php");
+header("../inventory.php");
