@@ -6,10 +6,7 @@ if (!isset($_SESSION["username"])) {
 if (!isset($_COOKIE["spin-initiated"]) || $_COOKIE["spin-initiated"] == "true") {
     setcookie("spin-initiated", "false", time() + 86400);
 }
-setcookie("trade_ready", "false", time() + 86400);
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
 
 if (isset($_POST["undo"])) {
     $trade_code = $_POST["id_to_remove"];

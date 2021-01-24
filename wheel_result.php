@@ -6,20 +6,24 @@ if (!isset($_SESSION["username"])) {
 if ($_COOKIE["spin-initiated"] == false or !isset($_COOKIE["spin-initiated"])) {
     header("Location: wheel.php");
 }
-
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
-
 include "externalPHPfiles/achievement_handler.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="scripts/preload.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
+    <?php
+    if (isset($_POST["redir-btn"])) {
+        setcookie("spin-initiated", false, time() + 86400);
+        complete_achievement($_SESSION["username"], 1);
+        header("Location: externalPHPfiles/update_inventory.php");
+    }
+    ?>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Treasure of Dragon Port</title>
 </head>
@@ -90,13 +94,7 @@ include "externalPHPfiles/achievement_handler.php";
                value='Elfogadás'>
     </form>
 
-    <?php
-    if (isset($_POST["redir-btn"])) {
-        setcookie("spin-initiated", false, time() + 86400);
-        complete_achievement($_SESSION["username"], 1);
-        header("Location: externalPHPfiles/update_inventory.php");
-    }
-    ?>
+
 </div>
 </body>
 <script src="scripts/wheel_result.js"></script>

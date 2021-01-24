@@ -7,8 +7,6 @@ if (!isset($_COOKIE["spin-initiated"])) {
     setcookie("spin-initiated", false, time() + 86400);
 }
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
 ?>
 <!DOCTYPE html>
 <html lang="en">

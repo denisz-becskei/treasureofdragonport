@@ -4,14 +4,13 @@ if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/preload.js"></script>
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
 
@@ -78,11 +77,11 @@ clear_trades();
     <?php
         if (get_wheelturns() > 0) {
             echo "<form action='wheel.php' method='GET'>
-        <input onclick='start_spin()' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2);' type='submit' name='spin-btn' value='Pörgetés'>
+        <input onclick='start_spin()' style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         } else {
             echo "<form action='wheel.php' method='GET'>
-        <input disabled class='container3' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2);' type='submit' name='spin-btn' value='Pörgetés'>
+        <input disabled class='container3' style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         }
 
@@ -94,6 +93,5 @@ clear_trades();
     ?>
 </div>
 <script src="scripts/wheel.js"></script>
-<script src="scripts/preload.js"></script>
 </body>
 </html>

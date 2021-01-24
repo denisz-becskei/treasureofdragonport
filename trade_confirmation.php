@@ -6,10 +6,10 @@ if (!isset($_SESSION["username"])) {
 if (!isset($_COOKIE["spin-initiated"]) || $_COOKIE["spin-initiated"] == "true") {
     setcookie("spin-initiated", "false", time() + 86400);
 }
-setcookie("trade_ready", "false", time() + 86400);
+if (!isset($_COOKIE["trade_id"])) {
+    header("Location: ongoing_trades.php");
+}
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/trading_functionality.php";
 
@@ -34,6 +34,10 @@ if (isset($_POST["confirm"])) {
     remove_from_inventory($_SESSION["username"], get_index(get_index(get_coins_by_id($_COOKIE['trade_id'][1]))), false);
     add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
     remove_trade($_COOKIE["trade_id"]);
+    header("Location: ongoing_trades.php");
+}
+if (isset($_POST["deny"])) {
+    setcookie('trade_id');
     header("Location: ongoing_trades.php");
 }
 ?>

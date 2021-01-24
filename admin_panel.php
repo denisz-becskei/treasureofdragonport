@@ -1,8 +1,6 @@
 <?php
 session_start();
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
-clear_trades();
 include "externalPHPfiles/userDAO.php";
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
@@ -117,7 +115,7 @@ if (isset($_POST["modification-btn"])) {
             $sql = "UPDATE user SET user_status = '$status_to_give' WHERE username = '$user_to_edit'";
             mysqli_query($conn, $sql);
         } else {
-            echo "Hé, nem bántani azt a felhasználót :c";
+            echo "<p style='position:absolute; top: 650px; left: calc(100vw / 2 - 100px)'>Hé, nem bántani azt a felhasználót :c</p>";
         }
     }
     if ($editing_data[3]) {

@@ -7,17 +7,14 @@ if (!isset($_COOKIE["spin-initiated"])) {
     setcookie("spin-initiated", false, time() + 86400);
 }
 include "db_connect.php";
-include "externalPHPfiles/clear_data.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/trading_functionality.php";
-clear_trades();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -134,11 +131,6 @@ if (isset($_POST["delete"])) {
             </tbody>
         </table>
     <?php endif; ?>
-
-
-
 </div>
-
-
 </body>
 </html>
