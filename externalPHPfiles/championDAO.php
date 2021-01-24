@@ -1,6 +1,7 @@
 <?php
 
-function get_rarity_by_champion($champion) {
+function get_rarity_by_champion($champion): string
+{
     $legendary_array = ["Yagorath"];
     $epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
     $rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
@@ -22,7 +23,8 @@ function get_rarity_by_champion($champion) {
     }
 }
 
-function get_image_for_name($name) {
+function get_image_for_name($name): string
+{
     switch ($name) {
         case "Androxus":
             return "https://i.imgur.com/zXlhJl6.png";

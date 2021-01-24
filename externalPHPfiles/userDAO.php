@@ -72,7 +72,7 @@ function get_coronia() {
 
     $username = $_SESSION["username"];
 
-    $sql = "SELECT coronia FROM user WHERE username = '$username'";
+    $sql = "SELECT cronia FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }

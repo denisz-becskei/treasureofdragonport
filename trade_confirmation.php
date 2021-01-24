@@ -10,18 +10,32 @@ setcookie("trade_ready", "false", time() + 86400);
 include "db_connect.php";
 include "externalPHPfiles/clear_data.php";
 clear_trades();
+include "externalPHPfiles/userDAO.php";
+include "externalPHPfiles/trading_functionality.php";
 
-if (isset($_POST["undo"])) {
-    $trade_code = $_POST["id_to_remove"];
-    $conn = OpenCon();
-    $sql = "DELETE FROM trades WHERE trade_code = '$trade_code'";
-    mysqli_query($conn, $sql);
-    CloseCon($conn);
+if (isset($_POST["confirm"])) {
+    add_coin(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[1]);
+    add_coin($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[0]);
 
-    header("Location: own_trades.php");
+    function get_index($champion) {
+        $inventory = get_inventory();
+        $inventory = explode(", ", $inventory);
+        $ind = 0;
+        foreach ($inventory as $i) {
+            if (trim($i) == $champion) {
+                return $ind;
+            }
+            $ind++;
+        }
+        return null;
+    }
+
+    remove_from_inventory(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[3], false);
+    remove_from_inventory($_SESSION["username"], get_index(get_index(get_coins_by_id($_COOKIE['trade_id'][1]))), false);
+    add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
+    remove_trade($_COOKIE["trade_id"]);
+    header("Location: ongoing_trades.php");
 }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +73,7 @@ if (isset($_POST["undo"])) {
     echo "background-color:gray";
 } ?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
     <?php $avatars_coded = [0 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/eb/Avatar_Default_Icon.png", 6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png", 2 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/b/bf/Avatar_Cutesy_Zhin_Icon.png", 3 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/c/c7/Avatar_Ember_Icon.png", 4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png", 5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png", 1 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/e4/Avatar_Death_Speaker_Icon.png", 7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"]; ?>
-    <?php include "externalPHPfiles/userDAO.php";
+    <?php
     include "externalPHPfiles/rank_selector.php";
     echo "<h1 style='font-size: 24pt'>" . get_felhasznalonev() . "</h1><img src='" . $avatars_coded[get_avatar()] . "' alt='avatar' style='height: 100px;'><h2 style='font-size: 16px;'>" . get_ign() . "<img alt='max_rank' src='" . select_image_by_rank() . "' style='width: 30px; position:absolute; top: 200px;'></h2><h2 style='font-size: 16px;'><img src='https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png' alt='credits' width='20px' style='position: relative; top: 2px;'>" . get_credits() . "  <img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' alt='credits' width='20px' style='position: relative; top: 2px;'> " . get_coronia() . "</h2>"; ?>
 
@@ -84,63 +98,48 @@ if (isset($_POST["undo"])) {
 
 </aside>
 <div class="container_push" style="height: 100vh; overflow-y: scroll">
-    <div style="background-color: rgb(59,59,59); height: 50px; width: 85%; position:relative; top: 0;">
-        <table style="width: 100%; text-align: center">
-            <tr>
-                <td style="width: 25%;">Adandó Érme</td>
-                <td style="width: 25%;">Keresendő Érme</td>
-                <td style="width: 25%;">Hirdetés Dátuma</td>
-                <td style="width: 25%;">Visszavonás</td>
-            </tr>
-        </table>
+
+    <div>
+        <img style="width: 250px; position:absolute; top: 150px; left: 15%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[0])) ?>">
+        <img style="width: 250px; position:absolute; top: 150px; right: 30%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
+
+        <form action="trade_confirmation.php" method="POST" style="position:absolute; top: 500px; left: calc(100vw / 2 - 350px / 2)">
+            <input type="submit" value="Igen" name="confirm">
+            <input type="submit" value="Nem" name="deny">
+        </form>
     </div>
-    <?php
-    include "externalPHPfiles/championDAO.php";
-
-    $conn = OpenCon();
-    $sql = "SELECT * FROM trades";
-    $result = $conn->query($sql);
-
-    $top = 5;
-
-    $first = true;
-
-    $color_1 = "rgb(59,59,59)";
-    $color_2 = "rgb(124,124,124)";
-    $i = 1;
-
-    while ($row = mysqli_fetch_array($result)) {
-        if ($row["owned_by"] == $_SESSION["username"]) {
-            if ($i % 2 == 0) {
-                $color = $color_1;
-            } else {
-                $color = $color_2;
-            }
-            $i++;
-            echo "<div style='background-color: ". $color ."; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
-                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 6%'><img style='width: 80px; height: 80px' alt='champion' src='".get_image_for_name($row["coin"])."'><p>".$row["coin"]."</p></div>
-                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 31%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='".get_image_for_name($row["coin_in_return"])."'><p>".$row["coin_in_return"]."</p></div>
-                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 56%'><p>".$row["posted_on"]."</p></div>
-                <form action='own_trades.php' method='POST'>
-                <input type='text' value='".$row["trade_code"]."' name='id_to_remove' hidden>
-                <input type='submit' value='X' name='undo' style='position:absolute; left: 86%; top: 32px;'>
-</form>
-            </div>";
-            $top += 20;
-        }
-    }
 
 
-    ?>
-    <a href="ongoing_trades.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px;">
-        <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
-             alt="all_trades">
+    <a href="new_trade.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px;">
+        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+             alt="add_trades">
     </a>
-    <a href="new_trade.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
-        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; bottom: 20px; height: 85px;"
-             alt="add_trade">
+    <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
+        <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
+             alt="own_trades">
     </a>
 </div>
 </body>
 <script src="scripts/preload.js"></script>
+<script>
+    <?php
+    $inventory = get_inventory(); $inventory = explode(",", $inventory);?>
+
+    var inventory = "<?php echo get_inventory()?>";
+    inventory = inventory.split(",");
+    inventory.pop();
+
+    for (let i = 2; i < <?php echo get_trade_count() + 2; ?>; i++) {
+        let btn = document.getElementById("btn" + i);
+        let text = document.getElementById("champion" + i);
+
+        for (let j = 0; j < inventory.length; j++) {
+            console.log("Checking " + inventory[j] + " " + text.value);
+            if (inventory[j].trim() === text.value) {
+                btn.removeAttribute("disabled");
+                break;
+            }
+        }
+    }
+</script>
 </html>

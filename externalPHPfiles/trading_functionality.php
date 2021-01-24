@@ -3,44 +3,6 @@
 include "inventory_selling.php";
 include "championDAO.php";
 
-function get_tradee_avatar($tradee) {
-    if ($tradee == "null") {
-        return 1337;
-    }
-    $conn = OpenCon();
-
-    $sql = "SELECT avatar FROM user WHERE username = '$tradee'";
-    $result = $conn->query($sql);
-    CloseCon($conn);
-    return mysqli_fetch_array($result)[0];
-}
-
-function get_trader_avatar($trader) {
-    $conn = OpenCon();
-
-    $sql = "SELECT avatar FROM user WHERE username = '$trader'";
-    $result = $conn->query($sql);
-    $result = mysqli_fetch_array($result)[0];
-    if ($result != null) {
-        CloseCon($conn);
-        return $result;
-    } else {
-        return "null";
-    }
-}
-
-
-function strip($string) {
-    $new_string = [];
-    for ($i = 0; $i < strlen($string); $i++) {
-        if (($string[$i] > '@' && $string[$i] < '[') || ($string[$i] > '`' && $string[$i] < '{')) {
-            array_push($new_string, $string[$i]);
-        }
-    }
-    return implode($new_string);
-}
-
-
 function add_coin($user, $champion) {
     $conn = OpenCon();
     $sql = "SELECT inventory FROM user WHERE username = '$user'";
@@ -65,7 +27,7 @@ function add_coin($user, $champion) {
     CloseCon($conn);
 }
 
-function add_trade($coin, $coin_in_return, $owned_by) {
+function add_trade($coin, $coin_index, $coin_in_return, $owned_by) {
     $rarity = get_rarity_by_champion($coin);
     if ($rarity == "&ltLegendás&gt") {
         $cronia_value1 = 5;
@@ -98,7 +60,7 @@ function add_trade($coin, $coin_in_return, $owned_by) {
     $date = date("Y/m/d H:i:s");
 
     $conn = OpenCon();
-    $sql = "INSERT INTO trades(coin, coin_in_return, owned_by, cronia_got, posted_on) VALUES ('$coin', '$coin_in_return', '$owned_by', '$cronia_value', '$date')";
+    $sql = "INSERT INTO trades(coin, coin_index, coin_in_return, owned_by, cronia_got, posted_on) VALUES ('$coin', '$coin_index' , '$coin_in_return', '$owned_by', '$cronia_value', '$date')";
     mysqli_query($conn, $sql);
 
     CloseCon($conn);
@@ -110,4 +72,50 @@ function get_trade_count() {
     $result = $conn->query($sql);
     CloseCon($conn);
     return mysqli_fetch_array($result)[0];
+}
+
+function get_coins_by_id($id) {
+    $conn = OpenCon();
+    $sql = "SELECT coin, coin_in_return, owned_by, coin_index FROM trades WHERE trade_code = '$id'";
+    $result = $conn->query($sql);
+    CloseCon($conn);
+    return mysqli_fetch_array($result);
+}
+
+function get_coins_by_owner($owner) {
+    $conn = OpenCon();
+    $sql = "SELECT trade_code, coin, coin_in_return, coin_index FROM trades WHERE owned_by = '$owner'";
+    $result = $conn->query($sql);
+    CloseCon($conn);
+    return mysqli_fetch_array($result);
+}
+
+function remove_trade($id) {
+    $conn = OpenCon();
+    $sql = "DELETE FROM trades WHERE trade_code = '$id'";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+}
+
+function add_cronias($tradee, $owned, $id) {
+    $conn = OpenCon();
+    $sql = "SELECT cronia_got, owned_by FROM trades WHERE trade_code = '$id'";
+    $result = $conn->query($sql);
+
+    $cronias_to_add = mysqli_fetch_array($result)["cronia_got"];
+
+    $sql = "SELECT cronia FROM user WHERE username = '$owned'";
+    $result2 = $conn->query($sql);
+    $current_cronia = intval(mysqli_fetch_array($result2)[0]);
+    $current_cronia += $cronias_to_add;
+    $sql = "UPDATE user SET cronia = '$current_cronia' WHERE username = '$owned'";
+    mysqli_query($conn, $sql);
+
+    $sql = "SELECT cronia FROM user WHERE username = '$tradee'";
+    $result3 = $conn->query($sql);
+    $current_cronia = intval(mysqli_fetch_array($result3)[0]);
+    $current_cronia += $cronias_to_add;
+    $sql = "UPDATE user SET cronia = '$current_cronia' WHERE username = '$tradee'";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
 }

@@ -1085,106 +1085,110 @@
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="343" parent="336" name="coin_in_return">
+    <column id="343" parent="336" name="coin_index">
       <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+    </column>
+    <column id="344" parent="336" name="coin_in_return">
+      <Position>4</Position>
       <DataType>varchar(25)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="344" parent="336" name="owned_by">
-      <Position>4</Position>
+    <column id="345" parent="336" name="owned_by">
+      <Position>5</Position>
       <DataType>varchar(128)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="345" parent="336" name="cronia_got">
-      <Position>5</Position>
+    <column id="346" parent="336" name="cronia_got">
+      <Position>6</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="346" parent="336" name="posted_on">
-      <Position>6</Position>
+    <column id="347" parent="336" name="posted_on">
+      <Position>7</Position>
       <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="347" parent="336" name="PRIMARY">
+    <key id="348" parent="336" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>trade_code</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="348" parent="337" name="username">
+    <column id="349" parent="337" name="username">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="349" parent="337" name="pass">
+    <column id="350" parent="337" name="pass">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="350" parent="337" name="email">
+    <column id="351" parent="337" name="email">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
     </column>
-    <column id="351" parent="337" name="ign">
+    <column id="352" parent="337" name="ign">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="352" parent="337" name="max_rank">
+    <column id="353" parent="337" name="max_rank">
       <Position>5</Position>
       <DataType>varchar(30)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="353" parent="337" name="user_status">
+    <column id="354" parent="337" name="user_status">
       <Position>6</Position>
       <DataType>tinyint(4)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="354" parent="337" name="inventory">
+    <column id="355" parent="337" name="inventory">
       <Position>7</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="355" parent="337" name="wheelturns">
+    <column id="356" parent="337" name="wheelturns">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="356" parent="337" name="credits">
+    <column id="357" parent="337" name="credits">
       <Position>9</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="357" parent="337" name="coronia">
+    <column id="358" parent="337" name="cronia">
       <Position>10</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="358" parent="337" name="avatar">
+    <column id="359" parent="337" name="avatar">
       <Position>11</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="359" parent="337" name="unique">
+    <column id="360" parent="337" name="unique">
       <Position>12</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="360" parent="337" name="achievements">
+    <column id="361" parent="337" name="achievements">
       <Position>13</Position>
       <DataType>varchar(120)|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X&apos;</DefaultExpression>
     </column>
-    <column id="361" parent="337" name="dark_mode">
+    <column id="362" parent="337" name="dark_mode">
       <Position>14</Position>
       <DataType>tinyint(1)|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <key id="362" parent="337" name="PRIMARY">
+    <key id="363" parent="337" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

@@ -18,8 +18,9 @@ clear_trades();
         $username = $_SESSION["username"];
         $champ1 = $_POST["champion"];
         $champ2 = $_POST["champion2"];
+        $champ_index = $_POST["champion_index"];
 
-        add_trade($champ1, $champ2, $username);
+        add_trade($champ1, $champ_index, $champ2, $username);
         header("Location: ongoing_trades.php");
     }
 
@@ -69,8 +70,8 @@ clear_trades();
 
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
@@ -84,27 +85,41 @@ clear_trades();
 
 </aside>
 <div class="container_push" style="height: 100vh;">
-    <img class="unselectable" draggable="false" src="assets/list_coins.png" alt="previous" id="prev_arrow" style="border: 5px solid black; height: 300px; transform: scaleX(-1); position:absolute; left: calc(100vw / 2 - 350px - 15%);">
-    <img class="unselectable" draggable="false" style="width: 300px; position: absolute; left: calc(100vw / 2 - 150px - 15%)" src="assets/box_question_mark.jpg" alt="trade" id="trade_coin">
-    <img class="unselectable" draggable="false" src="assets/list_coins.png" alt="next" id="next_arrow" style="border: 5px solid black; height: 300px; position:absolute; left: calc(100vw / 2 + 200px - 15%);">
+    <img class="unselectable" draggable="false" src="<?php if (get_dm_status() == 0) { echo "assets/list_coins_black.png"; } else { echo "assets/list_coins_white.png"; } ?>" alt="previous" id="prev_arrow" style="border: 5px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; height: 300px; transform: scaleX(-1); position:absolute; left: calc(100vw / 2 - 350px - 15%);">
+    <img class="unselectable" draggable="false" style="width: 300px; position: absolute; left: calc(100vw / 2 - 150px - 15%);" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" alt="trade" id="trade_coin">
+    <img class="unselectable" draggable="false" src="<?php if (get_dm_status() == 0) { echo "assets/list_coins_black.png"; } else { echo "assets/list_coins_white.png"; } ?>" alt="next" id="next_arrow" style="border: 5px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; height: 300px; position:absolute; left: calc(100vw / 2 + 200px - 15%);">
+    <img class="unselectable" draggable="false" src="assets/swap_icon.png" style="width: 100px; position:absolute; left: calc(100vw / 2 - 15% - 100px / 2); top: calc(100vh / 2 - 100px / 2 - 115px); transform: rotate(90deg)" alt="swap">
     <form method="POST" action="new_trade.php">
-        <input style="position: relative; left: calc(100vw / 2 - 75px - 15%); top: 350px; text-align: center; background-color: transparent; border: none;" readonly value="" type="text" name="champion" id="champion"><br>
+        <input style="<?php if (get_dm_status() == 0) {
+            echo "color: black";
+        } else {
+            echo "color:white";
+        } ?>; position: relative; left: calc(100vw / 2 - 75px - 15%); top: 350px; text-align: center; background-color: transparent; border: none;" readonly value="" type="text" name="champion" id="champion"><br>
+        <input style="<?php if (get_dm_status() == 0) {
+            echo "color: black";
+        } else {
+            echo "color:white";
+        } ?>; position: relative; left: calc(100vw / 2 - 75px - 15%); top: 350px; text-align: center; background-color: transparent; border: none;" hidden value="" type="text" name="champion_index" id="champion_index"><br>
 
-        <input style="position: relative; left: calc(100vw / 2 - 75px - 15%); top: calc(100vh - 150px); text-align: center; background-color: transparent; border: none;" readonly value="" type="text" name="champion2" id="champion2"><br>
+        <input style="<?php if (get_dm_status() == 0) {
+            echo "color: black";
+        } else {
+            echo "color:white";
+        } ?>;position: relative; left: calc(100vw / 2 - 75px - 15%); top: calc(100vh - 150px); text-align: center; background-color: transparent; border: none;" readonly value="" type="text" name="champion2" id="champion2"><br>
         <input style="position: relative; left: calc(100vw / 2 - 50px - 15%); top: calc(100vh - 100px)" type="submit" name="lock" id="lock" disabled>
     </form>
-    <a href="ongoing_trades.php">
+    <a href="ongoing_trades.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px;">
         <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
              alt="all_trades">
     </a>
-    <a href="own_trades.php">
-        <img class="btn" src="assets/btn_own.png" style="position:absolute; left: 90px; bottom: 20px; height: 85px;"
+    <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
+        <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
              alt="own_trades">
     </a>
     <div style="position:relative; top: 360px;">
-        <img class="unselectable" draggable="false" src="assets/list_coins.png" alt="previous" id="prev_arrow2" style="border: 5px solid black; height: 300px; transform: scaleX(-1); position:absolute; left: calc(100vw / 2 - 350px - 15%);">
-        <img class="unselectable" draggable="false" style="width: 300px; position: absolute; left: calc(100vw / 2 - 150px - 15%)" src="assets/box_question_mark.jpg" alt="trade" id="trade_coin2">
-        <img class="unselectable" draggable="false" src="assets/list_coins.png" alt="next" id="next_arrow2" style="border: 5px solid black; height: 300px; position:absolute; left: calc(100vw / 2 + 200px - 15%);">
+        <img class="unselectable" draggable="false" src="<?php if (get_dm_status() == 0) { echo "assets/list_coins_black.png"; } else { echo "assets/list_coins_white.png"; } ?>" alt="previous" id="prev_arrow2" style="border: 5px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; height: 300px; transform: scaleX(-1); position:absolute; left: calc(100vw / 2 - 350px - 15%);">
+        <img class="unselectable" draggable="false" style="width: 300px; position: absolute; left: calc(100vw / 2 - 150px - 15%);" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" alt="trade" id="trade_coin2">
+        <img class="unselectable" draggable="false" src="<?php if (get_dm_status() == 0) { echo "assets/list_coins_black.png"; } else { echo "assets/list_coins_white.png"; } ?>" alt="next" id="next_arrow2" style="border: 5px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; height: 300px; position:absolute; left: calc(100vw / 2 + 200px - 15%);">
     </div>
 </div>
 
@@ -118,37 +133,49 @@ clear_trades();
     console.log(inventory);
     var index = -1;
 
-    document.getElementById("prev_arrow").onclick = function() {
-        index--;
-        if (index >= 0) {
-            document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
-            document.getElementById("champion").value = inventory[index];
-        } else {
-            index = inventory.length - 1;
-            document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
-            document.getElementById("champion").value = inventory[index];
-        }
+    if (inventory.length !== 0) {
+        document.getElementById("prev_arrow").onclick = function() {
+            index--;
+            if (index >= 0) {
+                document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
+                document.getElementById("champion").value = inventory[index];
+                document.getElementById("champion_index").value = index;
+            } else {
+                index = inventory.length - 1;
+                document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
+                document.getElementById("champion").value = inventory[index];
+                document.getElementById("champion_index").value = index;
+            }
 
-        if (index !== -1 && index2 !== -1) {
-            document.getElementById("lock").removeAttribute("disabled");
-        }
-    };
+            if (index !== -1 && index2 !== -1) {
+                document.getElementById("lock").removeAttribute("disabled");
+            }
+            if (document.getElementById("champion").value === document.getElementById("champion2").value) {
+                document.getElementById("lock").setAttribute("disabled", "");
+            }
+        };
 
-    document.getElementById("next_arrow").onclick = function() {
-        index++;
-        if (index < inventory.length) {
-            document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
-            document.getElementById("champion").value = inventory[index];
-        } else {
-            index = 0;
-            document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
-            document.getElementById("champion").value = inventory[index];
-        }
+        document.getElementById("next_arrow").onclick = function() {
+            index++;
+            if (index < inventory.length) {
+                document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
+                document.getElementById("champion").value = inventory[index];
+                document.getElementById("champion_index").value = index;
+            } else {
+                index = 0;
+                document.getElementById("trade_coin").src = get_image_for_name(inventory[index].trim());
+                document.getElementById("champion").value = inventory[index];
+                document.getElementById("champion_index").value = index;
+            }
 
-        if (index !== -1 && index2 !== -1) {
-            document.getElementById("lock").removeAttribute("disabled");
-        }
-    };
+            if (index !== -1 && index2 !== -1) {
+                document.getElementById("lock").removeAttribute("disabled");
+            }
+            if (document.getElementById("champion").value === document.getElementById("champion2").value) {
+                document.getElementById("lock").setAttribute("disabled", "");
+            }
+        };
+    }
 
     let entire_array = ["Yagorath", "Vora", "Corvus", "Raum", "Tiberius", "Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus",
         "Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye",
@@ -170,6 +197,10 @@ clear_trades();
 
         if (index !== -1 && index2 !== -1) {
             document.getElementById("lock").removeAttribute("disabled");
+            document.getElementById("champion2").style.mixBlendMode = "normal";
+        }
+        if (document.getElementById("champion").value === document.getElementById("champion2").value) {
+            document.getElementById("lock").setAttribute("disabled", "");
         }
     };
 
@@ -186,6 +217,9 @@ clear_trades();
 
         if (index !== -1 && index2 !== -1) {
             document.getElementById("lock").removeAttribute("disabled");
+        }
+        if (document.getElementById("champion").value === document.getElementById("champion2").value) {
+            document.getElementById("lock").setAttribute("disabled", "");
         }
     };
 </script>

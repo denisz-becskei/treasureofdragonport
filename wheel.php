@@ -20,7 +20,7 @@ clear_trades();
 </head>
 <style>
     table, th, td {
-        border: 1px solid black;
+        border: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>;
         border-collapse: collapse;
     }
 
@@ -45,8 +45,8 @@ clear_trades();
 
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
@@ -64,9 +64,9 @@ clear_trades();
     <p style='position: absolute; top: 0; right: 10px; font-size: 24px;'>Maradék pörgetések száma: <?php echo get_wheelturns() ?></p>
     <table class="container3">
         <tr>
-            <td class="upper"><img alt="item1" src="assets/box_question_mark.jpg" style="width: 200px; mix-blend-mode: multiply"></td>
-            <td class="upper"><img alt="item2" src="assets/box_question_mark.jpg" style="width: 200px; mix-blend-mode: multiply"></td>
-            <td class="upper"><img alt="item2" src="assets/box_question_mark.jpg" style="width: 200px; mix-blend-mode: multiply"></td>
+            <td class="upper"><img alt="item1" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
+            <td class="upper"><img alt="item2" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
+            <td class="upper"><img alt="item2" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
         </tr>
         <tr>
             <td class="lower"></td>
@@ -78,11 +78,11 @@ clear_trades();
     <?php
         if (get_wheelturns() > 0) {
             echo "<form action='wheel.php' method='GET'>
-        <input class='container3' onclick='start_spin()' style='height: 30px; width: 150px' type='submit' name='spin-btn' value='Pörgetés'>
+        <input onclick='start_spin()' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2);' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         } else {
             echo "<form action='wheel.php' method='GET'>
-        <input disabled class='container3' style='height: 30px; width: 150px' type='submit' name='spin-btn' value='Pörgetés'>
+        <input disabled class='container3' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2);' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         }
 

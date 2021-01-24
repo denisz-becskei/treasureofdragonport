@@ -25,7 +25,7 @@ include "externalPHPfiles/achievement_handler.php";
 </head>
 <style>
     table, th, td {
-        border: 1px solid black;
+        border: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>;
         border-collapse: collapse;
     }
 
@@ -50,8 +50,8 @@ include "externalPHPfiles/achievement_handler.php";
 
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
@@ -69,9 +69,9 @@ include "externalPHPfiles/achievement_handler.php";
     <?php echo "<p style='position: absolute; top: 0; right: 10px; font-size: 24px;'>Maradék pörgetések száma: ".get_wheelturns()."</p>"?>
     <table class="container3">
         <tr>
-            <td class="upper"><img alt="item1" id="item1" src="assets/box_question_mark.jpg" style="width: 200px;"></td>
-            <td class="upper"><img alt="item2" id="item2" src="assets/box_question_mark.jpg" style="width: 200px;"></td>
-            <td class="upper"><img alt="item3" id="item3" src="assets/box_question_mark.jpg" style="width: 200px;"></td>
+            <td class="upper"><img alt="item1" id="item1" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
+            <td class="upper"><img alt="item2" id="item2" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
+            <td class="upper"><img alt="item3" id="item3" src="<?php if (get_dm_status() == 0) { echo "assets/box_question_mark_black.png"; } else { echo "assets/box_question_mark_white.png"; } ?>" style="width: 200px;"></td>
         </tr>
         <tr>
             <td class="lower"><p id="item_name1"></p>
@@ -86,7 +86,7 @@ include "externalPHPfiles/achievement_handler.php";
     <audio id="chinging" hidden src="assets/sounds/ching.ogg" controls></audio>
 
     <form action='wheel_result.php' method='POST'>
-        <input hidden id="back" class='container3' style='height: 30px; width: 150px' type='submit' name='redir-btn'
+        <input hidden id="back" class='container3' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2)' type='submit' name='redir-btn'
                value='Elfogadás'>
     </form>
 

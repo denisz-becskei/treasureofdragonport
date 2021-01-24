@@ -1,33 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/get_image.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="New Trading System Implementation Start">
+      <change afterPath="$PROJECT_DIR$/trade_confirmation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current_trade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/check_ready_status.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/box_question_mark.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finish_trade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initiated_trade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/check_for_ready.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/check_for_ready.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/nav.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ongoing_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/own_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_actions.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_init.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_join.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/treasureofdragonport" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel_result.php" afterDir="false" />
     </list>
@@ -57,6 +49,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -92,8 +85,18 @@
       <workItem from="1610408106174" duration="872000" />
       <workItem from="1610463340643" duration="600000" />
       <workItem from="1610464146354" duration="4586000" />
-      <workItem from="1611433037220" duration="15417000" />
+      <workItem from="1611433037220" duration="21895000" />
+      <workItem from="1611502172482" duration="2841000" />
+      <workItem from="1611514250251" duration="8999000" />
     </task>
+    <task id="LOCAL-00001" summary="New Trading System Implementation Start">
+      <created>1611449420538</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1611449420538</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,5 +113,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="New Trading System Implementation Start" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Trading System Implementation Start" />
   </component>
 </project>
