@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="Modified aside bar">
-      <change afterPath="$PROJECT_DIR$/css/inventory_dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/externalPHPfiles/dark_mode_checker.php" afterDir="false" />
+    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/get_image.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style_dark.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style_dark.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/current_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/current_trade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/appearance_changer.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/appearance_changer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/rank_selector.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/rank_selector.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/redir.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/redir.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/finish_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/finish_trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/current_trade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/check_ready_status.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/finish_trade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initiated_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/initiated_trade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initiated_trade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/register_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/register_scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/check_for_ready.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/check_for_ready.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/nav.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_actions.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_actions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_init.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_init.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trading_join.php" beforeDir="false" afterPath="$PROJECT_DIR$/trading_join.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_actions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_init.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/trading_join.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/treasureofdragonport" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel_result.php" afterDir="false" />
     </list>
@@ -37,13 +38,6 @@
   </component>
   <component name="ComposerSettings">
     <execution />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,17 +50,13 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="9ea76cbf-5204-4462-ba06-6045999abeab" />
-  </component>
-  <component name="ProjectId" id="1lqY7xgfajBzoF1rvXMa4njjsHb" />
+  <component name="ProjectId" id="1lKXUqlwDwSlQfdenao7mBqMa8k" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DatabaseDriversLRU" value="redshift&#10;mariadb" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -77,77 +67,33 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="vue.rearranger.settings.migration" value="true" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\css" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\externalPHPfiles" />
-      <recent name="C:\xampp\htdocs" />
-    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="4779da32-58f6-44f2-aa66-c2b816d87a5e" name="Default Changelist" comment="" />
-      <created>1608325925286</created>
+      <changelist id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="" />
+      <created>1607346776125</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1608325925286</updated>
-      <workItem from="1608325926442" duration="2358000" />
-      <workItem from="1608328346190" duration="5218000" />
-      <workItem from="1608340238938" duration="4094000" />
-      <workItem from="1608382318488" duration="11999000" />
-      <workItem from="1608412396735" duration="9653000" />
-      <workItem from="1608422215029" duration="7691000" />
-      <workItem from="1608431678058" duration="158000" />
-      <workItem from="1608465534666" duration="2920000" />
-      <workItem from="1608468715702" duration="268000" />
-      <workItem from="1608469009376" duration="15112000" />
-      <workItem from="1608484453672" duration="4799000" />
-      <workItem from="1608558615164" duration="10609000" />
-      <workItem from="1608571797260" duration="1938000" />
-      <workItem from="1608580770734" duration="3045000" />
-      <workItem from="1608583939569" duration="2528000" />
-      <workItem from="1608586518714" duration="17263000" />
-      <workItem from="1608678134326" duration="86000" />
-      <workItem from="1608735525391" duration="1577000" />
-      <workItem from="1608756074905" duration="8027000" />
-      <workItem from="1608819989227" duration="1961000" />
-      <workItem from="1608822048997" duration="30000" />
-      <workItem from="1609088838094" duration="10420000" />
-      <workItem from="1609273096277" duration="8963000" />
-      <workItem from="1609282398755" duration="201000" />
-      <workItem from="1609420111613" duration="7107000" />
-      <workItem from="1609427368919" duration="103000" />
-      <workItem from="1609540116491" duration="3980000" />
-      <workItem from="1609718356765" duration="6598000" />
-      <workItem from="1609762149161" duration="5000" />
-      <workItem from="1609799734747" duration="61000" />
-      <workItem from="1609850423328" duration="86000" />
-      <workItem from="1609850641740" duration="8519000" />
-      <workItem from="1610030330448" duration="6769000" />
-      <workItem from="1610137112870" duration="4863000" />
-      <workItem from="1610225785652" duration="4147000" />
+      <updated>1607346776125</updated>
+      <workItem from="1607346778053" duration="221000" />
+      <workItem from="1607347024220" duration="4105000" />
+      <workItem from="1607367833162" duration="8138000" />
+      <workItem from="1607803216075" duration="5849000" />
+      <workItem from="1610196445251" duration="4863000" />
+      <workItem from="1610214416281" duration="479000" />
+      <workItem from="1610219313101" duration="5349000" />
+      <workItem from="1610285643240" duration="9773000" />
+      <workItem from="1610301647781" duration="185000" />
+      <workItem from="1610307682892" duration="20718000" />
+      <workItem from="1610373502858" duration="816000" />
+      <workItem from="1610380366113" duration="14723000" />
+      <workItem from="1610408106174" duration="872000" />
+      <workItem from="1610463340643" duration="600000" />
+      <workItem from="1610464146354" duration="4586000" />
+      <workItem from="1611433037220" duration="15417000" />
     </task>
-    <task id="LOCAL-00001" summary="Fixed issue with inventory selling">
-      <created>1609851927381</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1609851927381</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Modified aside bar">
-      <created>1610036557726</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1610036557726</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,10 +110,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed issue with inventory selling" />
-    <MESSAGE value="Modified aside bar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified aside bar" />
   </component>
 </project>
