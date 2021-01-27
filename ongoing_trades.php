@@ -21,6 +21,7 @@ if (isset($_POST["btn"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php";
     if (get_dm_status() == 0) {
         echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";
@@ -88,6 +89,7 @@ if (isset($_POST["btn"])) {
             </tr>
         </table>
     </div>
+    <table style="width: 85%; text-align: center;">
     <?php
 
     $conn = OpenCon();
@@ -114,30 +116,29 @@ if (isset($_POST["btn"])) {
             $color = $color_2;
         }
         $i++;
-        echo "<div style='background-color: " . $color . "; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 3%'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p>" . $row["coin"] . "</p></div>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 19%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p>" . $row["coin_in_return"] . "</p></div>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 39%' id='owned".$i."'><p>" . $row["owned_by"] . "</p></div>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 52%'><p>" . $row["posted_on"] . "</p></div>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 74%'><img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' style='width: 25px; height: 25px; position:relative; top: 30px;' alt='cronia_value'><p>" . ' ' . $row["cronia_got"] . "</p></div>
-                <div style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 74%'>
-                <form method='POST' action='ongoing_trades.php' style='width: 16.5%; display: flex; font-size: 20pt; position:absolute; left: 96%; top: calc(42px - 12px);'>
+
+        echo "<tr style='background-color: " . $color . "; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
+<td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p>" . $row["coin"] . "</p></td>
+<td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p>" . $row["coin_in_return"] . "</p></td>
+<td style='width: 16%;'><p id='owned".$i."'>" . $row["owned_by"] . "</p></td>
+<td style='width: 16%;'><p>" . $row["posted_on"] . "</p></td>
+<td style='width: 16%;'><img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' style='width: 20px; height: 20px; position:relative; top: 30px;' alt='cronia_value'><p style='position:relative; left: 20px; bottom: 7px;'>" . ' ' . $row["cronia_got"] . "</p></td>
+<td style='width: 16%;'><form method='POST' action='ongoing_trades.php' style='display: flex; font-size: 20pt; position:relative; left: calc(50% - 25px); top: calc(50% - 12px);'>
                 <input type='text' value='" . $row["coin_in_return"] . "' id='champion". $i . "' hidden name='number'>
                 <input type='text' value='". $row["trade_code"] ."' hidden name='trade_code'>
                 <input type='submit' disabled value='Csere' id='btn". $i . "' name='btn'>
-</form>
-</div>
-            </div>";
+</form></td>
+</tr>";
         $top += 20;
     }
 
 
     ?>
+    </table>
 
-
-    <a href="new_trade.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px;">
+    <a href="new_trade.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
         <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
-             alt="add_trades">
+             alt="all_trades">
     </a>
     <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
         <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"

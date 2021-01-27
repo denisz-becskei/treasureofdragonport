@@ -14,7 +14,7 @@ include "db_connect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="/assets/full_collection.png">
+    <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) { echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";} ?>
 
     <title>Treasure of Dragon Port</title>

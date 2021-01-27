@@ -1188,7 +1188,16 @@
       <DataType>tinyint(1)|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <key id="363" parent="337" name="PRIMARY">
+    <column id="363" parent="337" name="last_traded">
+      <Position>15</Position>
+      <DataType>datetime|0s</DataType>
+    </column>
+    <column id="364" parent="337" name="number_of_trades">
+      <Position>16</Position>
+      <DataType>int(11)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <key id="365" parent="337" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

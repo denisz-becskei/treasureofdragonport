@@ -11,6 +11,7 @@ include "db_connect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="scripts/preload.js"></script>
+    <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
 
@@ -81,7 +82,7 @@ include "db_connect.php";
     </form>";
         } else {
             echo "<form action='wheel.php' method='GET'>
-        <input disabled class='container3' style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
+        <input disabled style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         }
 

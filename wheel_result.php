@@ -15,6 +15,7 @@ include "externalPHPfiles/achievement_handler.php";
     <meta charset="UTF-8">
     <script src="scripts/preload.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
     <?php

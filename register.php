@@ -7,10 +7,18 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/assets/logo.png">
     <title>Treasure of Dragon Port</title>
 </head>
-<body>
-    <div class="container2" style="height: 325px;">
+<style>
+    .margins * {
+        margin-left: 5px;
+    }
+</style>
+<body onload="loader();">
+<canvas id="canvas" width="420px" height="420px" hidden style="position: absolute; left: calc(100vw / 2 - 420px / 2); top: calc(100vh / 2 - 420px / 2); background: white; border: 2px solid black; z-index: 5;"></canvas>
+<div id="instructions" class="margins" style="opacity: 0; display: flex; width: 50vw; text-align: center; position:absolute; left: calc(100vw / 2 - 14vw); top: 10vh;"><p>Kattints egy </p><p style="color: green">ZÖLD </p><p> körre, majd egy </p><p style="color: red;">PIROS </p><p>négyzetre, amíg minden el nem tűnik!</p></div>
+    <div class="container2" style="height: 350px;">
         <form action="externalPHPfiles/register_functionality.php" method="POST">
             <br>
             <label for="username">Felhasználónév</label>
@@ -85,7 +93,8 @@ session_start();
                 </option>
             </select>
             <br>
-            <input type="submit" name="smt_button" value="Regisztráció">
+            <button type="button" onclick="show_captcha();" id="not_robot">Bizonyítsd be, hogy nem vagy robot!</button>
+            <input type="submit" name="smt_button" disabled id="register_btn" value="Regisztráció">
         </form>
         <form action="externalPHPfiles/register_functionality.php" method="GET">
             <input type="submit" name="smt_button4" value="Bejelentkezés">
@@ -93,5 +102,12 @@ session_start();
 
     </div>
 <script src="scripts/register_scripts.js"></script>
+<script src="scripts/captcha.js"></script>
+<script>
+    function show_captcha() {
+        document.getElementById("canvas").removeAttribute("hidden");
+        document.getElementById("instructions").style.opacity = "1";
+    }
+</script>
 </body>
 </html>

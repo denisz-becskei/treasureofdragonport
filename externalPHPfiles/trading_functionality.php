@@ -119,3 +119,54 @@ function add_cronias($tradee, $owned, $id) {
     mysqli_query($conn, $sql);
     CloseCon($conn);
 }
+
+function update_trade_date() {
+    $date = date("Y-m-d");
+    $username = $_SESSION["username"];
+    $conn = OpenCon();
+    $sql = "UPDATE user SET last_traded = '$date' WHERE username = '$username'";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+}
+
+function get_trade_date() {
+    $conn = OpenCon();
+    $username = $_SESSION["username"];
+    $sql = "SELECT last_traded FROM user WHERE username = '$username'";
+    $mysqldate = $conn->query($sql);
+    $mysqldate = mysqli_fetch_array($mysqldate)[0];
+    CloseCon($conn);
+
+    $phpdate = strtotime($mysqldate);
+    $mysqldate = date( 'Y-m-d', $phpdate );
+    $today = date("Y-m-d");
+
+    $today = str_replace("-", "", $today);
+    $mysqldate = str_replace("-", "", $mysqldate);
+
+    $days = intval($today) - intval($mysqldate);
+
+    if ($days >= 1) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function change_ongoing_trade_numbers($username, $action) {
+    $conn = OpenCon();
+    $sql = "SELECT number_of_trades FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result)[0];
+    $newVal = intval($result);
+
+    if ($action == "increase") {
+        $newVal++;
+    } else {
+        $newVal--;
+    }
+
+    $sql = "UPDATE user SET number_of_trades = '$newVal' WHERE username='$username'";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+}

@@ -31,9 +31,13 @@ if (isset($_POST["confirm"])) {
     }
 
     remove_from_inventory(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[3], false);
-    remove_from_inventory($_SESSION["username"], get_index(get_index(get_coins_by_id($_COOKIE['trade_id'][1]))), false);
+    remove_from_inventory($_SESSION["username"], get_index(get_coins_by_id($_COOKIE['trade_id'][1])), false);
     add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
     remove_trade($_COOKIE["trade_id"]);
+
+    change_ongoing_trade_numbers(get_coins_by_id($_COOKIE['trade_id'])[2], "decrease");
+
+    update_trade_date();
     header("Location: ongoing_trades.php");
 }
 if (isset($_POST["deny"])) {
@@ -47,6 +51,7 @@ if (isset($_POST["deny"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php";
     if (get_dm_status() == 0) {
         echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";
@@ -75,7 +80,7 @@ if (isset($_POST["deny"])) {
     echo "background-color: lightgray";
 } else {
     echo "background-color:gray";
-} ?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
+} ?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll; z-index: 0;">
     <?php $avatars_coded = [0 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/eb/Avatar_Default_Icon.png", 6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png", 2 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/b/bf/Avatar_Cutesy_Zhin_Icon.png", 3 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/c/c7/Avatar_Ember_Icon.png", 4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png", 5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png", 1 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/e4/Avatar_Death_Speaker_Icon.png", 7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"]; ?>
     <?php
     include "externalPHPfiles/rank_selector.php";
@@ -104,19 +109,24 @@ if (isset($_POST["deny"])) {
 <div class="container_push" style="height: 100vh; overflow-y: scroll">
 
     <div>
-        <img style="width: 250px; position:absolute; top: 150px; left: 15%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[0])) ?>">
-        <img style="width: 250px; position:absolute; top: 150px; right: 30%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
+        <img src="assets/trading-bg.png" style="z-index: -5; position:absolute; top: 10vh; left: 15vw; height: 70vh;">
 
-        <form action="trade_confirmation.php" method="POST" style="position:absolute; top: 500px; left: calc(100vw / 2 - 350px / 2)">
-            <input type="submit" value="Igen" name="confirm">
+        <img style="width: 12vw; position:absolute; top: 25vh; left: 23%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[0])) ?>">
+        <img style="width: 10vw; position:relative; top: calc(100vh / 2 - 11vw); left: calc(100vw / 2 - 15vw);" src="assets/swap_icon_white.png">
+        <img style="width: 12vw; position:absolute; top: 25vh; right: 42%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
+
+        <h3 style="position: absolute; top: calc(100vh / 2 + 2vh); left: calc(100vw / 2 - 22vw)">Biztos vagy benne, hogy végre szeretnéd a cserét hajtani?</h3>
+
+        <form action="trade_confirmation.php" method="POST" style="position:absolute; top: 60vh; left: calc(100vw / 2 - 475px / 2)">
+            <input type="submit" <?php if (get_trade_date() == false) { echo "disabled"; } ?> value="Igen" name="confirm">
             <input type="submit" value="Nem" name="deny">
+            <p style="color: <?php if (get_dm_status() == 0) { echo "black";} else { echo "white"; }?>; position:absolute; top: 7vh;" <?php if (get_trade_date() == true) { echo "hidden"; }?>>Napi 1 csere megengedett!</p>
         </form>
     </div>
 
-
-    <a href="new_trade.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px;">
-        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
-             alt="add_trades">
+    <a href="ongoing_trades.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
+        <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+             alt="all_trades">
     </a>
     <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
         <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
