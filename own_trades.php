@@ -70,6 +70,7 @@ if (isset($_POST["undo"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
@@ -84,7 +85,7 @@ if (isset($_POST["undo"])) {
 
 </aside>
 <div class="container_push" style="height: 100vh; overflow-y: scroll">
-    <div style="background-color: rgb(59,59,59); height: 50px; width: 85%; position:relative; top: 0;">
+    <div style="background-color: <?php if (get_dm_status() == 1) { echo "rgb(59,59,59)";} else {echo "lightgray"; } ?>; height: 50px; width: 85%; position:relative; top: 0;">
         <table style="width: 100%; text-align: center">
             <tr>
                 <td style="width: 25%;">Adandó Érme</td>
@@ -104,8 +105,13 @@ if (isset($_POST["undo"])) {
 
     $first = true;
 
-    $color_1 = "rgb(59,59,59)";
-    $color_2 = "rgb(124,124,124)";
+    if (get_dm_status() == 1) {
+        $color_1 = "rgb(59,59,59)";
+        $color_2 = "rgb(124,124,124)";
+    } else {
+        $color_1 = "lightgray";
+        $color_2 = "white";
+    }
     $i = 1;
 
     while ($row = mysqli_fetch_array($result)) {

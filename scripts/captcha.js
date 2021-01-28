@@ -132,7 +132,7 @@ function select_draggable(event) {
     let click_posY = event.clientY - (innerHeight / 2 - 420 / 2);
 
     for (let i = 0; i < amount_drag; i++) {
-        if (click_posX > draggables[i].get_coords()[0] - draggables[i].get_coords()[2] && click_posX < draggables[i].get_coords()[0] + draggables[i].get_coords()[2] && click_posY > draggables[i].get_coords()[1] - draggables[i].get_coords()[2] && click_posY < draggables[i].get_coords()[1] + draggables[i].get_coords()[2]) {
+        if (click_posX > draggables[i].get_coords()[0] - draggables[i].get_coords()[2] - 2 && click_posX < draggables[i].get_coords()[0] + draggables[i].get_coords()[2] + 2 && click_posY > draggables[i].get_coords()[1] - draggables[i].get_coords()[2] - 2 && click_posY < draggables[i].get_coords()[1] + draggables[i].get_coords()[2] + 2) {
             if (draggables[i].selected === false) {
                 for (let i = 0; i < amount_drag; i++) {
                     draggables[i].selected = false;
