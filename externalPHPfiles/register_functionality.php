@@ -27,7 +27,7 @@ if (isset($_POST["smt_button"])) {
     $max_rank = $_POST["max_rank"];
 
 
-    if (isset($_POST["max_rank2"])) {
+    if (isset($_POST["max_rank_2"])) {
         $max_rank_2 = $_POST["max_rank_2"];
         $max = $max_rank . " " . $max_rank_2;
     } else {
@@ -39,7 +39,7 @@ if (isset($_POST["smt_button"])) {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     if (checkNames($username) && strlen($password) >= 6 && $password == $password2) {
-        $sql = "INSERT INTO user(username, pass, email, ign, max_rank, user_status, inventory, wheelturns, credits, cronia, avatar, `unique`, achievements) VALUES ('$username', '$password_hash', '$email', '$ign', '$max', 0, '', 0, 0, 0, 0, 0, 'X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X')";
+        $sql = "INSERT INTO user(username, pass, email, ign, max_rank, user_status, inventory, wheelturns, credits, cronia, avatar, `unique`, achievements) VALUES ('$username', '$password_hash', '$email', '$ign', '$max', 0, '0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0', 150, 0, 0, 0, 0, 'X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X')";
 
         if (mysqli_query($conn, $sql)) {
             echo "ADDED record to DB";

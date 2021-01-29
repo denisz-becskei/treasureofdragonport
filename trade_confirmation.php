@@ -11,33 +11,24 @@ if (!isset($_COOKIE["trade_id"])) {
 }
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
+include "externalPHPfiles/update_new_inventory.php";
 include "externalPHPfiles/trading_functionality.php";
 
 if (isset($_POST["confirm"])) {
-    add_coin(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[1]);
-    add_coin($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[0]);
+    remove_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[0]);
+    remove_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[1]);
 
-    function get_index($champion) {
-        $inventory = get_inventory();
-        $inventory = explode(", ", $inventory);
-        $ind = 0;
-        foreach ($inventory as $i) {
-            if (trim($i) == $champion) {
-                return $ind;
-            }
-            $ind++;
-        }
-        return null;
-    }
+    add_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[1]);
+    add_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[0]);
 
-    remove_from_inventory(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[3], false);
-    remove_from_inventory($_SESSION["username"], get_index(get_coins_by_id($_COOKIE['trade_id'][1])), false);
     add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
     remove_trade($_COOKIE["trade_id"]);
 
     change_ongoing_trade_numbers(get_coins_by_id($_COOKIE['trade_id'])[2], "decrease");
 
     update_trade_date();
+    update_unique($_SESSION["username"]);
+    update_unique(get_coins_by_id($_COOKIE['trade_id'])[2]);
     header("Location: ongoing_trades.php");
 }
 if (isset($_POST["deny"])) {
@@ -116,7 +107,7 @@ if (isset($_POST["deny"])) {
         <img style="width: 10vw; position:relative; top: calc(100vh / 2 - 11vw); left: calc(100vw / 2 - 15vw);" src="assets/swap_icon_white.png">
         <img style="width: 12vw; position:absolute; top: 25vh; right: 42%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
 
-        <h3 style="position: absolute; top: calc(100vh / 2 + 2vh); left: calc(100vw / 2 - 22vw)">Biztos vagy benne, hogy végre szeretnéd a cserét hajtani?</h3>
+        <h3 style="position: absolute; top: calc(100vh / 2 + 2vh); left: calc(100vw / 2 - 22vw); color: white;">Biztos vagy benne, hogy végre szeretnéd a cserét hajtani?</h3>
 
         <form action="trade_confirmation.php" method="POST" style="position:absolute; top: 60vh; left: calc(100vw / 2 - 475px / 2)">
             <input type="submit" <?php if (get_trade_date() == false) { echo "disabled"; } ?> value="Igen" name="confirm">
@@ -129,7 +120,11 @@ if (isset($_POST["deny"])) {
         <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
              alt="all_trades">
     </a>
-    <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
+    <a href="new_trade.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
+        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+             alt="new_trade">
+    </a>
+    <a href="own_trades.php" style="position:absolute; left: 180px; bottom: 20px; height: 85px; width: 85px;">
         <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
              alt="own_trades">
     </a>
@@ -149,7 +144,6 @@ if (isset($_POST["deny"])) {
         let text = document.getElementById("champion" + i);
 
         for (let j = 0; j < inventory.length; j++) {
-            console.log("Checking " + inventory[j] + " " + text.value);
             if (inventory[j].trim() === text.value) {
                 btn.removeAttribute("disabled");
                 break;

@@ -72,7 +72,7 @@ session_start();
                     Grandmaster
                 </option>
             </select>
-            <select required style="width: 25px;" id="max_rank_2" name="max_rank_2">
+            <select required style="width: 35px;" id="max_rank_2" name="max_rank_2">
                 <option selected disabled>
                     Válassz egyet!
                 </option>

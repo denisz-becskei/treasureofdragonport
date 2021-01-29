@@ -1,7 +1,3 @@
-function getRandomNumber() {
-    return Math.floor(Math.random() * 10) + 1;
-}
-
 function getElement(id) {
     return document.getElementById(id);
 }
@@ -134,16 +130,43 @@ function get_rarity_for_champion(champion) {
     }
 }
 
+let numberz = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+    30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58,
+    59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87,
+    88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100];
+
+function shuffle() {
+    let currentIndex = numberz.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = numberz[currentIndex];
+        numberz[currentIndex] = numberz[randomIndex];
+        numberz[randomIndex] = temporaryValue;
+    }
+
+    return numberz;
+}
+
+let done = false;
+
 async function spin() {
+    let random_array;
     if (localStorage.getItem("reserved") === "true") {
         let entire_array = ["Yagorath", "Vora", "Corvus", "Raum", "Tiberius", "Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus",
             "Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye",
-            "Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji"];
+            "Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji", "Willo"];
         let legendary_coin = "Yagorath";
         let epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
         let rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
         let uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
-        let common_array = ["Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji"];
+        let common_array = ["Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji", "Willo"];
 
         let final_coins = [];
 
@@ -169,12 +192,6 @@ async function spin() {
             let num2 = Math.floor(Math.random() * entire_array.length);
             let num3 = Math.floor(Math.random() * entire_array.length);
 
-            if(i === 0) {
-                item_image1.style.mixBlendMode = "normal";
-                item_image2.style.mixBlendMode = "normal";
-                item_image3.style.mixBlendMode = "normal";
-            }
-
             item_image1.src = get_image_for_name(entire_array[num1]);
             item_image2.src = get_image_for_name(entire_array[num2]);
             item_image3.src = get_image_for_name(entire_array[num3]);
@@ -184,10 +201,11 @@ async function spin() {
             item_name3.innerHTML = `${entire_array[num3]}`;
 
             if (i === 4 || i === 8 || i === 12) {
-                legendary = Math.floor(Math.random() * 101) <= 1;
-                epic = Math.floor(Math.random() * 101) < 3;
-                rare = Math.floor(Math.random() * 101) < 10;
-                uncommon = Math.floor(Math.random() * 101) < 35;
+                random_array = shuffle();
+                legendary = random_array[0] === 1;
+                epic = random_array[0] < 3;
+                rare = random_array[0] < 10;
+                uncommon = random_array[0] < 35;
 
                 if (legendary) {
                     final_coins.push(legendary_coin);
@@ -239,29 +257,48 @@ async function spin() {
         item_rarity1.innerText = `${get_rarity_for_champion(final_coins[0])}`;
         item_rarity2.innerText = `${get_rarity_for_champion(final_coins[1])}`;
         item_rarity3.innerText = `${get_rarity_for_champion(final_coins[2])}`;
-        if (get_rarity_for_champion(final_coins[0]) === "<Legendás>") {item_rarity1.style.color = "red";}
-        else if (get_rarity_for_champion(final_coins[0]) === "<Gyakori>") {item_rarity1.style.color = "gray";}
-        else if (get_rarity_for_champion(final_coins[0]) === "<Egyedi>") {item_rarity1.style.color = "limegreen";}
-        else if (get_rarity_for_champion(final_coins[0]) === "<Ritka>") {item_rarity1.style.color = "blue";}
-        else if (get_rarity_for_champion(final_coins[0]) === "<Epikus>") {item_rarity1.style.color = "purple";}
+        if (get_rarity_for_champion(final_coins[0]) === "<Legendás>") {
+            item_rarity1.style.color = "red";
+        } else if (get_rarity_for_champion(final_coins[0]) === "<Gyakori>") {
+            item_rarity1.style.color = "gray";
+        } else if (get_rarity_for_champion(final_coins[0]) === "<Egyedi>") {
+            item_rarity1.style.color = "limegreen";
+        } else if (get_rarity_for_champion(final_coins[0]) === "<Ritka>") {
+            item_rarity1.style.color = "blue";
+        } else if (get_rarity_for_champion(final_coins[0]) === "<Epikus>") {
+            item_rarity1.style.color = "purple";
+        }
 
-        if (get_rarity_for_champion(final_coins[1]) === "<Legendás>") {item_rarity2.style.color = "red";}
-        else if (get_rarity_for_champion(final_coins[1]) === "<Gyakori>") {item_rarity2.style.color = "gray";}
-        else if (get_rarity_for_champion(final_coins[1]) === "<Egyedi>") {item_rarity2.style.color = "limegreen";}
-        else if (get_rarity_for_champion(final_coins[1]) === "<Ritka>") {item_rarity2.style.color = "blue";}
-        else if (get_rarity_for_champion(final_coins[1]) === "<Epikus>") {item_rarity2.style.color = "purple";}
+        if (get_rarity_for_champion(final_coins[1]) === "<Legendás>") {
+            item_rarity2.style.color = "red";
+        } else if (get_rarity_for_champion(final_coins[1]) === "<Gyakori>") {
+            item_rarity2.style.color = "gray";
+        } else if (get_rarity_for_champion(final_coins[1]) === "<Egyedi>") {
+            item_rarity2.style.color = "limegreen";
+        } else if (get_rarity_for_champion(final_coins[1]) === "<Ritka>") {
+            item_rarity2.style.color = "blue";
+        } else if (get_rarity_for_champion(final_coins[1]) === "<Epikus>") {
+            item_rarity2.style.color = "purple";
+        }
 
-        if (get_rarity_for_champion(final_coins[2]) === "<Legendás>") {item_rarity3.style.color = "red";}
-        else if (get_rarity_for_champion(final_coins[2]) === "<Gyakori>") {item_rarity3.style.color = "gray";}
-        else if (get_rarity_for_champion(final_coins[2]) === "<Egyedi>") {item_rarity3.style.color = "limegreen";}
-        else if (get_rarity_for_champion(final_coins[2]) === "<Ritka>") {item_rarity3.style.color = "blue";}
-        else if (get_rarity_for_champion(final_coins[2]) === "<Epikus>") {item_rarity3.style.color = "purple";}
+        if (get_rarity_for_champion(final_coins[2]) === "<Legendás>") {
+            item_rarity3.style.color = "red";
+        } else if (get_rarity_for_champion(final_coins[2]) === "<Gyakori>") {
+            item_rarity3.style.color = "gray";
+        } else if (get_rarity_for_champion(final_coins[2]) === "<Egyedi>") {
+            item_rarity3.style.color = "limegreen";
+        } else if (get_rarity_for_champion(final_coins[2]) === "<Ritka>") {
+            item_rarity3.style.color = "blue";
+        } else if (get_rarity_for_champion(final_coins[2]) === "<Epikus>") {
+            item_rarity3.style.color = "purple";
+        }
 
-        createCookie("spun-champions", final_coins[0] + ", " + final_coins[1] + ", " + final_coins[2] + ", ");
+        createCookie("spun-champions", final_coins[0] + "," + final_coins[1] + "," + final_coins[2]);
 
         const btn = getElement('back');
         btn.hidden = false;
         localStorage.setItem("reserved", "false");
+        done = true;
     }
 }
 

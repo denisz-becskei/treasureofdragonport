@@ -87,7 +87,7 @@ include "db_connect.php";
     </form>";
         }
 
-        if (isset($_GET["spin-btn"])) {
+        if (isset($_GET["spin-btn"]) && get_wheelturns() != 0) {
             setcookie("spin-initiated", "true", time() + 86400);
             set_wheelturns(get_wheelturns()-1);
             header("Location: wheel_result.php");

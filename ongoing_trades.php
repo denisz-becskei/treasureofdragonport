@@ -119,8 +119,8 @@ if (isset($_POST["btn"])) {
         $i++;
 
         echo "<tr style='background-color: " . $color . "; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
-<td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p>" . $row["coin"] . "</p></td>
-<td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p>" . $row["coin_in_return"] . "</p></td>
+<td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p style='color: ". get_color_by_champion($row["coin"]) ."'>" . $row["coin"] . "</p></td>
+<td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p style='color: ". get_color_by_champion($row["coin_in_return"]) ."'>" . $row["coin_in_return"] . "</p></td>
 <td style='width: 16%;'><p id='owned".$i."'>" . $row["owned_by"] . "</p></td>
 <td style='width: 16%;'><p>" . $row["posted_on"] . "</p></td>
 <td style='width: 16%;'><img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' style='width: 20px; height: 20px; position:relative; top: 30px;' alt='cronia_value'><p style='position:relative; left: 20px; bottom: 7px;'>" . ' ' . $row["cronia_got"] . "</p></td>
@@ -137,11 +137,15 @@ if (isset($_POST["btn"])) {
     ?>
     </table>
 
-    <a href="new_trade.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
-        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+    <a href="ongoing_trades.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
+        <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
              alt="all_trades">
     </a>
-    <a href="own_trades.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
+    <a href="new_trade.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
+        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+             alt="new_trade">
+    </a>
+    <a href="own_trades.php" style="position:absolute; left: 180px; bottom: 20px; height: 85px; width: 85px;">
         <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
              alt="own_trades">
     </a>
@@ -149,11 +153,23 @@ if (isset($_POST["btn"])) {
 </body>
 <script src="scripts/preload.js"></script>
 <script>
-    <?php
-    $inventory = get_inventory(); $inventory = explode(",", $inventory);?>
 
-    var inventory = "<?php echo get_inventory()?>";
-    inventory = inventory.split(",");
+    function get_index(champion) {
+        let champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+            "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+            "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
+
+        for (let i = 0; i < 47; i++) {
+            if (champions[i] === champion) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+
+    var inventory = "<?php echo implode('|', get_inventory())?>";
+    inventory = inventory.split("|");
     inventory.pop();
 
     for (let i = 2; i < <?php echo get_trade_count() + 2; ?>; i++) {
@@ -161,7 +177,7 @@ if (isset($_POST["btn"])) {
         let text = document.getElementById("champion" + i);
 
         for (let j = 0; j < inventory.length; j++) {
-            if (inventory[j].trim() === text.value && document.getElementById("owned" + i).innerText !== '<?php echo $_SESSION["username"]?>') {
+            if (inventory[get_index(text.value)] !== "0" && document.getElementById("owned" + i).innerText !== '<?php echo $_SESSION["username"]?>') {
                 btn.removeAttribute("disabled");
                 break;
             }

@@ -2,6 +2,7 @@
 session_start();
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
+include "externalPHPfiles/update_new_inventory.php";
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
@@ -134,8 +135,7 @@ if (isset($_POST["modification-btn"])) {
         add_news($post_news);
     }
     if ($editing_data[7]) {
-        include "externalPHPfiles/trading_functionality.php";
-        add_coin($user_to_edit, $add_coin);
+        add_champion($user_to_edit, $add_coin);
     }
     CloseCon($conn);
 }

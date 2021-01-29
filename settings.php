@@ -129,7 +129,7 @@ include "db_connect.php";
                         Grandmaster
                     </option>
                 </select>
-                <select class="rank2" style="width: 25px; top: 214px;" id="max_rank_2" name="rank_change2">
+                <select class="rank2" style="width: 35px; top: 214px;" id="max_rank_2" name="rank_change2">
                     <option selected disabled>
                         Válassz egyet!
                     </option>

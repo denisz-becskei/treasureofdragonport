@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="Register Captcha and Trading Modifications and Fixes">
-      <change afterPath="$PROJECT_DIR$/assets/ml_splash.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/woh_splash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/externalPHPfiles/event_handler.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/signup.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
+    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="Registration to Events">
+      <change afterPath="$PROJECT_DIR$/assets/rarities.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/externalPHPfiles/update_new_inventory.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/faq.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/inventory.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/new_trade.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/new_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ongoing_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/own_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/captcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/captcha.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trade_confirmation.php" beforeDir="false" afterPath="$PROJECT_DIR$/trade_confirmation.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel.php" afterDir="false" />
@@ -92,7 +93,9 @@
       <workItem from="1611780816555" duration="6763000" />
       <workItem from="1611842368022" duration="7257000" />
       <workItem from="1611849732587" duration="1990000" />
-      <workItem from="1611860073508" duration="4875000" />
+      <workItem from="1611860073508" duration="5094000" />
+      <workItem from="1611874528107" duration="16071000" />
+      <workItem from="1611924556053" duration="23620000" />
     </task>
     <task id="LOCAL-00001" summary="New Trading System Implementation Start">
       <created>1611449420538</created>
@@ -122,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611787685227</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Registration to Events">
+      <created>1611866176125</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1611866176125</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +155,7 @@
     <MESSAGE value="Done Trading System" />
     <MESSAGE value="Push Images and Some Trading Modifications" />
     <MESSAGE value="Register Captcha and Trading Modifications and Fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Register Captcha and Trading Modifications and Fixes" />
+    <MESSAGE value="Registration to Events" />
+    <option name="LAST_COMMIT_MESSAGE" value="Registration to Events" />
   </component>
 </project>

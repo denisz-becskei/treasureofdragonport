@@ -7,7 +7,13 @@ if ($_COOKIE["spin-initiated"] == false or !isset($_COOKIE["spin-initiated"])) {
     header("Location: wheel.php");
 }
 include "db_connect.php";
+include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/achievement_handler.php";
+include "externalPHPfiles/update_new_inventory.php";
+
+if (isset($_POST["redir-btn"])) {
+    update_wheelspin();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +24,6 @@ include "externalPHPfiles/achievement_handler.php";
     <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
-    <?php
-    if (isset($_POST["redir-btn"])) {
-        setcookie("spin-initiated", false, time() + 86400);
-        complete_achievement($_SESSION["username"], 1);
-        header("Location: externalPHPfiles/update_inventory.php");
-    }
-    ?>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Treasure of Dragon Port</title>
 </head>
@@ -47,7 +46,7 @@ include "externalPHPfiles/achievement_handler.php";
 <body style="overflow-y: hidden; overflow-x: hidden;">
 <aside class="index_aside" style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
     <?php $avatars_coded = [0 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/eb/Avatar_Default_Icon.png", 6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png", 2 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/b/bf/Avatar_Cutesy_Zhin_Icon.png", 3 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/c/c7/Avatar_Ember_Icon.png", 4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png", 5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png", 1 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/e4/Avatar_Death_Speaker_Icon.png", 7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"];?>
-    <?php include "externalPHPfiles/userDAO.php"; include "externalPHPfiles/rank_selector.php";
+    <?php include "externalPHPfiles/rank_selector.php";
     echo "<h1 style='font-size: 24pt'>".get_felhasznalonev()."</h1><img src='".$avatars_coded[get_avatar()]."' alt='avatar' style='height: 100px;'><h2 style='font-size: 16px;'>".get_ign()."<img alt='max_rank' src='".select_image_by_rank()."' style='width: 30px; position:absolute; top: 200px;'></h2><h2 style='font-size: 16px;'><img src='https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png' alt='credits' width='20px' style='position: relative; top: 2px;'>".get_credits()."  <img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' alt='credits' width='20px' style='position: relative; top: 2px;'> ".get_coronia()."</h2>"; ?>
 
     <?php
@@ -95,9 +94,8 @@ include "externalPHPfiles/achievement_handler.php";
         <input hidden id="back" class='container3' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2)' type='submit' name='redir-btn'
                value='Elfogadás'>
     </form>
-
-
 </div>
 </body>
+
 <script src="scripts/wheel_result.js"></script>
 </html>

@@ -141,8 +141,12 @@ if (isset($_POST["undo"])) {
         <img class="btn" src="assets/btn_all.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
              alt="all_trades">
     </a>
-    <a href="new_trade.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px;">
-        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; bottom: 20px; height: 85px;"
+    <a href="new_trade.php" style="position:absolute; left: 90px; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
+        <img class="btn" src="assets/btn_add_new.png" style="position:absolute; left: 0; bottom: 20px; height: 85px;"
+             alt="new_trade">
+    </a>
+    <a href="own_trades.php" style="position:absolute; left: 180px; bottom: 20px; height: 85px; width: 85px;">
+        <img class="btn" src="assets/btn_own.png" style="position:absolute; bottom: 20px; height: 85px;"
              alt="own_trades">
     </a>
 </div>

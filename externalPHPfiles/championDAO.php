@@ -1,5 +1,17 @@
 <?php
 
+function is_champion($champion) {
+    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+        "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
+    foreach ($champions as $ch) {
+        if ($ch == $champion) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function get_rarity_by_champion($champion): string
 {
     $legendary_array = ["Yagorath"];
@@ -20,6 +32,29 @@ function get_rarity_by_champion($champion): string
         return "&ltEgyedi&gt";
     } else {
         return "&ltGyakori&gt";
+    }
+}
+
+function get_color_by_champion($champion): string
+{
+    $legendary_array = ["Yagorath"];
+    $epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
+    $rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
+    $uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
+
+    $right_trimmed_champion = rtrim($champion);
+    $champion = ltrim($right_trimmed_champion);
+
+    if (in_array($champion, $legendary_array)) {
+        return "red";
+    } elseif (in_array($champion, $epic_array)) {
+        return "purple";
+    } elseif (in_array($champion, $rare_array)) {
+        return "blue";
+    } elseif (in_array($champion, $uncommon_array)) {
+        return "lime";
+    } else {
+        return "lightgray";
     }
 }
 
@@ -79,6 +114,7 @@ function get_image_for_name($name): string
         case "Makoa":
             return "https://i.imgur.com/Ea1NmkK.png";
         case "Mal'Damba":
+        case "MalDamba":
             return "https://i.imgur.com/ejPTOc9.png";
         case "Moji":
             return "https://i.imgur.com/x9APW4y.png";

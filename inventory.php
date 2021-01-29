@@ -76,63 +76,48 @@ if (isset($_POST["delete"])) {
     </form>
 
 </aside>
-<div style="position: relative; left: 15%;">
-    <?php echo "<p style='position: absolute; top: 0; right: 15vw; font-size: 24px; text-align: center;'>Jelenlegi különböző<br> érméid száma: <br>".get_unique()." / 47</p>"?>
+<div style="position: relative; left: 15%; width: calc(100vw - 15%);">
+
     <?php
-    $inventory = explode(",", get_inventory());
-    $champions = array();
+    $champions = ["", "Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+        "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
 
-    foreach ($inventory as $item) {
-        array_push($champions, array("Hős" => $item, "Ritkaság" => get_rarity_by_champion($item)));
-    }
-    array_pop($champions);
+        $left = 0;
+        $top = 0;
+
+        for ($i = 1; $i <= 47; $i++) {
+            echo "<div style='width: 10vw; height: 10vw; position:absolute; left: ". $left ."vw; top: ". $top ."vh'>";
+            echo "<img onmouseover='open_sidebar(this);' data-champion='".$champions[$i]."' onmouseout='close_sidebar();' id='image".$i."' style='width: 10vw;' src='". get_image_for_name($champions[$i]) . "'>";
+            echo "<p id='name".$i."' style='position:absolute; bottom: 0; right: 12px; font-size: 20pt'>". get_inventory()[$i - 1] ."</p>";
+            echo "</div>";
+            $left += 11;
+            if ($i != 0 && $i % 6 == 0) {
+                $top += 15;
+                $left = 0;
+            }
+        }
     ?>
-
-    <?php if (count($champions) > 0): ?>
-        <table>
-            <thead>
-            <tr>
-                <th class="inventory-title" style="width: 120px;">Érem</th>
-                <th class="inventory-title"><?php echo implode('</th><th class="inventory-title">', array_keys(current($champions))); ?></th>
-                <th class="inventory-title" style="width: 120px;">Műveletek</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            for ($i = 0; $i < count($champions); $i++): array_map('htmlentities', $champions[$i]); ?>
-                <tr style="height: 120px;">
-                    <td class="inventory-items2" style="width: 120px;"><img
-                                src="<?php echo get_image_for_name(ltrim(rtrim($inventory[$i]))) ?>" alt="item"
-                                style="width: 120px;"></td>
-                    <td class="inventory-items"
-                        style="height: 120px;"><?php
-                        if (get_rarity_by_champion(ltrim(rtrim($inventory[$i]))) == "&ltLegendás&gt") {
-                            $color = "red";
-                            $implosion = '</td><td class="inventory-items" style="color:' . $color . '">';
-                        } elseif (get_rarity_by_champion(ltrim(rtrim($inventory[$i]))) == "&ltEpikus&gt") {
-                            $color = "purple";
-                            $implosion = '</td><td class="inventory-items" style="color:' . $color . '">';
-                        } elseif (get_rarity_by_champion(ltrim(rtrim($inventory[$i]))) == "&ltRitka&gt") {
-                            $color = "blue";
-                            $implosion = '</td><td class="inventory-items" style="color:' . $color . '">';
-                        } elseif (get_rarity_by_champion(ltrim(rtrim($inventory[$i]))) == "&ltEgyedi&gt") {
-                            $color = "limegreen";
-                            $implosion = '</td><td class="inventory-items" style="color:' . $color . '">';
-                        } else {
-                            $color = "gray";
-                            $implosion = '</td><td class="inventory-items" style="color:' . $color . '">';
-                        }
-                        echo implode($implosion, $champions[$i]); ?></td>
-                    <td class="inventory-items2" style="width: 120px;"><form action="inventory.php" method="POST">
-                            <input hidden name="item_num" type="text" value="<?php echo $i;?>">
-                            <input type="submit" name="delete" value="Eladás Kreditekért">
-                        </form></td>
-                </tr>
-            <?php
-            endfor; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
 </div>
+
+<div style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; position:fixed; right: 0; width: 15%; height: 100vh; top: 0; border-left: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; z-index: -50;">
+
+<div id="champion_aside" style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; opacity: 0; position:fixed; right: 0; width: 15%; height: 100vh; top: 0; border-left: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>">
+    <div style="width: 100%; height: 5vh; text-align: center;">
+        <h2 id="champion_name" style="position:relative; font-size: 20px;">Champion Name</h2>
+    </div>
+    <img style="width: 10vw; position:absolute; left: calc(10vw / 2 - 15%)" alt="champion image" id="champion_info">
+    <hr style="position:absolute; top: 25vh; width: 100%" />
+    <div style="width: 100%; height: 5vh; text-align: center;">
+        <h3 style="position:relative; top: 20vh;">Ritkaság:</h3>
+        <h4 style="position:relative; top: 20vh;" id="rarity"></h4>
+        <h3 style="position:relative; top: 20vh;">Kreditár:</h3>
+        <img src="https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png" style="position:absolute; top: 41vh; left: 5.75vw; height: 20px;">
+        <h4 style="position:relative; top: 20vh;" id="credit_price"></h4>
+        <!--<input type="submit" style="position:relative; top: 20vh;" id="sell" value="Eladás Kreditekért">-->
+    </div>
+</div>
+
+<script src="scripts/inventory.js"></script>
 </body>
 </html>
