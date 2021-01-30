@@ -7,9 +7,18 @@
 
     <title>Treasure of Dragon Port</title>
 </head>
+<script src="scripts/jquery-3.5.1.js"></script>
+<script>
+    function add_coin() {
+            $.post("externalPHPfiles/add_coin.php", function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+    }
+</script>
 
-<body style="background-color: black" onload="loader();">
-<canvas id="canvas" width="420px" height="420px" style="position: absolute; left: calc(100vw / 2 - 420px / 2); top: calc(100vh / 2 - 420px / 2); background: black; margin:20px; border: 2px solid white;"></canvas>
+<body style="background-color: black" onload="add_coin();">
+
+
 </body>
 <script src="scripts/captcha.js"></script>
 </html>

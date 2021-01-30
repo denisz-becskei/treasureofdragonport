@@ -1,4 +1,4 @@
-for (let i = 1; i <= 47; i++) {
+for (let i = 0; i < 47; i++) {
     if (document.getElementById("name"+i).innerText === "0") {
         document.getElementById("image"+i).style.opacity = "0.4";
     }

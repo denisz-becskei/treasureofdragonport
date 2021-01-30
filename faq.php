@@ -56,24 +56,33 @@ header('Content-type: text/html; charset=UTF-8');
     </form>
 
 </aside>
+<div style="background-color: red; position:absolute; right: 0; width: 100px; height: 25%;">
+    <p style="transform: rotate(90deg); position: absolute; top: 20%; font-size: 20pt;">Treasure of Dragon Port</p>
+</div>
+<div style="background-color: red; position:absolute; top: 30%; right: 0; width: 100px; height: 25%;">
+
+</div>
+<div style="background-color: red; position:absolute; top: 60%; right: 0; width: 100px; height: 25%;">
+
+</div>
 <div class="container_push" style="width: calc(100vw - 15% - 50px); height: calc(100vh - 15px);">
     <div hidden>
         <h1>Treasure of Dragon Port - A Sárkány-öböl Kincse</h1>
         <h3><i>Ruckus kapitány küldetést kapott Jenostól, hogy gyűjtse össze a Sárkány-öböl összes mágikus aranyérmét, amit az Őrzők a béke érdekében szórtak szét szerte
-                a Birodalomban. Az érméken a bajnokok arcképei találhatóak, amikből ha összegyűlik az összes, Jenos képes lesz elűzni a közelgő sötétséget! Ruckus kapitány
-                jutalom reményében elfogadta a küldetést, és legénységét elküldte különböző tájakra. Segítsd a kapitányt, szerezz érméket, cserélgesd őket a többi matrózzal,
-                hogy neked legyen meg elsőként az összes érme!</i></h3>
+        a Birodalomban. Az érméken a bajnokok arcképei találhatóak, amikből ha összegyűlik az összes, Jenos képes lesz elűzni a közelgő sötétséget! Ruckus kapitány
+        jutalom reményében elfogadta a küldetést, és legénységét elküldte különböző tájakra. Segítsd a kapitányt, szerezz érméket, cserélgesd őket a többi matrózzal,
+        hogy neked legyen meg elsőként az összes érme!</i></h3>
         <p>Ez egy gyűjtögetős event, amely nagyban hasonlít híres trading-kártyajátékokra, mint például a Yi-Gu-Oh vagy a Pokémon.<br>Az event során érméket lehet gyűjteni,
         amelyeken a mindannyiunk által ismert és szeretett hősök arcképei találhatóak. Az event alatt egy szerencsekereket tudnak a játékosok megpörgetni, amely ad 3 random
         érmét. Minden érme különböző ritkaságú, amelyekről egy másik oldalon lehet olvasni.<br>Az event több szezonon át fog menni, mindegyik szezonban az első, aki összegyűjti
         az adott szezon összes érméjét kristályjutalomban részesül.<br>Viszont akkor sem éri meg a pörgetéseket abbahagyni, ha már megvan a szezon győztese, ugyanis <b>mindenki</b>,
         aki összegyűjti az <br>egész event összes érméjét az event végén egy valódi, kézzelfogható jutalomban fog részesülni.<br>Hogyan is szerezhetők ilyen pörgetések? Nos, egy
         Paladins meccsen pontok szerezhetők, pontfoglalásért... kocsibetolásért, stb. Így születik egy végső pontszám, például 4-1. Pörgetések ezek az eredmények alapján szerezhetők,
-        azaz minden pontért <b>2 darab pörgetés jár</b>, amely a győztes csapat mindegyik tagjának 8 pörgetést jelent. <b>A PÖRGETÉSEK A SZEZON VÉGÉN NULLÁZÓDNAK.</b><br>Mire vársz még? Good luck, have fun! :D</p>
+        azaz minden pontért <b>3 darab pörgetés jár</b>, amely a győztes csapat mindegyik tagjának 12 pörgetést jelent. <b>A PÖRGETÉSEK A SZEZON VÉGÉN NULLÁZÓDNAK.</b><br>Mire vársz még? Good luck, have fun! :D</p>
     </div>
     <div hidden>
         <h1>Érmék</h1>
-        <p>Az eventen kapható érméken a hőseink arcképei láthatóak. Minden érmének van egy ritkasági szintje és ezek alapján egy ára, azaz a gyakori ritkaságú érmékért 25 kredit jár,
+        <p>Az eventen kapható érméken a hőseink arcképei láthatóak, összesen 47. Minden érmének van egy ritkasági szintje és ezek alapján egy ára, azaz a gyakori ritkaságú érmékért 25 kredit jár,
         az egyediekért 50, a ritkákért 75, az epikusokért 100 és végül a legendásokért 150. A hősök ritkaságait az alábbi képen lehet látni.</p>
         <img src="assets/rarities.png" style="width: calc(100vw - 15% - 150px);" alt="rarities">
         <p><b>Kreditek:</b> Az érmék eladhatók kreditekért. Ezekből a kreditekből (amennyiben az event szervezőbácsija úgy dönt hogy most nem lesz lusta és megcsinálja) a boltban
@@ -85,9 +94,14 @@ header('Content-type: text/html; charset=UTF-8');
         szezonos pörgetéseket, amelyek segítenek abban, hogy amennyiben nem lett meg egy érme, az még pótolható legyen. Ezeknél a pörgetéseknél <b>MEGNÖVELT</b> eséllyel droppolnak a
         ritkább érmék is.</p>
     </div>
-    <div>
+    <div hidden>
         <h1>Csere</h1>
-        <p></p>
+        <p>Egymás között lehet érméket cserélni, amiért króniák a jutalom. A króniákról egy másik oldalon lehet olvasni. A csere oldalon három funkció elérhető. Az első gomb az alap oldal,
+        itt láthatóak a jelenleg aktív cserék, a cserék feladásának tulajdonosa és annak időpontja, továbbá a cseréért járó króniák száma. Nem tudod elfogadni a saját cseréd, illetve azokat,
+        amelyekhez a szükséges érem hiányzik az aranyzsákból. Napi 1 csere elfogadható, ez szükséges, hogy ne lehessen cserélgetni egy napon oda-vissza, ezáltal összeszedve többszáz króniát.<br>
+        A következő funkció az új csere feladásáról szól. A felületen az első képre kattintva kiválasztható az aranyzsákból, hogy mely érmet szeretnél cserére rakni, majd a másodikra kattintva
+        azt, hogy mely érmét szeretnéd a tiédért cserébe. Egyszerre három általad lévő csere lehet aktív.<br>
+        Végül a harmadik funkció kilistázza a magad által feladott cseréket. Itt vissza tudod azokat vonni.</p>
     </div>
 </div>
 </body>

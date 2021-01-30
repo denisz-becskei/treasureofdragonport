@@ -12,7 +12,7 @@ include "externalPHPfiles/achievement_handler.php";
 include "externalPHPfiles/update_new_inventory.php";
 
 if (isset($_POST["redir-btn"])) {
-    update_wheelspin();
+    header("Location: wheel.php");
 }
 ?>
 <!DOCTYPE html>
@@ -92,10 +92,11 @@ if (isset($_POST["redir-btn"])) {
 
     <form action='wheel_result.php' method='POST'>
         <input hidden id="back" class='container3' style='height: 30px; width: 150px; left: calc(100vw / 2 - 154px / 2)' type='submit' name='redir-btn'
-               value='Elfogadás'>
+               value='Vissza'>
     </form>
 </div>
 </body>
 
+<script src="scripts/jquery-3.5.1.js"></script>
 <script src="scripts/wheel_result.js"></script>
 </html>

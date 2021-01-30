@@ -79,20 +79,20 @@ if (isset($_POST["delete"])) {
 <div style="position: relative; left: 15%; width: calc(100vw - 15%);">
 
     <?php
-    $champions = ["", "Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
         "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
         "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
 
         $left = 0;
         $top = 0;
 
-        for ($i = 1; $i <= 47; $i++) {
+        for ($i = 0, $j = 1; $i < 47; $i++, $j++) {
             echo "<div style='width: 10vw; height: 10vw; position:absolute; left: ". $left ."vw; top: ". $top ."vh'>";
             echo "<img onmouseover='open_sidebar(this);' data-champion='".$champions[$i]."' onmouseout='close_sidebar();' id='image".$i."' style='width: 10vw;' src='". get_image_for_name($champions[$i]) . "'>";
-            echo "<p id='name".$i."' style='position:absolute; bottom: 0; right: 12px; font-size: 20pt'>". get_inventory()[$i - 1] ."</p>";
+            echo "<p id='name".$i."' style='position:absolute; bottom: 0; right: 12px; font-size: 20pt'>". get_inventory()[$i] ."</p>";
             echo "</div>";
             $left += 11;
-            if ($i != 0 && $i % 6 == 0) {
+            if ($i != 0 && $j % 6 == 0) {
                 $top += 15;
                 $left = 0;
             }

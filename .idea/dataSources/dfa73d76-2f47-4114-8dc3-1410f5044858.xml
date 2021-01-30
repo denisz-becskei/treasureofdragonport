@@ -23,7 +23,7 @@
     </schema>
     <schema id="7" parent="1" name="treasure_of_dragon_port">
       <Current>1</Current>
-      <Collation>utf8_unicode_ci</Collation>
+      <Collation>utf8mb4_unicode_ci</Collation>
     </schema>
     <collation id="8" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -1089,7 +1089,7 @@
     </column>
     <column id="346" parent="338" name="content">
       <Position>2</Position>
-      <DataType>text|0s</DataType>
+      <DataType>mediumtext|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="347" parent="338" name="author">
@@ -1168,7 +1168,7 @@
     </column>
     <column id="362" parent="340" name="inventory">
       <Position>7</Position>
-      <DataType>text|0s</DataType>
+      <DataType>mediumtext|0s</DataType>
     </column>
     <column id="363" parent="340" name="wheelturns">
       <Position>8</Position>
@@ -1220,7 +1220,11 @@
       <DataType>int(11)|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <key id="372" parent="340" name="PRIMARY">
+    <column id="372" parent="340" name="last_spin">
+      <Position>17</Position>
+      <DataType>varchar(25)|0s</DataType>
+    </column>
+    <key id="373" parent="340" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>username</ColNames>
       <Primary>1</Primary>

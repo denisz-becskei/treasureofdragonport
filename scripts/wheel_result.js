@@ -162,13 +162,9 @@ async function spin() {
         let entire_array = ["Yagorath", "Vora", "Corvus", "Raum", "Tiberius", "Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus",
             "Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye",
             "Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji", "Willo"];
-        let legendary_coin = "Yagorath";
-        let epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
-        let rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
-        let uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
-        let common_array = ["Jenos", "Vivian", "Buck", "Seris", "Inara", "Grohk", "Viktor", "Cassie", "Lex", "Grover", "Ash", "Ruckus", "Fernando", "Barik", "Pip", "Moji", "Willo"];
-
         let final_coins = [];
+
+        $.post("externalPHPfiles/add_coin.php");
 
         const item_image1 = getElement('item1');
         const item_image2 = getElement('item2');
@@ -182,10 +178,9 @@ async function spin() {
         const item_rarity2 = getElement('item_rarity2');
         const item_rarity3 = getElement('item_rarity3');
 
-        let legendary;
-        let epic;
-        let rare;
-        let uncommon;
+        $.post("externalPHPfiles/get_spun.php", function(data, status){
+            final_coins = data.split("|");
+        });
 
         for (let i = 0; i < 13; i++) {
             let num1 = Math.floor(Math.random() * entire_array.length);
@@ -199,30 +194,6 @@ async function spin() {
             item_name1.innerHTML = `${entire_array[num1]}`;
             item_name2.innerHTML = `${entire_array[num2]}`;
             item_name3.innerHTML = `${entire_array[num3]}`;
-
-            if (i === 4 || i === 8 || i === 12) {
-                random_array = shuffle();
-                legendary = random_array[0] === 1;
-                epic = random_array[0] < 3;
-                rare = random_array[0] < 10;
-                uncommon = random_array[0] < 35;
-
-                if (legendary) {
-                    final_coins.push(legendary_coin);
-                } else if (epic) {
-                    let select = Math.floor(Math.random() * epic_array.length);
-                    final_coins.push(epic_array[select]);
-                } else if (rare) {
-                    let select = Math.floor(Math.random() * rare_array.length);
-                    final_coins.push(rare_array[select]);
-                } else if (uncommon) {
-                    let select = Math.floor(Math.random() * uncommon_array.length);
-                    final_coins.push(uncommon_array[select]);
-                } else {
-                    let select = Math.floor(Math.random() * common_array.length);
-                    final_coins.push(common_array[select]);
-                }
-            }
 
             let tick = getElement("ticking");
             tick.currentTime = 0;
@@ -293,10 +264,10 @@ async function spin() {
             item_rarity3.style.color = "purple";
         }
 
-        createCookie("spun-champions", final_coins[0] + "," + final_coins[1] + "," + final_coins[2]);
+        $.post("externalPHPfiles/update_spun.php");
 
         const btn = getElement('back');
-        btn.hidden = false;
+        btn.removeAttribute("hidden");
         localStorage.setItem("reserved", "false");
         done = true;
     }
