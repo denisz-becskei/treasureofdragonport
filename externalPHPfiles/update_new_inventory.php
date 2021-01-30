@@ -5,12 +5,11 @@ function update_unique($username) {
     $uni = 0;
 
     foreach ($inventory as $i) {
-        if ($i != 0) {
+        if (intval($i) != 0) {
             $uni++;
         }
     }
 
-    $uni--;
     $conn = OpenCon();
     $sql = "UPDATE user SET `unique` = '$uni' WHERE username='$username'";
     mysqli_query($conn, $sql);

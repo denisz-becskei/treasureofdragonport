@@ -18,11 +18,11 @@ session_start();
 <body onload="loader();">
 <canvas id="canvas" width="420px" height="420px" hidden style="position: absolute; left: calc(100vw / 2 - 420px / 2); top: calc(100vh / 2 - 420px / 2); background: white; border: 2px solid black; z-index: 5;"></canvas>
 <div id="instructions" class="margins" style="opacity: 0; display: flex; width: 50vw; text-align: center; position:absolute; left: calc(100vw / 2 - 14vw); top: 10vh;"><p>Kattints egy </p><p style="color: green">ZÖLD </p><p> körre, majd egy </p><p style="color: red;">PIROS </p><p>négyzetre, amíg minden el nem tűnik!</p></div>
-    <div class="container2" style="height: 350px;">
+    <div class="container2" style="height: 420px;">
         <form action="externalPHPfiles/register_functionality.php" method="POST">
             <br>
-            <label for="username">Felhasználónév</label>
-            <br>
+            <label for="username">Felhasználónév</label><br>
+            <p style="position:absolute; font-size: 8pt;">A felhasználóneved csakis számokat és az angol ábécé betűit tartalmazhatja!</p><br><br>
             <input id="username" name="username" type="text" value="" required>
             <br>
             <label for="password">Jelszó</label>
@@ -38,6 +38,7 @@ session_start();
             <input id="email" type="text" name="email" value="">
             <br>
             <label for="ign">In-game név</label>
+            <p style="position:absolute; font-size: 8pt;">A mező csakis számokat és az angol ábécé betűit tartalmazhatja! Amennyiben Paladinsban ékezetes az ign-ed, annélkül írd le!</p><br><br>
             <br>
             <input id="ign" type="text" name="ign" value="" required>
             <br>

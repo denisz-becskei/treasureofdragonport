@@ -141,34 +141,46 @@ function get_rank() {
 
 function set_avatar($avatar) {
     switch ($avatar) {
-        case "Death Speaker":
+        case "Halálsuttogó":
             return 1;
-        case "Cutesy Zhin":
+        case "Cuki Zhin":
             return 2;
-        case "Ember":
+        case "Parázs":
             return 3;
-        case "Lily-hopper":
+        case "Tündérrózsa-ugráló":
             return 4;
-        case "Spirit":
+        case "Szellemes":
             return 5;
-        case "I WUV YOU";
+        case "SZEJETLEK";
             return 6;
-        case "Beauty in Conflict":
+        case "Gyönyör a Konfliktusban":
             return 7;
         default:
             return 0;
     }
 }
 
-function get_avatar() {
+function get_avatar($username) {
     $conn = OpenCon();
-
-    $username = $_SESSION["username"];
 
     $sql = "SELECT avatar FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     CloseCon($conn);
-    return mysqli_fetch_array($result)[0];
+    return intval(mysqli_fetch_array($result)[0]);
+}
+
+function get_avatar_link($username) {
+    $avatars_coded = [
+            0 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/eb/Avatar_Default_Icon.png",
+            1 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/e4/Avatar_Death_Speaker_Icon.png",
+            2 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/b/bf/Avatar_Cutesy_Zhin_Icon.png",
+            3 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/c/c7/Avatar_Ember_Icon.png",
+            4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png",
+            5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png",
+            6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png",
+            7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"
+        ];
+    return $avatars_coded[get_avatar($username)];
 }
 
 function get_unique() {
@@ -178,7 +190,7 @@ function get_unique() {
 
     $sql = "SELECT `unique` FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
-    CloseCon($conn);;
+    CloseCon($conn);
     return mysqli_fetch_array($result)[0];
 }
 

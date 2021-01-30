@@ -2,19 +2,32 @@
 session_start();
 include "../db_connect.php";
 
-function checkNames($username) {
+function checkNames($username): bool
+{
     $conn = OpenCon();
 
     $sql = "SELECT username FROM user";
     $result = $conn->query($sql);
-    if ($result->num_rows > 0) {
-        for ($i = 0; $i < $result->num_rows; $i++) {
-            if ($username == mysqli_fetch_array($result)[$i]) {
-                return false;
-            }
+    while($row = mysqli_fetch_array($result)) {
+        if ($row["username"] == $username) {
+            return false;
         }
     }
     CloseCon($conn);
+    return true;
+}
+
+function checkStringForIllegalCharacters($string): bool
+{
+    if (strlen($string) != strlen(utf8_decode($string)))
+    {
+        return false;
+    }
+    for ($i = 0; $i < strlen($string); $i++){
+        if (!(ord($string[$i]) >= 48 && ord($string[$i]) <= 57 || ord($string[$i]) >= 65 && ord($string[$i]) <= 90 || ord($string[$i]) >= 97 && ord($string[$i]) <= 122)) {
+            return false;
+        }
+    }
     return true;
 }
 
@@ -25,7 +38,6 @@ if (isset($_POST["smt_button"])) {
     $email = $_POST["email"];
     $ign = $_POST["ign"];
     $max_rank = $_POST["max_rank"];
-
 
     if (isset($_POST["max_rank_2"])) {
         $max_rank_2 = $_POST["max_rank_2"];
@@ -38,7 +50,7 @@ if (isset($_POST["smt_button"])) {
 
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
-    if (checkNames($username) && strlen($password) >= 6 && $password == $password2) {
+    if (checkNames($username) && strlen($password) >= 6 && $password == $password2 && checkStringForIllegalCharacters($username) && checkStringForIllegalCharacters($ign)) {
         $sql = "INSERT INTO user(username, pass, email, ign, max_rank, user_status, inventory, wheelturns, credits, cronia, avatar, `unique`, achievements) VALUES ('$username', '$password_hash', '$email', '$ign', '$max', 0, '0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0', 150, 0, 0, 0, 0, 'X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X')";
 
         if (mysqli_query($conn, $sql)) {
@@ -51,6 +63,12 @@ if (isset($_POST["smt_button"])) {
         echo "Sikeres regisztráció";
     } elseif (!checkNames($username)) {
         echo "A felhasználónév foglalt!";
+        echo "<form action='register_functionality.php' method='GET'><input name='smt-button3' type='submit' value='Vissza'></form>";
+    } elseif (!checkStringForIllegalCharacters($username)) {
+        echo "A felhasználónév illegális karaktereket tartalmaz!";
+        echo "<form action='register_functionality.php' method='GET'><input name='smt-button3' type='submit' value='Vissza'></form>";
+    }  elseif (!checkStringForIllegalCharacters($ign)) {
+        echo "Az ingame név illegális karaktereket tartalmaz!";
         echo "<form action='register_functionality.php' method='GET'><input name='smt-button3' type='submit' value='Vissza'></form>";
     } elseif ($password < 6) {
         echo "A jelszó nem tartalmaz legalább 6 karaktert!";

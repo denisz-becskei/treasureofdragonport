@@ -7,6 +7,111 @@ if (!isset($_COOKIE["spin-initiated"])) {
     setcookie("spin-initiated", false, time() + 86400);
 }
 include "db_connect.php";
+include "externalPHPfiles/userDAO.php";
+include "externalPHPfiles/rank_selector.php";
+?>
+
+<?php
+if (isset($_POST["submit_changes"])) {
+    //password changing
+    $current_pass = $_POST["password_change0"];
+    $new_pass = $_POST["password_change1"];
+    $new_pass_again = $_POST["password_change2"];
+
+    //email changing
+    $new_email = $_POST["email_change"];
+
+    //ign change
+    $new_ign = $_POST["ign_change"];
+
+    //rank change
+    if (!isset($_POST["rank_change"]) || !isset($_POST["rank_change2"])) {
+        $new_rank = "";
+    } else {
+        $new_rank = $_POST["rank_change"] . " " . $_POST["rank_change2"];
+    }
+
+    //submit
+    $commit_password = $_POST["commit_password"];
+
+    if ($new_email != "") {
+        if (password_verify($commit_password, get_password())) {
+
+            $conn = OpenCon();
+
+            $username = $_SESSION["username"];
+
+            $sql = "UPDATE user SET email = '$new_email' WHERE username = '$username'";
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>document.getElementById('response').innerText = 'Az e-mail címed sikeresen megváltozott!'</script>";
+            }
+            CloseCon($conn);
+        } else {
+            echo "<script>alert('A jóváhagyási jelszó helytelen!')</script>";
+        }
+    }
+
+    if ($new_ign != "") {
+        if (password_verify($commit_password, get_password())) {
+
+            $conn = OpenCon();
+
+            $username = $_SESSION["username"];
+
+            $sql = "UPDATE user SET ign = '$new_ign' WHERE username = '$username'";
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>alert('Az In-game neved sikeresen megváltozott!')</script>";
+            }
+            CloseCon($conn);
+        } else {
+            echo "<script>alert('A jóváhagyási jelszó helytelen!')</script>";
+        }
+    }
+
+    if ($new_rank != "") {
+        if (password_verify($commit_password, get_password())) {
+
+            $conn = OpenCon();
+
+            $username = $_SESSION["username"];
+
+            $sql = "UPDATE user SET max_rank = '$new_rank' WHERE username = '$username'";
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>document.getElementById('response').innerText = 'A legmagasabb rankod sikeresen megváltozott!'</script>";
+            }
+            CloseCon($conn);
+        } else {
+            echo "<script>document.getElementById('response').innerText = 'A jóváhagyási jelszó helytelen!'</script>";
+        }
+    }
+
+    if ($current_pass != "" && $new_pass != "" && $new_pass_again != "") {
+        if (password_verify($current_pass, get_password())) {
+
+            if ($new_pass == $new_pass_again) {
+                $conn = OpenCon();
+
+                $username = $_SESSION["username"];
+
+                $password_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+
+                $sql = "UPDATE user SET pass = '$password_hashed' WHERE username = '$username'";
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('A jelszó sikeresen megváltozott!')</script>";
+                }
+                CloseCon($conn);
+            } else {
+                echo "<script>alert('A két megadott új jelszó nem egyezik meg!')</script>";
+            }
+
+        } else {
+            echo "<script>alert('A jelenlegiként megadott jelszó helytelen!')</script>";
+        }
+    } else if ($current_pass != "" || $new_pass != "" || $new_pass_again != "") {
+        echo "<script>alert('Hiányzó adat a jelszóváltáshoz!')</script>";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +119,12 @@ include "db_connect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/assets/logo.png">
-    <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) { echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";} ?>
+    <?php include "externalPHPfiles/dark_mode_checker.php";
+    if (get_dm_status() == 0) {
+        echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";
+    } else {
+        echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";
+    } ?>
     <title>Treasure of Dragon Port</title>
 </head>
 <style>
@@ -47,12 +157,19 @@ include "db_connect.php";
     .logout {
         height: 62px;
     }
+
+    .btn:hover {
+        transform: scale(1.2);
+    }
 </style>
 <body style="overflow-y: hidden; overflow-x: hidden;">
-<aside class="index_aside" style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
-    <?php $avatars_coded = [0 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/eb/Avatar_Default_Icon.png", 6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png", 2 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/b/bf/Avatar_Cutesy_Zhin_Icon.png", 3 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/c/c7/Avatar_Ember_Icon.png", 4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png", 5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png", 1 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/e/e4/Avatar_Death_Speaker_Icon.png", 7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"];?>
-    <?php include "externalPHPfiles/userDAO.php"; include "externalPHPfiles/rank_selector.php";
-    echo "<h1 style='font-size: 24pt'>".get_felhasznalonev()."</h1><img src='".$avatars_coded[get_avatar()]."' alt='avatar' style='height: 100px;'><h2 style='font-size: 16px;'>".get_ign()."<img alt='max_rank' src='".select_image_by_rank()."' style='width: 30px; position:absolute; top: 200px;'></h2><h2 style='font-size: 16px;'><img src='https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png' alt='credits' width='20px' style='position: relative; top: 2px;'>".get_credits()."  <img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' alt='credits' width='20px' style='position: relative; top: 2px;'> ".get_coronia()."</h2>"; ?>
+<aside class="index_aside" style="<?php if (get_dm_status() == 0) {
+    echo "background-color: lightgray";
+} else {
+    echo "background-color:gray";
+} ?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
+    <?php
+    echo "<h1 style='font-size: 24pt'>" . get_felhasznalonev() . "</h1><img src='" . get_avatar_link($_SESSION["username"]) . "' alt='avatar' style='height: 100px;'><h2 style='font-size: 16px;'>" . get_ign() . "<img alt='max_rank' src='" . select_image_by_rank() . "' style='width: 30px; position:absolute; top: 200px;'></h2><h2 style='font-size: 16px;'><img src='https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png' alt='credits' width='20px' style='position: relative; top: 2px;'>" . get_credits() . "  <img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' alt='credits' width='20px' style='position: relative; top: 2px;'> " . get_coronia() . "</h2>"; ?>
 
     <?php
     $is_admin = (get_status() == 1 || get_status() == 2) ? "<div class='side_button'><a style='text-decoration: none; color: red;' href='admin_panel.php'>Admin Panel</a></div>" : "";
@@ -70,11 +187,12 @@ include "db_connect.php";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
-        <div class="side_button"><input style="background-color: transparent; border: none; padding: 0; margin: 0;" type="submit" name="lgt-button" class="logout" value="Kijelentkezés"></div>
+        <div class="side_button"><input style="background-color: transparent; border: none; padding: 0; margin: 0;"
+                                        type="submit" name="lgt-button" class="logout" value="Kijelentkezés"></div>
     </form>
 
 </aside>
-<div class="container_push">
+<div class="container_push" style="height: 100vh;">
     <form action="settings.php" method="POST" autocomplete="off">
         <fieldset>
             <legend>Adatváltoztatás</legend>
@@ -162,125 +280,22 @@ include "db_connect.php";
             </fieldset>
         </fieldset>
     </form>
-    <form action="externalPHPfiles/appearance_changer.php" method="POST">
-        <fieldset>
-            <legend>Testreszabás</legend>
-            <label for="avatars">Avatár váltása</label>
-            <select id="avatars" name="avatars" style="width: 125px">
-                <?php include 'externalPHPfiles/avatars.php' ?>
-            </select><br>
-            <label for="dark-mode">Sötét-mód</label>
-            <input type="checkbox" id="dark-mode" name="dark-mode" style="position:relative; left: 458px; top: 2px;">
-            <br><label for="submit_changes2">Jóváhagyás</label>
-            <input type="submit" id="submit_changes2" name="submit_changes2" value="Változtatások mentése">
-        </fieldset>
-    </form>
+    <p id="response" style="position: relative; left: 20px"></p>
+    <div class="btn" id="toggle_dm" style="position:absolute; bottom: 20px;">
+        <img style="height: 85px;" src="assets/btn_dark_mode.png" alt="toggle_dark_mode">
+    </div>
+    <div style="position:absolute; bottom: 20px; left: 90px; width: 120px; text-align: center;">
+        <p>Avatárok</p>
+        <select id="avatars" name="avatars" style="width: 125px">
+            <option disabled selected>--</option>
+            <?php include 'externalPHPfiles/avatars.php'?>
+        </select>
+    </div>
 
-    <?php
-    if (isset($_POST["submit_changes"])) {
-        //password changing
-        $current_pass = $_POST["password_change0"];
-        $new_pass = $_POST["password_change1"];
-        $new_pass_again = $_POST["password_change2"];
-
-        //email changing
-        $new_email = $_POST["email_change"];
-
-        //ign change
-        $new_ign = $_POST["ign_change"];
-
-        //rank change
-        if (!isset($_POST["rank_change"]) || !isset($_POST["rank_change2"])) {
-            $new_rank = "";
-        } else {
-            $new_rank = $_POST["rank_change"] . " " . $_POST["rank_change2"];
-        }
-
-        //submit
-        $commit_password = $_POST["commit_password"];
-
-        if ($current_pass != "" && $new_pass != "" && $new_pass_again != "") {
-            if (password_verify($current_pass, get_password())) {
-                if (password_verify($commit_password, get_password())) {
-                    if ($new_pass == $new_pass_again) {
-                        $conn = OpenCon();
-
-                        $username = $_SESSION["username"];
-
-                        $password_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
-
-                        $sql = "UPDATE user SET pass = '$password_hashed' WHERE username = '$username'";
-                        if (mysqli_query($conn, $sql)) {
-                            echo "<p style='position: relative; left: 20px'>A jelszó sikeresen megváltozott!</p>";
-                        }
-                        CloseCon($conn);
-                    } else {
-                        echo "<p style='position: relative; left: 20px'>A két megadott új jelszó nem egyezik meg!</p>";
-                    }
-                } else {
-                    echo "<p style='position: relative; left: 20px'>A jóváhagyási jelszó nem helyes!</p>";
-                }
-            } else {
-                echo "<p style='position: relative; left: 20px'>A jelenlegiként megadott jelszó helytelen!</p>";
-            }
-        } else if ($current_pass != "" || $new_pass != "" || $new_pass_again != "") {
-            echo "<p style='position: relative; left: 20px'>Hiányzó adat a jelszóváltáshoz!</p>";
-        }
-
-        if ($new_email != "") {
-            if (password_verify($commit_password, get_password())) {
-
-                $conn = OpenCon();
-
-                $username = $_SESSION["username"];
-
-                $sql = "UPDATE user SET email = '$new_email' WHERE username = '$username'";
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p style='position: relative; left: 20px'>Az e-mail sikeresen megváltozott!</p>";
-                }
-                CloseCon($conn);
-            } else {
-                echo "<p style='position: relative; left: 20px'>A jóváhagyási jelszó helytelen!</p>";
-            }
-        }
-
-        if ($new_ign != "") {
-            if (password_verify($commit_password, get_password())) {
-
-                $conn = OpenCon();
-
-                $username = $_SESSION["username"];
-
-                $sql = "UPDATE user SET ign = '$new_ign' WHERE username = '$username'";
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p style='position: relative; left: 20px'>Az Ingame neved sikeresen megváltozott!</p>";
-                }
-                CloseCon($conn);
-            } else {
-                echo "<p style='position: relative; left: 20px'>A jóváhagyási jelszó helytelen!</p>";
-            }
-        }
-
-        if ($new_rank != "") {
-            if (password_verify($commit_password, get_password())) {
-
-                $conn = OpenCon();
-
-                $username = $_SESSION["username"];
-
-                $sql = "UPDATE user SET max_rank = '$new_rank' WHERE username = '$username'";
-                if (mysqli_query($conn, $sql)) {
-                    echo "<p style='position: relative; left: 20px'>A legmagasabb rankod sikeresen megváltozott!</p>";
-                }
-                CloseCon($conn);
-            } else {
-                echo "<p style='position: relative; left: 20px'>A jóváhagyási jelszó helytelen!</p>";
-            }
-        }
-    }
-
-    ?>
 </div>
 </body>
+<script src="scripts/jquery-3.5.1.js"></script>
+<script src="scripts/settings.js"></script>
+<script src="scripts/avatar.js"></script>
 <script src="scripts/register_scripts.js"></script>
 </html>
