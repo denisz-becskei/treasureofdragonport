@@ -1,7 +1,20 @@
 function check() {
     document.getElementById("inv").style.opacity = "0";
     document.getElementById("collection").style.opacity = "0";
-    if (document.getElementById("champion").value === document.getElementById("champion2").value || document.getElementById("champion").value === "" || document.getElementById("champion2").value === "") {
+    let no_of_trades = function () {
+        var tmp = null;
+        $.ajax({
+            'type': "POST",
+            'async': false,
+            'global': false,
+            'url': "externalPHPfiles/get_no_trades.php",
+            'success': function (data) {
+                tmp = data;
+            }
+        });
+        return tmp;
+    }();
+    if (document.getElementById("champion").value === document.getElementById("champion2").value || document.getElementById("champion").value === "" || document.getElementById("champion2").value === "" || no_of_trades >= 3) {
         document.getElementById("lock").setAttribute("disabled", "");
     } else {
         document.getElementById("lock").removeAttribute("disabled");
@@ -49,24 +62,6 @@ function generate_images() {
     let image2_3 = new Image(SIZE, SIZE);
     let image2_4 = new Image(SIZE, SIZE);
 
-    let amount1 = document.createElement("p");
-    let amount2 = document.createElement("p");
-    let amount3 = document.createElement("p");
-    let amount4 = document.createElement("p");
-
-    amount1.style.position = "absolute";
-    amount1.style.left = "120px";
-    amount1.style.top = "90px";
-    amount2.style.position = "absolute";
-    amount2.style.left = "240px";
-    amount2.style.top = "90px";
-    amount3.style.position = "absolute";
-    amount3.style.left = "120px";
-    amount3.style.top = "220px";
-    amount4.style.position = "absolute";
-    amount4.style.left = "240px";
-    amount4.style.top = "220px";
-
     image1.src = get_image_for_name(entire_array[i]);
     image1.dataset.champion = entire_array[i];
     image2.src = get_image_for_name(entire_array[i+=1]);
@@ -78,16 +73,12 @@ function generate_images() {
 
     image2_1.src = get_image_for_name(what_we_have[j]);
     image2_1.dataset.champion = what_we_have[j];
-    amount1.innerText = what_we_have_amount[j];
     image2_2.src = get_image_for_name(what_we_have[j+=1]);
     image2_2.dataset.champion = what_we_have[j];
-    amount2.innerText = what_we_have_amount[j];
     image2_3.src = get_image_for_name(what_we_have[j+=1]);
     image2_3.dataset.champion = what_we_have[j];
-    amount3.innerText = what_we_have_amount[j];
     image2_4.src = get_image_for_name(what_we_have[j+=1]);
     image2_4.dataset.champion = what_we_have[j];
-    amount4.innerText = what_we_have_amount[j];
 
     image1.id = "image1";
     image2.id = "image2";
@@ -99,10 +90,6 @@ function generate_images() {
     image2_3.id = "image2_3";
     image2_4.id = "image2_4";
 
-    amount1.id = "amount1";
-    amount2.id = "amount2";
-    amount3.id = "amount3";
-    amount4.id = "amount4";
 
     image1.onclick = function () {
         insert_image(this, inventoryDiv, this.dataset.champion);
@@ -138,28 +125,18 @@ function generate_images() {
     if (what_we_have.length !== 1) {
         if ((what_we_have.length - 1 % 4) === 1) {
             inventoryDiv.appendChild(image2_1);
-            inventoryDiv.appendChild(amount1);
         } else if (what_we_have.length - 1 % 4 === 2) {
             inventoryDiv.appendChild(image2_1);
             inventoryDiv.appendChild(image2_2);
-            inventoryDiv.appendChild(amount1);
-            inventoryDiv.appendChild(amount2);
         } else if (what_we_have.length - 1 % 4 === 3) {
             inventoryDiv.appendChild(image2_1);
             inventoryDiv.appendChild(image2_2);
             inventoryDiv.appendChild(image2_3);
-            inventoryDiv.appendChild(amount1);
-            inventoryDiv.appendChild(amount2);
-            inventoryDiv.appendChild(amount3);
         } else {
             inventoryDiv.appendChild(image2_1);
             inventoryDiv.appendChild(image2_2);
             inventoryDiv.appendChild(image2_3);
             inventoryDiv.appendChild(image2_4);
-            inventoryDiv.appendChild(amount1);
-            inventoryDiv.appendChild(amount2);
-            inventoryDiv.appendChild(amount3);
-            inventoryDiv.appendChild(amount4);
         }
     }
 
@@ -224,76 +201,124 @@ function page_forward() {
     }
 }
 
+let page = 1;
+
 function page_forward_inventory() {
     let image2_1 = document.getElementById("image2_1");
     let image2_2 = document.getElementById("image2_2");
     let image2_3 = document.getElementById("image2_3");
     let image2_4 = document.getElementById("image2_4");
 
-    let amount1 = document.getElementById("amount1");
-    let amount2 = document.getElementById("amount2");
-    let amount3 = document.getElementById("amount3");
-    let amount4 = document.getElementById("amount4");
+    console.log(page)
 
-    if (j === 0) {
+    if (page < Math.floor((what_we_have.length - 1) / 4)) {
         image2_1.removeAttribute("hidden");
         image2_2.removeAttribute("hidden");
         image2_3.removeAttribute("hidden");
         image2_4.removeAttribute("hidden");
 
-        amount1.removeAttribute("hidden");
-        amount2.removeAttribute("hidden");
-        amount3.removeAttribute("hidden");
-        amount4.removeAttribute("hidden");
+        image2_1.src = get_image_for_name(what_we_have[j+=1]);
+        image2_1.dataset.champion = what_we_have[j];
+        image2_2.src = get_image_for_name(what_we_have[j+=1]);
+        image2_2.dataset.champion = what_we_have[j];
+        image2_3.src = get_image_for_name(what_we_have[j+=1]);
+        image2_3.dataset.champion = what_we_have[j];
+        image2_4.src = get_image_for_name(what_we_have[j+=1]);
+        image2_4.dataset.champion = what_we_have[j];
+        page++;
+    } else if ((what_we_have.length - 1) % 4 === 3) {
+        image2_1.removeAttribute("hidden");
+        image2_2.removeAttribute("hidden");
+        image2_3.removeAttribute("hidden");
+        image2_4.setAttribute("hidden", "hidden");
 
         image2_1.src = get_image_for_name(what_we_have[j+=1]);
         image2_1.dataset.champion = what_we_have[j];
-        amount1.innerText = what_we_have_amount[j];
         image2_2.src = get_image_for_name(what_we_have[j+=1]);
         image2_2.dataset.champion = what_we_have[j];
-        amount2.innerText = what_we_have_amount[j];
         image2_3.src = get_image_for_name(what_we_have[j+=1]);
         image2_3.dataset.champion = what_we_have[j];
-        amount3.innerText = what_we_have_amount[j];
+        page = 0;
+        j = 0;
+    } else if ((what_we_have.length - 1) % 4 === 2) {
+        image2_1.removeAttribute("hidden");
+        image2_2.removeAttribute("hidden");
+        image2_3.setAttribute("hidden", "");
+        image2_4.setAttribute("hidden", "");
+
+        image2_1.src = get_image_for_name(what_we_have[j+=1]);
+        image2_1.dataset.champion = what_we_have[j];
+        image2_2.src = get_image_for_name(what_we_have[j+=1]);
+        image2_2.dataset.champion = what_we_have[j];
+        page = 0;
+        j = 0;
+    } else if ((what_we_have.length - 1) % 4 === 1) {
+        image2_1.removeAttribute("hidden");
+        image2_2.setAttribute("hidden", "hidden");
+        image2_3.setAttribute("hidden", "hidden");
+        image2_4.setAttribute("hidden", "hidden");
+
+        image2_1.src = get_image_for_name(what_we_have[j+=1]);
+        image2_1.dataset.champion = what_we_have[j];
+        page = 0;
+        j = 0;
+    }else {
+        page = 1;
+        j = 0;
+        image2_1.removeAttribute("hidden");
+        image2_2.removeAttribute("hidden");
+        image2_3.removeAttribute("hidden");
+        image2_4.removeAttribute("hidden");
+
+        image2_1.src = get_image_for_name(what_we_have[j+=1]);
+        image2_1.dataset.champion = what_we_have[j];
+        image2_2.src = get_image_for_name(what_we_have[j+=1]);
+        image2_2.dataset.champion = what_we_have[j];
+        image2_3.src = get_image_for_name(what_we_have[j+=1]);
+        image2_3.dataset.champion = what_we_have[j];
         image2_4.src = get_image_for_name(what_we_have[j+=1]);
         image2_4.dataset.champion = what_we_have[j];
-        amount4.innerText = what_we_have_amount[j];
+    }
 
-    } else if (j > what_we_have.length - 4) {
-        switch ((what_we_have.length - 1) % 4) {
+    /*if (j === 0) {
+        image2_1.removeAttribute("hidden");
+        image2_2.removeAttribute("hidden");
+        image2_3.removeAttribute("hidden");
+        image2_4.removeAttribute("hidden");
+
+        image2_1.src = get_image_for_name(what_we_have[j+=1]);
+        image2_1.dataset.champion = what_we_have[j];
+        image2_2.src = get_image_for_name(what_we_have[j+=1]);
+        image2_2.dataset.champion = what_we_have[j];
+        image2_3.src = get_image_for_name(what_we_have[j+=1]);
+        image2_3.dataset.champion = what_we_have[j];
+        image2_4.src = get_image_for_name(what_we_have[j+=1]);
+        image2_4.dataset.champion = what_we_have[j];
+
+    } else if (j > what_we_have.length - 3) {
+        switch ((what_we_have.length + 1) % 4) {
             case 3:
                 image2_1.src = get_image_for_name(what_we_have[j+=1]);
                 image2_1.dataset.champion = what_we_have[j];
-                amount1.innerText = what_we_have_amount[j];
                 image2_2.src = get_image_for_name(what_we_have[j+=1]);
                 image2_2.dataset.champion = what_we_have[j];
-                amount2.innerText = what_we_have_amount[j];
                 image2_3.src = get_image_for_name(what_we_have[j+=1]);
                 image2_3.dataset.champion = what_we_have[j];
-                amount3.innerText = what_we_have_amount[j];
                 image2_4.setAttribute("hidden", "");
-                amount4.setAttribute("hidden", "");
                 break;
             case 2:
                 image2_1.src = get_image_for_name(what_we_have[j+=1]);
                 image2_1.dataset.champion = what_we_have[j];
-                amount1.innerText = what_we_have_amount[j];
                 image2_2.src = get_image_for_name(what_we_have[j+=1]);
                 image2_2.dataset.champion = what_we_have[j];
-                amount2.innerText = what_we_have_amount[j];
                 image2_3.setAttribute("hidden", "");
-                amount3.setAttribute("hidden", "");
                 image2_4.setAttribute("hidden", "");
-                amount4.setAttribute("hidden", "");
                 break;
             case 1:
                 image2_1.src = get_image_for_name(what_we_have[j+=1]);
                 image2_1.dataset.champion = what_we_have[j];
-                amount2.setAttribute("hidden", "");
                 image2_2.setAttribute("hidden", "");
-                amount3.setAttribute("hidden", "");
                 image2_3.setAttribute("hidden", "");
-                amount4.setAttribute("hidden", "");
                 image2_4.setAttribute("hidden", "");
                 break;
         }
@@ -301,17 +326,13 @@ function page_forward_inventory() {
     } else {
         image2_1.src = get_image_for_name(what_we_have[j+=1]);
         image2_1.dataset.champion = what_we_have[j];
-        amount1.innerText = what_we_have_amount[j];
         image2_2.src = get_image_for_name(what_we_have[j+=1]);
         image2_2.dataset.champion = what_we_have[j];
-        amount2.innerText = what_we_have_amount[j];
         image2_3.src = get_image_for_name(what_we_have[j+=1]);
         image2_3.dataset.champion = what_we_have[j];
-        amount3.innerText = what_we_have_amount[j];
         image2_4.src = get_image_for_name(what_we_have[j+=1]);
         image2_4.dataset.champion = what_we_have[j];
-        amount4.innerText = what_we_have_amount[j];
-    }
+    }*/
 }
 /*
 function page_back() {

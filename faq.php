@@ -3,9 +3,6 @@ session_start();
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
-if (!isset($_COOKIE["spin-initiated"]) || $_COOKIE["spin-initiated"] == "true") {
-    setcookie("spin-initiated", "false", time() + 86400);
-}
 include "db_connect.php";
 header('Content-type: text/html; charset=UTF-8');
 ?>
@@ -41,13 +38,14 @@ header('Content-type: text/html; charset=UTF-8');
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
+    echo "<div class='side_button'><a style='text-decoration: none;' href='faq.php'>GY.I.K.</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
@@ -55,17 +53,17 @@ header('Content-type: text/html; charset=UTF-8');
     </form>
 
 </aside>
-<div style="background-color: red; position:absolute; right: 0; width: 100px; height: 25%;">
-    <p style="transform: rotate(90deg); position: absolute; top: 20%; font-size: 20pt;">Treasure of Dragon Port</p>
+<div id="btn1" style="border: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; position:absolute; right: 0; width: 100px; height: 25%; text-align: center;">
+    <p style="transform: rotate(90deg); position: absolute; top: calc(50% - 30%); font-size: 2.5vh;">Treasure of Dragon Port</p>
 </div>
-<div style="background-color: red; position:absolute; top: 30%; right: 0; width: 100px; height: 25%;">
-
+<div id="btn2" style="border: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; position:absolute; top: 30%;  right: 0; width: 100px; height: 25%;">
+    <p style="transform: rotate(90deg); position: absolute; top: calc(50% - 20%); font-size: 2.5vh;">Érmék</p>
 </div>
-<div style="background-color: red; position:absolute; top: 60%; right: 0; width: 100px; height: 25%;">
-
+<div id="btn3" style="border: 1px solid <?php if (get_dm_status() == 0) { echo "black"; } else { echo "white"; } ?>; position:absolute; top: 60%; right: 0; width: 100px; height: 25%;">
+    <p style="transform: rotate(90deg); position: absolute; top: calc(50% - 20%); font-size: 2.5vh;">Csere</p>
 </div>
-<div class="container_push" style="width: calc(100vw - 15% - 50px); height: calc(100vh - 15px);">
-    <div hidden>
+<div class="container_push" style="width: calc(100vw - 15% - 150px); height: calc(100vh - 15px);">
+    <div hidden id="div1">
         <h1>Treasure of Dragon Port - A Sárkány-öböl Kincse</h1>
         <h3><i>Ruckus kapitány küldetést kapott Jenostól, hogy gyűjtse össze a Sárkány-öböl összes mágikus aranyérmét, amit az Őrzők a béke érdekében szórtak szét szerte
         a Birodalomban. Az érméken a bajnokok arcképei találhatóak, amikből ha összegyűlik az összes, Jenos képes lesz elűzni a közelgő sötétséget! Ruckus kapitány
@@ -79,11 +77,11 @@ header('Content-type: text/html; charset=UTF-8');
         Paladins meccsen pontok szerezhetők, pontfoglalásért... kocsibetolásért, stb. Így születik egy végső pontszám, például 4-1. Pörgetések ezek az eredmények alapján szerezhetők,
         azaz minden pontért <b>3 darab pörgetés jár</b>, amely a győztes csapat mindegyik tagjának 12 pörgetést jelent. <b>A PÖRGETÉSEK A SZEZON VÉGÉN NULLÁZÓDNAK.</b><br>Mire vársz még? Good luck, have fun! :D</p>
     </div>
-    <div hidden>
+    <div hidden id="div2">
         <h1>Érmék</h1>
         <p>Az eventen kapható érméken a hőseink arcképei láthatóak, összesen 47. Minden érmének van egy ritkasági szintje és ezek alapján egy ára, azaz a gyakori ritkaságú érmékért 25 kredit jár,
         az egyediekért 50, a ritkákért 75, az epikusokért 100 és végül a legendásokért 150. A hősök ritkaságait az alábbi képen lehet látni.</p>
-        <img src="assets/rarities.png" style="width: calc(100vw - 15% - 150px);" alt="rarities">
+        <img src="assets/rarities.png" style="width: calc(100vw - 15% - 250px);" alt="rarities">
         <p><b>Kreditek:</b> Az érmék eladhatók kreditekért. Ezekből a kreditekből (amennyiben az event szervezőbácsija úgy dönt hogy most nem lesz lusta és megcsinálja) a boltban
         lehet több dolgot is venni, többek között Discord címeket, illetve pörgetéseket, amelyek előnyt jelenthetnek az adott szezonban. <b>A SZEZON VÉGÉN A KREDITEK NULLÁZÓDNAK.</b><br>
         <b>Króniák:</b> Kreditekért megéri eladni a felesleges érméket, amikből több is van, viszont nem biztos, hogy ez egy jó döntés. Itt jönnek képbe a króniák. Króniákat éremcserékért
@@ -93,7 +91,7 @@ header('Content-type: text/html; charset=UTF-8');
         szezonos pörgetéseket, amelyek segítenek abban, hogy amennyiben nem lett meg egy érme, az még pótolható legyen. Ezeknél a pörgetéseknél <b>MEGNÖVELT</b> eséllyel droppolnak a
         ritkább érmék is.</p>
     </div>
-    <div hidden>
+    <div hidden id="div3">
         <h1>Csere</h1>
         <p>Egymás között lehet érméket cserélni, amiért króniák a jutalom. A króniákról egy másik oldalon lehet olvasni. A csere oldalon három funkció elérhető. Az első gomb az alap oldal,
         itt láthatóak a jelenleg aktív cserék, a cserék feladásának tulajdonosa és annak időpontja, továbbá a cseréért járó króniák száma. Nem tudod elfogadni a saját cseréd, illetve azokat,
@@ -105,4 +103,5 @@ header('Content-type: text/html; charset=UTF-8');
 </div>
 </body>
 <script src="scripts/preload.js"></script>
+<script src="scripts/faq.js"></script>
 </html>

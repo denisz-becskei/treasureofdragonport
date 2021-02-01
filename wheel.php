@@ -11,6 +11,7 @@ include "db_connect.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="scripts/preload.js"></script>
+    <script src="scripts/jquery-3.5.1.js"></script>
     <link rel="icon" href="/assets/logo.png">
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
@@ -45,13 +46,14 @@ include "db_connect.php";
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
+    echo "<div class='side_button'><a style='text-decoration: none;' href='faq.php'>GY.I.K.</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
@@ -77,22 +79,20 @@ include "db_connect.php";
 
     <?php
         if (get_wheelturns() > 0) {
-            echo "<form action='wheel.php' method='GET'>
-        <input onclick='start_spin()' style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
+            echo "<form action='wheel.php' method='POST'>
+        <input style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         } else {
-            echo "<form action='wheel.php' method='GET'>
+            echo "<form action='wheel.php' method='POST'>
         <input disabled style='height: 30px; width: 150px; position:absolute; left: calc(100vw / 2 - 154px / 2); top: 500px;' type='submit' name='spin-btn' value='Pörgetés'>
     </form>";
         }
 
-        if (isset($_GET["spin-btn"]) && get_wheelturns() != 0) {
-            setcookie("spin-initiated", "true", time() + 86400);
+        if (isset($_POST["spin-btn"]) && get_wheelturns() != 0) {
             set_wheelturns(get_wheelturns()-1);
-            header("Location: wheel_result.php");
+            echo "<script src='scripts/wheel.js'></script>";
         }
     ?>
 </div>
-<script src="scripts/wheel.js"></script>
 </body>
 </html>

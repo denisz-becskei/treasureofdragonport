@@ -54,7 +54,6 @@ function update_wheelspin()
 
 function add_champion($username, $champion)
 {
-
     $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
         "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
         "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
@@ -74,10 +73,11 @@ function add_champion($username, $champion)
     }
     $new_inv = substr($new_inv, 0, -1);
     $conn = OpenCon();
-    $sql = "UPDATE user SET inventory = '$new_inv' WHERE username = '$username'";
-    mysqli_query($conn, $sql);
+    if (is_champion($champion)) {
+        $sql = "UPDATE user SET inventory = '$new_inv' WHERE username = '$username'";
+        mysqli_query($conn, $sql);
+    }
     CloseCon($conn);
-
 }
 
 function remove_champion($username, $champion) {

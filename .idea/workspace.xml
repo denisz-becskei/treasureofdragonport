@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="New Backend Spin Logic">
-      <change afterPath="$PROJECT_DIR$/externalPHPfiles/theme.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/avatar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
+    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="Settings Panel and Avatar Rework">
+      <change afterPath="$PROJECT_DIR$/externalPHPfiles/deinitiate_spin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/externalPHPfiles/get_initiated.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/externalPHPfiles/get_no_trades.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/externalPHPfiles/initiate_spin.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/faq.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/add_coin.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/add_coin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/appearance_changer.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/appearance_changer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/avatars.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/avatars.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/event_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/event_handler.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_new_inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_new_inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/faq.php" beforeDir="false" afterPath="$PROJECT_DIR$/faq.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
@@ -22,7 +24,8 @@
       <change beforePath="$PROJECT_DIR$/new_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ongoing_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/own_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/new_trade.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/new_trade.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/wheel.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/signup.php" afterDir="false" />
@@ -112,7 +115,10 @@
       <workItem from="1611924556053" duration="24989000" />
       <workItem from="1611958763906" duration="10774000" />
       <workItem from="1612025247962" duration="9045000" />
-      <workItem from="1612037849373" duration="5460000" />
+      <workItem from="1612037849373" duration="7252000" />
+      <workItem from="1612095641159" duration="10047000" />
+      <workItem from="1612197560402" duration="150000" />
+      <workItem from="1612197740986" duration="3564000" />
     </task>
     <task id="LOCAL-00001" summary="New Trading System Implementation Start">
       <created>1611449420538</created>
@@ -163,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611969906759</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Settings Panel and Avatar Rework">
+      <created>1612043518031</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1612043518032</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +202,7 @@
     <MESSAGE value="Registration to Events" />
     <MESSAGE value="New Inventory System and Other Fixes" />
     <MESSAGE value="New Backend Spin Logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="New Backend Spin Logic" />
+    <MESSAGE value="Settings Panel and Avatar Rework" />
+    <option name="LAST_COMMIT_MESSAGE" value="Settings Panel and Avatar Rework" />
   </component>
 </project>

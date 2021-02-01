@@ -3,15 +3,27 @@ session_start();
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
-if (!isset($_COOKIE["spin-initiated"])) {
-    setcookie("spin-initiated", false, time() + 86400);
-}
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/rank_selector.php";
 ?>
 
 <?php
+
+function checkStringForIllegalCharacters($string): bool
+{
+    if (strlen($string) != strlen(utf8_decode($string)))
+    {
+        return false;
+    }
+    for ($i = 0; $i < strlen($string); $i++){
+        if (!(ord($string[$i]) >= 48 && ord($string[$i]) <= 57 || ord($string[$i]) >= 65 && ord($string[$i]) <= 90 || ord($string[$i]) >= 97 && ord($string[$i]) <= 122)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 if (isset($_POST["submit_changes"])) {
     //password changing
     $current_pass = $_POST["password_change0"];
@@ -43,7 +55,7 @@ if (isset($_POST["submit_changes"])) {
 
             $sql = "UPDATE user SET email = '$new_email' WHERE username = '$username'";
             if (mysqli_query($conn, $sql)) {
-                echo "<script>document.getElementById('response').innerText = 'Az e-mail címed sikeresen megváltozott!'</script>";
+                echo "<script>alert('Az e-mail címed sikeresen megváltozott!')</script>";
             }
             CloseCon($conn);
         } else {
@@ -53,16 +65,20 @@ if (isset($_POST["submit_changes"])) {
 
     if ($new_ign != "") {
         if (password_verify($commit_password, get_password())) {
+            if (checkStringForIllegalCharacters($new_ign)) {
 
-            $conn = OpenCon();
+                $conn = OpenCon();
 
-            $username = $_SESSION["username"];
+                $username = $_SESSION["username"];
 
-            $sql = "UPDATE user SET ign = '$new_ign' WHERE username = '$username'";
-            if (mysqli_query($conn, $sql)) {
-                echo "<script>alert('Az In-game neved sikeresen megváltozott!')</script>";
+                $sql = "UPDATE user SET ign = '$new_ign' WHERE username = '$username'";
+                if (mysqli_query($conn, $sql)) {
+                    echo "<script>alert('Az In-game neved sikeresen megváltozott!')</script>";
+                }
+                CloseCon($conn);
+            } else {
+                echo "<script>alert('Az ingame név illegális karaktereket tartalmaz!')</script>";
             }
-            CloseCon($conn);
         } else {
             echo "<script>alert('A jóváhagyási jelszó helytelen!')</script>";
         }
@@ -77,35 +93,37 @@ if (isset($_POST["submit_changes"])) {
 
             $sql = "UPDATE user SET max_rank = '$new_rank' WHERE username = '$username'";
             if (mysqli_query($conn, $sql)) {
-                echo "<script>document.getElementById('response').innerText = 'A legmagasabb rankod sikeresen megváltozott!'</script>";
+                echo "<script>alert('A legmagasabb rankod sikeresen megváltozott!')</script>";
             }
             CloseCon($conn);
         } else {
-            echo "<script>document.getElementById('response').innerText = 'A jóváhagyási jelszó helytelen!'</script>";
+            echo "<script>alert('A jóváhagyási jelszó helytelen!')</script>";
         }
     }
 
     if ($current_pass != "" && $new_pass != "" && $new_pass_again != "") {
         if (password_verify($current_pass, get_password())) {
+            if (strlen($new_pass) >= 6) {
+                if ($new_pass == $new_pass_again) {
+                    $conn = OpenCon();
 
-            if ($new_pass == $new_pass_again) {
-                $conn = OpenCon();
+                    $username = $_SESSION["username"];
 
-                $username = $_SESSION["username"];
+                    $password_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
 
-                $password_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
-
-                $sql = "UPDATE user SET pass = '$password_hashed' WHERE username = '$username'";
-                if (mysqli_query($conn, $sql)) {
-                    echo "<script>alert('A jelszó sikeresen megváltozott!')</script>";
+                    $sql = "UPDATE user SET pass = '$password_hashed' WHERE username = '$username'";
+                    if (mysqli_query($conn, $sql)) {
+                        echo "<script>alert('A jelszó sikeresen megváltozott!')</script>";
+                    }
+                    CloseCon($conn);
+                } else {
+                    echo "<script>alert('A két megadott új jelszó nem egyezik meg!')</script>";
                 }
-                CloseCon($conn);
             } else {
-                echo "<script>alert('A két megadott új jelszó nem egyezik meg!')</script>";
+                echo "<script>alert('Az új jelszó nem tartalmaz legalább 6 karaktert!')</script>";
             }
-
         } else {
-            echo "<script>alert('A jelenlegiként megadott jelszó helytelen!')</script>";
+            echo "<script>alert('A jóváhagyási jelszó helytelen!')</script>";
         }
     } else if ($current_pass != "" || $new_pass != "" || $new_pass_again != "") {
         echo "<script>alert('Hiányzó adat a jelszóváltáshoz!')</script>";
@@ -177,13 +195,14 @@ if (isset($_POST["submit_changes"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
+    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
+    echo "<div class='side_button'><a style='text-decoration: none;' href='faq.php'>GY.I.K.</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">

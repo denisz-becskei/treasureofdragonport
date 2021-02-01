@@ -38,12 +38,13 @@ function is_signed_up($event_num, $player) {
 function signup($event_num) {
     $conn = OpenCon();
     $username = $_SESSION["username"];
+    $ign = get_ign();
     switch ($event_num) {
         case 1:
-            $sql = "INSERT INTO event1_players(player) VALUES ('$username')";
+            $sql = "INSERT INTO event1_players(player, ign) VALUES ('$username', '$ign')";
             break;
         case 2:
-            $sql = "INSERT INTO event2_players(player) VALUES ('$username')";
+            $sql = "INSERT INTO event2_players(player, ign) VALUES ('$username', '$ign')";
             break;
     }
     mysqli_query($conn ,$sql);
@@ -55,9 +56,11 @@ function signoff($event_num) {
     $username = $_SESSION["username"];
     switch ($event_num) {
         case 1:
-            $sql = "DELETE FROM event1_players WHERE '$username'";
+            $sql = "DELETE FROM event1_players WHERE player = '$username'";
+            break;
         case 2:
-            $sql = "DELETE FROM event2_players WHERE '$username'";
+            $sql = "DELETE FROM event2_players WHERE player = '$username'";
+            break;
     }
     mysqli_query($conn ,$sql);
     CloseCon($conn);

@@ -155,6 +155,16 @@ function set_avatar($avatar) {
             return 6;
         case "Gyönyör a Konfliktusban":
             return 7;
+        case "Szia Uram!":
+            return 8;
+        case "VHS":
+            return 9;
+        case "gYiLkOsSáG":
+            return 10;
+        case "Nincs Pánikra Ok":
+            return 11;
+        case "Fa a Sötét Oldalról":
+            return 12;
         default:
             return 0;
     }
@@ -178,7 +188,12 @@ function get_avatar_link($username) {
             4 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/a/a6/Avatar_Lily-hopper_Icon.png",
             5 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/7/71/Avatar_Spirit_Icon.png",
             6 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/2/27/Avatar_I_WUV_YOU_Icon.png",
-            7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png"
+            7 => "https://static.wikia.nocookie.net/paladins_gamepedia/images/4/47/Avatar_Beauty_in_Conflict_Icon.png",
+            8 => "https://i.imgur.com/qZTyYkQ.png",
+            9 => "https://i.imgur.com/WqGXMXo.jpg",
+            10 => "https://i.imgur.com/nuEFy62.png",
+            11 => "https://i.imgur.com/3AjDPRz.png",
+            12 => "https://i.imgur.com/aR4UnkH.png"
         ];
     return $avatars_coded[get_avatar($username)];
 }
