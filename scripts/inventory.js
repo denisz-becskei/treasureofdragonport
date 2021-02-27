@@ -26,7 +26,18 @@ function get_rarity_for_champion(champion) {
 function open_sidebar(image) {
     let opacity_double = parseFloat(document.getElementById("champion_aside").style.opacity);
     document.getElementById("champion_info").src = image.src;
-    document.getElementById("champion_name").innerText = image.dataset.champion === "MalDamba" ? "Mal'Damba" : image.dataset.champion;
+    //document.getElementById("champion_name").innerText = image.dataset.champion === "MalDamba" ? "Mal'Damba" : image.dataset.champion;
+
+    if (image.dataset.champion === "MalDamba") {
+        document.getElementById("champion_name").innerText = "Mal'Damba";
+    } else if (image.dataset.champion === "Bomb_King") {
+        document.getElementById("champion_name").innerText = "Bomb King";
+    } else if (image.dataset.champion === "Sha_Lin") {
+        document.getElementById("champion_name").innerText = "Sha Lin";
+    } else {
+        document.getElementById("champion_name").innerText = image.dataset.champion;
+    }
+
     document.getElementById("rarity").innerText = get_rarity_for_champion(image.dataset.champion);
     let color;
     let price;

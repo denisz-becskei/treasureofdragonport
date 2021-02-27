@@ -13,4 +13,3 @@ $spun = explode("|", mysqli_fetch_array($result)[0]);
 foreach ($spun as $s) {
     add_champion($username, $s);
 }
-update_unique($username);

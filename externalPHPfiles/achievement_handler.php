@@ -94,48 +94,60 @@ function check_for_achievement($achievement_number) {
     if ($achievement_number == 2) {
         $list = ["Androxus", "Buck", "Evie", "Koga", "Lex", "Maeve", "Moji", "Skye", "Talus", "Zhin"];
     } elseif ($achievement_number == 3) {
-        $list = ["Bomb King", "Cassie", "Dredge", "Drogoz", "Imani", "Kinessa", "Lian", "Sha Lin", "Strix", "Tiberius", "Tyra", "Viktor", "Vivian", "Willo"];
+        $list = ["Bomb_King", "Cassie", "Dredge", "Drogoz", "Imani", "Kinessa", "Lian", "Sha_Lin", "Strix", "Tiberius", "Tyra", "Viktor", "Vivian", "Willo"];
     } elseif ($achievement_number == 4) {
         $list = ["Furia", "Grohk", "Grover", "Io", "Jenos", "Mal'Damba", "Pip", "Seris", "Ying"];
     } elseif ($achievement_number == 5) {
         $list = ["Ash", "Atlas", "Barik", "Fernando", "Inara", "Khan", "Makoa", "Raum", "Ruckus", "Terminus", "Torvald", "Yagorath"];
     } elseif ($achievement_number == 12) {
-        $list = ["Bomb King", "Dredge", "Drogoz", "Willo", "Pip", "Ash", "Fernando", "Terminus"];
+        $list = ["Bomb_King", "Dredge", "Drogoz", "Willo", "Pip", "Ash", "Fernando", "Terminus"];
     } elseif ($achievement_number == 13) {
         $list = ["Viktor", "Tyra", "Tiberius", "Raum", "Vivian"];
     } elseif ($achievement_number == 14) {
-        $list = ["Androxus", "Vora", "Maeve", "Raum", "Koga"];
+        $list = ["Androxus", "Vora", "Maeve", "Raum", "Koga", "Evie"];
     } elseif ($achievement_number == 16) {
-        $list = ["Furia", "Grover", "Ying", "Barik", "Inara", "Makoa", "Cassie", "Sha Lin", "Tyra", "Buck", "Evie", "Koga", "Talus"];
+        $list = ["Furia", "Grover", "Ying", "Barik", "Inara", "Makoa", "Cassie", "Sha_Lin", "Tyra", "Buck", "Evie", "Koga", "Talus"];
     } elseif ($achievement_number == 17) {
         $list = ["Corvus", "Ash", "Fernando", "Khan", "Terminus", "Torvald", "Lian", "Strix", "Viktor", "Vivian", "Lex", "Skye"];
     }
     $ready_for_completion = true;
-    $conn = OpenCon();
 
-    $username = $_SESSION["username"];
-    $sql = "SELECT inventory FROM user WHERE username = '$username'";
-    $result = $conn->query($sql);
-    $result = mysqli_fetch_array($result)[0];
-    $champions = explode(",", $result);
-    $temp = [];
+    $champions = get_inventory_2($_SESSION["username"]);
 
-    for ($i = 0; $i < count($champions) - 1; $i++) {
-        array_push($temp, $champions[$i]);
-    }
-    $champions = $temp;
 
     foreach ($list as $l) {
-        if (in_array($l, $champions) == false) {
+        if (intval($champions[$l]) == 0) {
             $ready_for_completion = false;
-            break;
         }
     }
 
     if ($ready_for_completion) {
-        complete_achievement($username, $achievement_number);
+        complete_achievement($_SESSION["username"], $achievement_number);
     }
 
+}
+
+function check_for_achievement_collection() {
+    $uni = get_unique();
+    $username = $_SESSION["username"];
+    if ($uni >= 1) {
+        complete_achievement($username, 1);
+    }
+    if ($uni >= 10) {
+        complete_achievement($username, 6);
+    }
+    if ($uni >= 20) {
+        complete_achievement($username, 7);
+    }
+    if ($uni >= 30) {
+        complete_achievement($username, 8);
+    }
+    if ($uni >= 40) {
+        complete_achievement($username, 9);
+    }
+    if ($uni == 47) {
+        complete_achievement($username, 10);
+    }
 }
 
 function get_achievement_status($achievement_number) {

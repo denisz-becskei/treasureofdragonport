@@ -136,11 +136,37 @@ if (isset($_POST["modification-btn"])) {
     }
     if ($editing_data[7]) {
         add_champion($user_to_edit, $add_coin);
-        update_unique($user_to_edit);
+        //update_unique($user_to_edit);
     }
     CloseCon($conn);
 }
 
+include "externalPHPfiles/event_handler.php";
+if (isset($_POST["event1"])) {
+    change_event_status("Mix League");
+}
+if (isset($_POST["event2"])) {
+    change_event_status("Warriors of Hungary");
+}
+if (isset($_POST["event1_del"]) && isset($_POST["event1_del_check"])) {
+    delete_players(1);
+}
+if (isset($_POST["event2_del"]) && isset($_POST["event2_del_check"])) {
+    delete_players(2);
+}
+
+
+if (isset($_POST["data"])) {
+    if ($_POST["felh_username"] != "") {
+        header("Location: data.php?user=".$_POST["felh_username"]."&mode=user");
+    }
+}
+
+if (isset($_POST["data_2"])) {
+    if ($_POST["event"] != "") {
+        header("Location: data.php?event_name=".$_POST["event"]."&mode=event");
+    }
+}
 
 ?>
 <aside class="index_aside" style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
@@ -153,10 +179,10 @@ if (isset($_POST["modification-btn"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
@@ -201,6 +227,36 @@ if (isset($_POST["modification-btn"])) {
             <input name="add_coin" id="add_coin" type="text">
             <br>
             <input type="submit" name="modification-btn" value="Módosítások elvégzése">
+        </fieldset>
+    </form>
+    <form action="admin_panel.php" method="POST">
+        <fieldset>
+            <legend>Eventkezelés</legend>
+            <fieldset>
+                <legend>Event státuszmódosítás</legend>
+                <input type="submit" name="event1" value="Mix League Státusz Módosítása"><br>
+                <input type="submit" name="event2" value="Warriors of Hungary Státusz Módosítása">
+            </fieldset>
+            <fieldset>
+                <legend>Heti jelentkezett játékosok törlése</legend>
+                <input type="checkbox" name="event1_del_check"><input type="submit" name="event1_del" value="Mix League Jelentkezettek Törlése"><br>
+                <input type="checkbox" name="event2_del_check"><input type="submit" name="event2_del" value="Warriors of Hungary Jelentkezettek Törlése">
+            </fieldset>
+        </fieldset>
+    </form>
+    <form action="admin_panel.php" method="POST">
+        <fieldset>
+            <legend>Információ lekérdezés</legend>
+            <fieldset>
+                <legend>Felhasználó adatainak lekérése</legend>
+                <input type="text" name="felh_username" placeholder="Felhasználó">
+                <input type="submit" value="Adatlekérés" name="data">
+            </fieldset>
+            <fieldset>
+                <legend>Event adatainak lekérése</legend>
+                <input type="text" name="event" placeholder="Event">
+                <input type="submit" value="Adatlekérés" name="data_2">
+            </fieldset>
         </fieldset>
     </form>
 </div>

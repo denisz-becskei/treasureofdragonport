@@ -15,6 +15,17 @@ function is_open($event_name) {
     }
 }
 
+function change_event_status($event_name) {
+    $conn = OpenCon();
+    if (is_open($event_name)) {
+        $sql = "UPDATE events SET open = 0 WHERE name = '$event_name'";
+    } else {
+        $sql = "UPDATE events SET open = 1 WHERE name = '$event_name'";
+    }
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+}
+
 function is_signed_up($event_num, $player) {
     $conn = OpenCon();
     switch ($event_num) {
@@ -33,6 +44,20 @@ function is_signed_up($event_num, $player) {
         }
     }
     return false;
+}
+
+function delete_players($event_num) {
+    $conn = OpenCon();
+    switch ($event_num) {
+        case 1:
+            $sql = "DELETE FROM event1_players";
+            break;
+        case 2:
+            $sql = "DELETE FROM event2_players";
+            break;
+    }
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
 }
 
 function signup($event_num) {
@@ -64,4 +89,32 @@ function signoff($event_num) {
     }
     mysqli_query($conn ,$sql);
     CloseCon($conn);
+}
+
+function get_event_players($event_name) {
+    $conn = OpenCon();
+    if ($event_name == "Mix League") {
+        $sql = "SELECT player FROM event1_players";
+        $players_1 = $conn->query($sql);
+        $players = mysqli_fetch_array($players_1);
+        $sql = "SELECT ign FROM event1_players";
+        $ign = $conn->query($sql);
+        $ign = mysqli_fetch_array($ign);
+    } else {
+        $sql = "SELECT player FROM event2_players";
+        $players_1 = $conn->query($sql);
+        $players = mysqli_fetch_array($players_1);
+        $sql = "SELECT ign FROM event2_players";
+        $ign = $conn->query($sql);
+        $ign = mysqli_fetch_array($ign);
+    }
+
+    $output = [];
+
+    for ($i = 0; $i < mysqli_num_rows($players_1); $i++) {
+        $temp = $players[$i] . "    :       ". $ign[$i];
+        array_push($output, $temp);
+    }
+
+    return $output;
 }

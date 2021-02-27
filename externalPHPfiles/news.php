@@ -17,7 +17,7 @@ function get_news() {
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_array($result)) {
-        echo str_replace(";", "<br>", $row["content"]) . "<br>By:: ". $row["author"] . "<br>Közzétéve::" . $row["date"] . "<br><br>";
+        echo str_replace(";", "<br>", utf8_encode($row["content"])) . "<br>By:: ". utf8_encode($row["author"]) . "<br>Közzétéve::" . utf8_encode($row["date"]) . "<br><br>";
     }
 
 }

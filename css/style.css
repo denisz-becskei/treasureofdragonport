@@ -71,6 +71,14 @@ body {
     scrollbar-width: none;
 }
 
+#div2_1::-webkit-scrollbar {
+    display: none;
+}
+
+#div2_1 {
+    scrollbar-width: none;
+}
+
 .logout {
     height: 62px;
     font-family: "Times New Roman", "serif";

@@ -51,11 +51,14 @@ if (isset($_POST["smt_button"])) {
     $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     if (checkNames($username) && strlen($password) >= 6 && $password == $password2 && checkStringForIllegalCharacters($username) && checkStringForIllegalCharacters($ign)) {
-        $sql = "INSERT INTO user(username, pass, email, ign, max_rank, user_status, inventory, wheelturns, credits, cronia, avatar, `unique`, achievements) VALUES ('$username', '$password_hash', '$email', '$ign', '$max', 0, '0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0', 150, 0, 0, 0, 0, 'X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X')";
+        $sql = "INSERT INTO user(username, pass, email, ign, max_rank, user_status, wheelturns, credits, cronia, avatar, `unique`, achievements) VALUES ('$username', '$password_hash', '$email', '$ign', '$max', 0, 0, 0, 0, 0, 0, 'X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X,X')";
 
         if (mysqli_query($conn, $sql)) {
             echo "ADDED record to DB";
         }
+
+        $sql = "INSERT INTO user_inventory(username) VALUES ('$username')";
+        mysqli_query($conn, $sql);
 
         CloseCon($conn);
 

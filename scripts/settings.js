@@ -1,7 +1,1 @@
-document.getElementById("toggle_dm").onclick = function () {
-    $.post("externalPHPfiles/theme.php", function (data, status) {
-        if (status === "success") {
-            window.location = "settings.php";
-        }
-    });
-}
+var _0x1cf7=["\x6F\x6E\x63\x6C\x69\x63\x6B","\x74\x6F\x67\x67\x6C\x65\x5F\x64\x6D","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x65\x78\x74\x65\x72\x6E\x61\x6C\x50\x48\x50\x66\x69\x6C\x65\x73\x2F\x74\x68\x65\x6D\x65\x2E\x70\x68\x70","\x73\x75\x63\x63\x65\x73\x73","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x73\x65\x74\x74\x69\x6E\x67\x73\x2E\x70\x68\x70","\x70\x6F\x73\x74"];eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('e[8[2]](8[1])[8[0]]=a(){$[8[7]](8[3],a(d,9){c(9===8[4]){b[8[5]]=8[6]}})}',15,15,'||||||||_0x1cf7|_0xb59dx2|function|window|if|_0xb59dx1|document'.split('|'),0,{}))

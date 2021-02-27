@@ -4,8 +4,8 @@ function is_champion($champion) {
     if ($champion == "Mal'Damba") {
         $champion = "MalDamba";
     }
-    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
-        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb_King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha_Lin", "Skye",
         "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
     foreach ($champions as $ch) {
         if ($ch == $champion) {
@@ -20,7 +20,7 @@ function get_rarity_by_champion($champion): string
     $legendary_array = ["Yagorath"];
     $epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
     $rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
-    $uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
+    $uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha_Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
 
     $right_trimmed_champion = rtrim($champion);
     $champion = ltrim($right_trimmed_champion);
@@ -38,12 +38,24 @@ function get_rarity_by_champion($champion): string
     }
 }
 
+function modify_champion($champion) {
+    if ($champion == "MalDamba")
+        return "Mal'Damba";
+    else if ($champion == "Bomb_King")
+        return "Bomb King";
+    else if ($champion == "Sha_Lin")
+        return "Sha Lin";
+    else {
+        return $champion;
+    }
+}
+
 function get_color_by_champion($champion): string
 {
     $legendary_array = ["Yagorath"];
     $epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
     $rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
-    $uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
+    $uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha_Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
 
     $right_trimmed_champion = rtrim($champion);
     $champion = ltrim($right_trimmed_champion);
@@ -72,7 +84,7 @@ function get_image_for_name($name): string
             return "https://i.imgur.com/AaawF8b.png";
         case "Barik":
             return "https://i.imgur.com/4FR5Iae.png";
-        case "Bomb King":
+        case "Bomb_King":
             return "https://i.imgur.com/g4B0GIf.png";
         case "Buck":
             return "https://i.imgur.com/NyG2GH8.png";
@@ -129,7 +141,7 @@ function get_image_for_name($name): string
             return "https://i.imgur.com/3L30iNI.png";
         case "Seris":
             return "https://i.imgur.com/aC8NZWv.png";
-        case "Sha Lin":
+        case "Sha_Lin":
             return "https://i.imgur.com/RaH2pvt.png";
         case "Skye":
             return "https://i.imgur.com/9nqqix3.png";

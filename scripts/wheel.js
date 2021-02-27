@@ -1,10 +1,1 @@
-
-function start_spin() {
-    $.post("externalPHPfiles/initiate_spin.php", function (data, status) {
-        if (status === "success") {
-            window.location = "wheel_result.php";
-        }
-    });
-}
-
-start_spin();
+var _0x47d4=["\x65\x78\x74\x65\x72\x6E\x61\x6C\x50\x48\x50\x66\x69\x6C\x65\x73\x2F\x69\x6E\x69\x74\x69\x61\x74\x65\x5F\x73\x70\x69\x6E\x2E\x70\x68\x70","\x73\x75\x63\x63\x65\x73\x73","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x77\x68\x65\x65\x6C\x5F\x72\x65\x73\x75\x6C\x74\x2E\x70\x68\x70","\x70\x6F\x73\x74"];eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('8 6(){$[5[4]](5[0],8(b,7){a(7===5[1]){9[5[2]]=5[3]}})}6()',12,12,'|||||_0x47d4|start_spin|_0x407ex3|function|window|if|_0x407ex2'.split('|'),0,{}))

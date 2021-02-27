@@ -8,19 +8,19 @@ include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/event_handler.php";
 
-if (isset($_POST["signup_1"])) {
+if (isset($_POST["signup_1"]) && is_open("Mix League")) {
     signup(1);
     header("Location: signup.php");
 }
-if (isset($_POST["signup_2"])) {
+if (isset($_POST["signup_2"]) && is_open("Warriors of Hungary")) {
     signup(2);
     header("Location: signup.php");
 }
-if (isset($_POST["signoff_1"])) {
+if (isset($_POST["signoff_1"]) && is_open("Mix League")) {
     signoff(1);
     header("Location: signup.php");
 }
-if (isset($_POST["signoff_2"])) {
+if (isset($_POST["signoff_2"]) && is_open("Warriors of Hungary")) {
     signoff(2);
     header("Location: signup.php");
 }
@@ -56,10 +56,10 @@ if (isset($_POST["signoff_2"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }

@@ -1,172 +1,90 @@
 <?php
 
-include "inventory_selling.php";
-include "championDAO.php";
+function get_trade_rarity_by_champion($champion): string
+{
+    $legendary_array = ["Yagorath"];
+    $epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
+    $rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
+    $uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha_Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "MalDamba", "Androxus", "Skye"];
 
-function add_coin($user, $champion) {
-    $conn = OpenCon();
-    $sql = "SELECT inventory FROM user WHERE username = '$user'";
-    $result = $conn->query($sql);
-    $result = mysqli_fetch_array($result)[0];
-    $result = $result . $champion . ", ";
-    $sql = "UPDATE user SET inventory = '$result' WHERE username = '$user'";
-    mysqli_query($conn, $sql);
+    $right_trimmed_champion = rtrim($champion);
+    $champion = ltrim($right_trimmed_champion);
 
-    $sql = "SELECT inventory FROM user WHERE username = '$user'";
-
-    $result = $conn->query($sql);
-    $result = mysqli_fetch_array($result)[0];
-    $result = str_replace(", ", ",", $result);
-    $champions = explode(",", $result);
-    $unique_arr = array_unique_own($champions);
-    $unique = count($unique_arr);
-
-    $sql = "UPDATE user SET `unique` = '$unique' WHERE username = '$user'";
-    mysqli_query($conn, $sql);
-
-    CloseCon($conn);
-}
-
-function add_trade($coin, $coin_index, $coin_in_return, $owned_by) {
-    $rarity = get_rarity_by_champion($coin);
-    if ($rarity == "&ltLegendás&gt") {
-        $cronia_value1 = 5;
-    } elseif ($rarity == "&ltEpikus&gt") {
-        $cronia_value1 = 4;
-    } elseif ($rarity == "&ltRitka&gt") {
-        $cronia_value1 = 3;
-    } elseif ($rarity == "&ltEgyedi&gt") {
-        $cronia_value1 = 2;
+    if (in_array($champion, $legendary_array)) {
+        return "L";
+    } elseif (in_array($champion, $epic_array)) {
+        return "E";
+    } elseif (in_array($champion, $rare_array)) {
+        return "R";
+    } elseif (in_array($champion, $uncommon_array)) {
+        return "E2";
     } else {
-        $cronia_value1 = 1;
-    }
-
-    $rarity = get_rarity_by_champion($coin_in_return);
-
-    if ($rarity == "&ltLegendás&gt") {
-        $cronia_value2 = 5;
-    } elseif ($rarity == "&ltEpikus&gt") {
-        $cronia_value2 = 4;
-    } elseif ($rarity == "&ltRitka&gt") {
-        $cronia_value2 = 3;
-    } elseif ($rarity == "&ltEgyedi&gt") {
-        $cronia_value2 = 2;
-    } else {
-        $cronia_value2 = 1;
-    }
-
-    $cronia_value = ceil(sqrt($cronia_value1 + $cronia_value2));
-
-    $date = date("Y/m/d H:i:s");
-
-    $conn = OpenCon();
-    $sql = "INSERT INTO trades(coin, coin_index, coin_in_return, owned_by, cronia_got, posted_on) VALUES ('$coin', '$coin_index' , '$coin_in_return', '$owned_by', '$cronia_value', '$date')";
-    mysqli_query($conn, $sql);
-
-    CloseCon($conn);
-}
-
-function get_trade_count() {
-    $conn = OpenCon();
-    $sql = "SELECT COUNT(trade_code) FROM trades";
-    $result = $conn->query($sql);
-    CloseCon($conn);
-    return mysqli_fetch_array($result)[0];
-}
-
-function get_coins_by_id($id) {
-    $conn = OpenCon();
-    $sql = "SELECT coin, coin_in_return, owned_by, coin_index FROM trades WHERE trade_code = '$id'";
-    $result = $conn->query($sql);
-    CloseCon($conn);
-    return mysqli_fetch_array($result);
-}
-
-function get_coins_by_owner($owner) {
-    $conn = OpenCon();
-    $sql = "SELECT trade_code, coin, coin_in_return, coin_index FROM trades WHERE owned_by = '$owner'";
-    $result = $conn->query($sql);
-    CloseCon($conn);
-    return mysqli_fetch_array($result);
-}
-
-function remove_trade($id) {
-    $conn = OpenCon();
-    $sql = "DELETE FROM trades WHERE trade_code = '$id'";
-    mysqli_query($conn, $sql);
-    CloseCon($conn);
-}
-
-function add_cronias($tradee, $owned, $id) {
-    $conn = OpenCon();
-    $sql = "SELECT cronia_got, owned_by FROM trades WHERE trade_code = '$id'";
-    $result = $conn->query($sql);
-
-    $cronias_to_add = mysqli_fetch_array($result)["cronia_got"];
-
-    $sql = "SELECT cronia FROM user WHERE username = '$owned'";
-    $result2 = $conn->query($sql);
-    $current_cronia = intval(mysqli_fetch_array($result2)[0]);
-    $current_cronia += $cronias_to_add;
-    $sql = "UPDATE user SET cronia = '$current_cronia' WHERE username = '$owned'";
-    mysqli_query($conn, $sql);
-
-    $sql = "SELECT cronia FROM user WHERE username = '$tradee'";
-    $result3 = $conn->query($sql);
-    $current_cronia = intval(mysqli_fetch_array($result3)[0]);
-    $current_cronia += $cronias_to_add;
-    $sql = "UPDATE user SET cronia = '$current_cronia' WHERE username = '$tradee'";
-    mysqli_query($conn, $sql);
-    CloseCon($conn);
-}
-
-function update_trade_date() {
-    $date = date("Y-m-d");
-    $username = $_SESSION["username"];
-    $conn = OpenCon();
-    $sql = "UPDATE user SET last_traded = '$date' WHERE username = '$username'";
-    mysqli_query($conn, $sql);
-    CloseCon($conn);
-}
-
-function get_trade_date() {
-    $conn = OpenCon();
-    $username = $_SESSION["username"];
-    $sql = "SELECT last_traded FROM user WHERE username = '$username'";
-    $mysqldate = $conn->query($sql);
-    $mysqldate = mysqli_fetch_array($mysqldate)[0];
-    CloseCon($conn);
-
-    $phpdate = strtotime($mysqldate);
-    $mysqldate = date( 'Y-m-d', $phpdate );
-    $today = date("Y-m-d");
-
-    $today = str_replace("-", "", $today);
-    $mysqldate = str_replace("-", "", $mysqldate);
-
-    $days = intval($today) - intval($mysqldate);
-
-    if ($days >= 1) {
-        return true;
-    } else {
-        return false;
+        return "G";
     }
 }
 
-function change_ongoing_trade_numbers($username, $action) {
+function get_trade_price($to_give, $to_receive) {
+    $rarity1 = get_trade_rarity_by_champion($to_give);
+    $rarity2 = get_trade_rarity_by_champion($to_receive);
+    $price1 = 0;
+    $price2 = 0;
+    if ($rarity1 == "L") {
+        $price1 = 5;
+    } else if ($rarity1 == "E") {
+        $price1 = 4;
+    } else if ($rarity1 == "R") {
+        $price1 = 3;
+    } else if ($rarity1 == "E2") {
+        $price1 = 2;
+    } else {
+        $price1 = 1;
+    }
+
+    if ($rarity2 == "L") {
+        $price2 = 5;
+    } else if ($rarity2 == "E") {
+        $price2 = 4;
+    } else if ($rarity2 == "R") {
+        $price2 = 3;
+    } else if ($rarity2 == "E2") {
+        $price2 = 2;
+    } else {
+        $price2 = 1;
+    }
+
+    return ceil(($price1 + $price2) / 2);
+}
+
+function increase_trades($username) {
     $conn = OpenCon();
+
     $sql = "SELECT number_of_trades FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     $result = mysqli_fetch_array($result)[0];
-    $newVal = intval($result);
-
-    if ($action == "increase") {
-        $newVal++;
-    } else {
-        $newVal--;
-    }
-
-    $sql = "UPDATE user SET number_of_trades = '$newVal' WHERE username='$username'";
+    $trades = intval($result) + 1;
+    $sql = "UPDATE user SET number_of_trades = '$trades' WHERE username = '$username'";
     mysqli_query($conn, $sql);
     CloseCon($conn);
+}
+
+function decrease_trades($username) {
+    $conn = OpenCon();
+
+    $sql = "SELECT number_of_trades FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result)[0];
+    $trades = intval($result) - 1;
+    $sql = "UPDATE user SET number_of_trades = '$trades' WHERE username = '$username'";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+}
+
+function trade_init($username, $to_give, $to_receive) {
+    $conn = OpenCon();
+    $price = get_trade_price($to_give, $to_receive);
+    $date = date("Y/m/d H:i:s");
+    $sql = "INSERT INTO trades(coin, coin_in_return, owned_by, cronia_got, posted_on) VALUES ('$to_give', '$to_receive', '$username', '$price', '$date')";
+    mysqli_query($conn, $sql);
+    CloseCon($conn);
+    increase_trades($username);
 }

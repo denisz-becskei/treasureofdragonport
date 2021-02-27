@@ -38,10 +38,10 @@ header('Content-type: text/html; charset=UTF-8');
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
@@ -63,7 +63,7 @@ header('Content-type: text/html; charset=UTF-8');
     <p style="transform: rotate(90deg); position: absolute; top: calc(50% - 20%); font-size: 2.5vh;">Csere</p>
 </div>
 <div class="container_push" style="width: calc(100vw - 15% - 150px); height: calc(100vh - 15px);">
-    <div hidden id="div1">
+    <div hidden id="div1_1" style="height: 85vh">
         <h1>Treasure of Dragon Port - A Sárkány-öböl Kincse</h1>
         <h3><i>Ruckus kapitány küldetést kapott Jenostól, hogy gyűjtse össze a Sárkány-öböl összes mágikus aranyérmét, amit az Őrzők a béke érdekében szórtak szét szerte
         a Birodalomban. Az érméken a bajnokok arcképei találhatóak, amikből ha összegyűlik az összes, Jenos képes lesz elűzni a közelgő sötétséget! Ruckus kapitány
@@ -75,9 +75,9 @@ header('Content-type: text/html; charset=UTF-8');
         az adott szezon összes érméjét kristályjutalomban részesül.<br>Viszont akkor sem éri meg a pörgetéseket abbahagyni, ha már megvan a szezon győztese, ugyanis <b>mindenki</b>,
         aki összegyűjti az <br>egész event összes érméjét az event végén egy valódi, kézzelfogható jutalomban fog részesülni.<br>Hogyan is szerezhetők ilyen pörgetések? Nos, egy
         Paladins meccsen pontok szerezhetők, pontfoglalásért... kocsibetolásért, stb. Így születik egy végső pontszám, például 4-1. Pörgetések ezek az eredmények alapján szerezhetők,
-        azaz minden pontért <b>3 darab pörgetés jár</b>, amely a győztes csapat mindegyik tagjának 12 pörgetést jelent. <b>A PÖRGETÉSEK A SZEZON VÉGÉN NULLÁZÓDNAK.</b><br>Mire vársz még? Good luck, have fun! :D</p>
+        azaz minden pontért <b>1 darab pörgetés jár</b>, amely a győztes csapat mindegyik tagjának 4 pörgetést jelent. <b>A PÖRGETÉSEK A SZEZON VÉGÉN NULLÁZÓDNAK.</b><br>Mire vársz még? Good luck, have fun! :D</p>
     </div>
-    <div hidden id="div2">
+    <div hidden id="div2_1" style="overflow-y: scroll; height: 85vh">
         <h1>Érmék</h1>
         <p>Az eventen kapható érméken a hőseink arcképei láthatóak, összesen 47. Minden érmének van egy ritkasági szintje és ezek alapján egy ára, azaz a gyakori ritkaságú érmékért 25 kredit jár,
         az egyediekért 50, a ritkákért 75, az epikusokért 100 és végül a legendásokért 150. A hősök ritkaságait az alábbi képen lehet látni.</p>
@@ -91,7 +91,7 @@ header('Content-type: text/html; charset=UTF-8');
         szezonos pörgetéseket, amelyek segítenek abban, hogy amennyiben nem lett meg egy érme, az még pótolható legyen. Ezeknél a pörgetéseknél <b>MEGNÖVELT</b> eséllyel droppolnak a
         ritkább érmék is.</p>
     </div>
-    <div hidden id="div3">
+    <div hidden id="div3_1" style="height: 85vh">
         <h1>Csere</h1>
         <p>Egymás között lehet érméket cserélni, amiért króniák a jutalom. A króniákról egy másik oldalon lehet olvasni. A csere oldalon három funkció elérhető. Az első gomb az alap oldal,
         itt láthatóak a jelenleg aktív cserék, a cserék feladásának tulajdonosa és annak időpontja, továbbá a cseréért járó króniák száma. Nem tudod elfogadni a saját cseréd, illetve azokat,

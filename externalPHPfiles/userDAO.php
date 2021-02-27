@@ -1,18 +1,5 @@
 <?php
 
-function get_index($champion) {
-    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
-        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
-        "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
-
-    for ($i = 0; $i < 47; $i++) {
-        if ($champions[$i] == $champion) {
-            return $i;
-        }
-    }
-    return null;
-}
-
 function get_felhasznalonev() {
 
     $conn = OpenCon();
@@ -60,30 +47,13 @@ function set_wheelturns($newValue) {
     CloseCon($conn);
 }
 
-function get_inventory() {
+function get_inventory_2($username): array
+{
     $conn = OpenCon();
 
-    $username = $_SESSION["username"];
-
-    $sql = "SELECT inventory FROM user WHERE username = '$username'";
+    $sql = "SELECT Androxus, Ash, Atlas, Barik, Bomb_King, Buck, Cassie, Corvus, Dredge, Drogoz, Evie, Fernando, Furia, Grohk, Grover, Imani, Inara, Io, Jenos, Khan, Kinessa, Koga, Lex, Lian, Maeve, Makoa, MalDamba, Moji, Pip, Raum, Ruckus, Seris, Sha_Lin, Skye, Strix, Talus, Terminus, Tiberius, Torvald, Tyra, Viktor, Vivian, Vora, Willo, Yagorath, Ying, Zhin FROM user_inventory WHERE username = '$username'";
     $result = $conn->query($sql);
-
-    CloseCon($conn);
-
-    $inventory_assembled = mysqli_fetch_array($result)[0];
-    return explode("|", $inventory_assembled);
-}
-
-function get_inventory_2($username) {
-    $conn = OpenCon();
-
-    $sql = "SELECT inventory FROM user WHERE username = '$username'";
-    $result = $conn->query($sql);
-
-    CloseCon($conn);
-
-    $inventory_assembled = mysqli_fetch_array($result)[0];
-    return explode("|", $inventory_assembled);
+    return mysqli_fetch_array($result);
 }
 
 function get_credits() {
@@ -209,7 +179,14 @@ function get_unique() {
     return mysqli_fetch_array($result)[0];
 }
 
-function get_amount($champion) {
-    $inventory = get_inventory();
-    return $inventory[get_index($champion)];
+function get_trade_amount() {
+    $conn = OpenCon();
+
+    $username = $_SESSION["username"];
+
+    $sql = "SELECT number_of_trades FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result)[0];
+    CloseCon($conn);
+    return intval($result);
 }

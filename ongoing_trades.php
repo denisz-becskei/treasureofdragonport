@@ -1,6 +1,5 @@
 <?php
 session_start();
-header("Location: index.php");
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
@@ -59,10 +58,10 @@ if (isset($_POST["btn"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
@@ -91,6 +90,8 @@ if (isset($_POST["btn"])) {
     <table style="width: 85%; text-align: center;">
     <?php
 
+    include "externalPHPfiles/championDAO.php";
+
     $conn = OpenCon();
     $sql = "SELECT * FROM trades";
     $result = $conn->query($sql);
@@ -117,8 +118,8 @@ if (isset($_POST["btn"])) {
         $i++;
 
         echo "<tr style='background-color: " . $color . "; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
-<td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p style='color: ". get_color_by_champion($row["coin"]) ."'>" . $row["coin"] . "</p></td>
-<td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p style='color: ". get_color_by_champion($row["coin_in_return"]) ."'>" . $row["coin_in_return"] . "</p></td>
+<td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p style='color: ". get_color_by_champion($row["coin"]) ."'>" . modify_champion($row["coin"]) . "</p></td>
+<td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p style='color: ". get_color_by_champion($row["coin_in_return"]) ."'>" . modify_champion($row["coin_in_return"]) . "</p></td>
 <td style='width: 16%;'><p id='owned".$i."'>" . $row["owned_by"] . "</p></td>
 <td style='width: 16%;'><p>" . $row["posted_on"] . "</p></td>
 <td style='width: 16%;'><img src='https://static.wikia.nocookie.net/realmroyale_gamepedia_en/images/e/e6/Currency_Crowns.png' style='width: 20px; height: 20px; position:relative; top: 30px;' alt='cronia_value'><p style='position:relative; left: 20px; bottom: 7px;'>" . ' ' . $row["cronia_got"] . "</p></td>
@@ -154,7 +155,7 @@ if (isset($_POST["btn"])) {
 
     function get_index(champion) {
         let champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
-            "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+            "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha_Lin", "Skye",
             "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
 
         for (let i = 0; i < 47; i++) {

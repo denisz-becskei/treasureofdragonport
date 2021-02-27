@@ -111,7 +111,7 @@ function get_rarity_for_champion(champion) {
     let legendary = "Yagorath";
     let epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
     let rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
-    let uncommon_array = ["Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
+    let uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
 
     if (legendary === champion) {
         return "<Legendás>";
@@ -162,7 +162,7 @@ async function spin() {
 
         $.post("externalPHPfiles/add_coin.php");
         $.post("externalPHPfiles/get_spun.php", function (data) {
-                final_coins = data.split("|");
+            final_coins = data.split("|");
         });
         $.post("externalPHPfiles/deinitiate_spin.php");
 

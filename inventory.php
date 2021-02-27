@@ -5,6 +5,7 @@ if (!isset($_SESSION["username"])) {
 }
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
+include "externalPHPfiles/championDAO.php";
 include "externalPHPfiles/trading_functionality.php";
 ?>
 <!DOCTYPE html>
@@ -56,10 +57,10 @@ if (isset($_POST["delete"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
@@ -74,8 +75,8 @@ if (isset($_POST["delete"])) {
 <div style="position: relative; left: 15%; width: calc(100vw - 15%);">
 
     <?php
-    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
-        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha Lin", "Skye",
+    $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb_King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
+        "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha_Lin", "Skye",
         "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
 
         $left = 0;
@@ -84,7 +85,7 @@ if (isset($_POST["delete"])) {
         for ($i = 0, $j = 1; $i < 47; $i++, $j++) {
             echo "<div style='width: 10vw; height: 10vw; position:absolute; left: ". $left ."vw; top: ". $top ."vh'>";
             echo "<img onmouseover='open_sidebar(this);' data-champion='".$champions[$i]."' onmouseout='close_sidebar();' id='image".$i."' style='width: 10vw;' src='". get_image_for_name($champions[$i]) . "'>";
-            echo "<p id='name".$i."' style='position:absolute; bottom: 0; right: 12px; font-size: 20pt'>". get_inventory()[$i] ."</p>";
+            echo "<p id='name".$i."' style='position:absolute; bottom: 0; right: 12px; font-size: 20pt'>". get_inventory_2($_SESSION["username"])[$champions[$i]] ."</p>";
             echo "</div>";
             $left += 11;
             if ($i != 0 && $j % 6 == 0) {
@@ -107,8 +108,10 @@ if (isset($_POST["delete"])) {
         <h3 style="position:relative; top: 20vh;">Ritkaság:</h3>
         <h4 style="position:relative; top: 20vh;" id="rarity"></h4>
         <h3 style="position:relative; top: 20vh;">Kreditár:</h3>
-        <img src="https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png" style="position:absolute; top: 41vh; left: 5.75vw; height: 20px;">
-        <h4 style="position:relative; top: 20vh;" id="credit_price"></h4>
+        <div style="display: flex; position:absolute; top: 41vh; right: 47%">
+            <img src="https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png" style="position:relative; height: 20px;">
+            <h4 style="position:absolute;" id="credit_price"></h4>
+        </div>
         <!--<input type="submit" style="position:relative; top: 20vh;" id="sell" value="Eladás Kreditekért">-->
     </div>
 </div>

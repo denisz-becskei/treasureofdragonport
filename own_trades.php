@@ -1,6 +1,5 @@
 <?php
 session_start();
-header("Location: index.php");
 if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
@@ -14,7 +13,7 @@ if (isset($_POST["undo"])) {
     mysqli_query($conn, $sql);
     CloseCon($conn);
 
-    change_ongoing_trade_numbers($_SESSION["username"], "decrease");
+    decrease_trades($_SESSION["username"]);
     header("Location: own_trades.php");
 }
 
@@ -66,10 +65,10 @@ if (isset($_POST["undo"])) {
     echo "<div class='side_button'><a style='text-decoration: none;' href='index.php'>Kezdőlap</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='wheel.php'>Szerencsekerék</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='inventory.php'>Aranyzsák</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='ongoing_trades.php'>Éremcsere</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='signup.php'>Versenyre Jelentkezés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='leaderboard.php'>Ranglista</a></div>";
-    echo "<div class='side_button'><!--<a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a>--><img src='assets/uc.png' alt='under construction'></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='achievements.php'>Mérföldkövek</a></div>";
     if ($is_admin != "") {
         echo $is_admin;
     }
@@ -94,6 +93,8 @@ if (isset($_POST["undo"])) {
         </table>
     </div>
     <?php
+
+    include "externalPHPfiles/championDAO.php";
 
     $conn = OpenCon();
     $sql = "SELECT * FROM trades";
@@ -121,8 +122,8 @@ if (isset($_POST["undo"])) {
             }
             $i++;
             echo "<div style='background-color: ". $color ."; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
-                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 6%'><img style='width: 80px; height: 80px' alt='champion' src='".get_image_for_name($row["coin"])."'><p>".$row["coin"]."</p></div>
-                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 31%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='".get_image_for_name($row["coin_in_return"])."'><p>".$row["coin_in_return"]."</p></div>
+                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 6%'><img style='width: 80px; height: 80px' alt='champion' src='".get_image_for_name($row["coin"])."'><p>".modify_champion($row["coin"])."</p></div>
+                <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 31%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='".get_image_for_name($row["coin_in_return"])."'><p>".modify_champion($row["coin_in_return"])."</p></div>
                 <div style='width: 20%; display: flex; font-size: 20pt; position:absolute; left: 56%'><p>".$row["posted_on"]."</p></div>
                 <form action='own_trades.php' method='POST'>
                 <input type='text' value='".$row["trade_code"]."' name='id_to_remove' hidden>

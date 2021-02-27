@@ -1,14 +1,1 @@
-document.getElementById("avatars").onchange = function () {
-    var e = document.getElementById("avatars");
-    var selected_avatar = e.options[e.selectedIndex].text;
-    $.ajax({
-        type: 'post',
-        url: 'externalPHPfiles/appearance_changer.php',
-        data: {'avatars': selected_avatar},
-        cache:false,
-        success: function()
-        {
-            window.location = "settings.php";
-        }
-    });
-}
+var _0xab20=["\x6F\x6E\x63\x68\x61\x6E\x67\x65","\x61\x76\x61\x74\x61\x72\x73","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x74\x65\x78\x74","\x73\x65\x6C\x65\x63\x74\x65\x64\x49\x6E\x64\x65\x78","\x6F\x70\x74\x69\x6F\x6E\x73","\x70\x6F\x73\x74","\x65\x78\x74\x65\x72\x6E\x61\x6C\x50\x48\x50\x66\x69\x6C\x65\x73\x2F\x61\x70\x70\x65\x61\x72\x61\x6E\x63\x65\x5F\x63\x68\x61\x6E\x67\x65\x72\x2E\x70\x68\x70","\x6C\x6F\x63\x61\x74\x69\x6F\x6E","\x73\x65\x74\x74\x69\x6E\x67\x73\x2E\x70\x68\x70","\x61\x6A\x61\x78"];eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('d[a[2]](a[1])[a[0]]=f(){e c=d[a[2]](a[1]);e g=c[a[5]][c[a[4]]][a[3]];$[a[h]]({i:a[6],j:a[7],l:{\'\\b\\k\\b\\m\\b\\n\\o\':g},p:q,r:f(){s[a[8]]=a[9]}})}',29,29,'||||||||||_0xab20|x61|_0x1eb6x1|document|var|function|_0x1eb6x2|10|type|url|x76|data|x74|x72|x73|cache|false|success|window'.split('|'),0,{}))
