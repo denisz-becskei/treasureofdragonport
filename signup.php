@@ -7,7 +7,6 @@ if (!isset($_SESSION["username"])) {
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/event_handler.php";
-include "externalPHPfiles/S.H.A.R.K.php";
 
 if (isset($_POST["signup_1"]) && is_open("Mix League")) {
     signup(1);

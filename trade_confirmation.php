@@ -12,7 +12,6 @@ include "externalPHPfiles/update_new_inventory.php";
 include "externalPHPfiles/trading_functionality.php";
 include "externalPHPfiles/external_userDAO.php";
 include "externalPHPfiles/championDAO.php";
-include "externalPHPfiles/S.H.A.R.K.php";
 
 if (get_inventory_2($_SESSION["username"])[get_coins_by_id($_COOKIE["trade_id"])[1]] == 0 || get_coins_by_id($_COOKIE["trade_id"])[2] == $_SESSION["username"]) {
     initiate_violation($_SESSION["username"], "attempt of confirming unconfirmable trade");

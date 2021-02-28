@@ -4,7 +4,6 @@ if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
 include "db_connect.php";
-include "externalPHPfiles/S.H.A.R.K.php";
 ?>
 
 <!DOCTYPE html>
