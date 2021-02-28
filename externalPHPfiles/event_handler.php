@@ -94,26 +94,17 @@ function signoff($event_num) {
 function get_event_players($event_name) {
     $conn = OpenCon();
     if ($event_name == "Mix League") {
-        $sql = "SELECT player FROM event1_players";
-        $players_1 = $conn->query($sql);
-        $players = mysqli_fetch_array($players_1);
-        $sql = "SELECT ign FROM event1_players";
-        $ign = $conn->query($sql);
-        $ign = mysqli_fetch_array($ign);
+        $sql = "SELECT player, ign FROM event1_players";
+        $players = $conn->query($sql);
     } else {
-        $sql = "SELECT player FROM event2_players";
-        $players_1 = $conn->query($sql);
-        $players = mysqli_fetch_array($players_1);
-        $sql = "SELECT ign FROM event2_players";
-        $ign = $conn->query($sql);
-        $ign = mysqli_fetch_array($ign);
+        $sql = "SELECT player, ign FROM event2_players";
+        $players = $conn->query($sql);
     }
 
     $output = [];
 
-    for ($i = 0; $i < mysqli_num_rows($players_1); $i++) {
-        $temp = $players[$i] . "    :       ". $ign[$i];
-        array_push($output, $temp);
+    while ($row = mysqli_fetch_array($players)) {
+        array_push($output, $row["player"] . " | " . $row["ign"] . " | @" . get_discord_name($row["player"]));
     }
 
     return $output;

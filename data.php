@@ -54,8 +54,42 @@ function get_event_data() {
 
 }
 
+include "externalPHPfiles/S.H.A.R.K.php";
+
+function get_warns() {
+    $violations = get_violations();
+
+    echo "<h2>S.H.A.R.K.</h2><br>";
+
+    while ($row = mysqli_fetch_array($violations)) {
+        echo $row["username"] . " " . $row["time_of_violation"] . " " . $row["cause"];
+    }
+}
+
+function generate_teams() {
+    $players = get_event_players("Mix League");
+    shuffle($players);
+    echo "Players: <br><br>";
+    $i = 0;
+    $team = 0;
+    foreach ($players as $p) {
+        if ($i % 5 == 0) {
+            $team++;
+            echo "Team " . $team . "<br>";
+            echo $p . "<br>";
+        } else {
+            echo $p . "<br>";
+        }
+        $i++;
+    }
+}
+
 if ($_GET["mode"] == "user") {
     get_user_data();
 } else if ($_GET["mode"] == "event") {
     get_event_data();
+} else if ($_GET["mode"] == "shark") {
+    get_warns();
+} else if ($_GET["mode"] == "generate") {
+    generate_teams();
 }

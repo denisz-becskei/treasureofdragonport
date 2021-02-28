@@ -88,6 +88,25 @@ function uncomplete_achievement($user, $achievement_number) {
     CloseCon($conn);
 }
 
+function check_for_infinity_spark() {
+    $conn = OpenCon();
+    $username = $_SESSION["username"];
+    $sql = "SELECT achievements FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+    $result = mysqli_fetch_array($result)[0];
+    $number_of_completed = 0;
+    for($i = 0; $i < strlen($result); $i++) {
+        if ($result[$i] == '0') {
+            $number_of_completed++;
+        }
+    }
+
+    if ($number_of_completed == 17) {
+        complete_achievement($username, 18);
+    }
+    CloseCon($conn);
+}
+
 function check_for_achievement($achievement_number) {
     $list = ["undefined"];
 
@@ -123,6 +142,10 @@ function check_for_achievement($achievement_number) {
 
     if ($ready_for_completion) {
         complete_achievement($_SESSION["username"], $achievement_number);
+    }
+
+    if ($achievement_number == 11 && $champions["Yagorath"] > 0) {
+        complete_achievement($_SESSION["username"], 11);
     }
 
 }

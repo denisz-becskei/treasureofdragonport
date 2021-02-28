@@ -1,5 +1,7 @@
 <?php
 
+include "S.H.A.R.K.php";
+
 function get_felhasznalonev() {
 
     $conn = OpenCon();
@@ -43,6 +45,8 @@ function set_wheelturns($newValue) {
         if (mysqli_query($conn, $sql)) {
             print "Gutchi";
         }
+    } else {
+        initiate_violation($username, "undercount");
     }
     CloseCon($conn);
 }

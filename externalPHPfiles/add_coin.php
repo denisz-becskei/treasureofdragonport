@@ -26,13 +26,13 @@ $uncommon = $numberz[0] >= 10 && $numberz[0] < 26;
 if ($legendary) {
     array_push($final, $legendary_coin);
 } else if($epic) {
-    array_push($final, $epic_array[rand(0, sizeof($epic_array))]);
+    array_push($final, $epic_array[rand(0, sizeof($epic_array)-1)]);
 } else if($rare) {
-    array_push($final, $rare_array[rand(0, sizeof($rare_array))]);
+    array_push($final, $rare_array[rand(0, sizeof($rare_array)-1)]);
 } else if($uncommon) {
-    array_push($final, $uncommon_array[rand(0, sizeof($uncommon_array))]);
+    array_push($final, $uncommon_array[rand(0, sizeof($uncommon_array)-1)]);
 } else {
-    array_push($final, $common_array[rand(0, sizeof($common_array))]);
+    array_push($final, $common_array[rand(0, sizeof($common_array)-1)]);
 }
 
 shuffle($numberz);

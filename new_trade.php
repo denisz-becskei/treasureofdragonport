@@ -4,6 +4,7 @@ if (!isset($_SESSION["username"])) {
     header("Location: login.php");
 }
 include "db_connect.php";
+include "externalPHPfiles/S.H.A.R.K.php";
 ?>
 
 <!DOCTYPE html>
@@ -57,6 +58,9 @@ include "db_connect.php";
                 trade_init($_SESSION["username"], $to_trade, $to_get);
             }
         }
+        header("Location: ongoing_trades.php");
+    } else if (intval(get_inventory_2($_SESSION["username"])[$_POST["to_trade"]]) == 0) {
+        initiate_violation($_SESSION["username"], "trying to add an impossible trade");
         header("Location: ongoing_trades.php");
     }
 

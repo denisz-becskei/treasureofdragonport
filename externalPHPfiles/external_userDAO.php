@@ -14,6 +14,13 @@ function get_ign_external($username) {
     return mysqli_fetch_array($result)[0];
 }
 
+function get_discord_name($username) {
+    $conn = OpenCon();
+    $sql = "SELECT discord FROM user WHERE username = '$username'";
+    $result = $conn->query($sql);
+    return mysqli_fetch_array($result)[0];
+}
+
 function get_status_external($username) {
     $conn = OpenCon();
     $sql = "SELECT user_status FROM user WHERE username = '$username'";

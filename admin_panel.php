@@ -175,6 +175,14 @@ if (isset($_POST["data_2"])) {
     }
 }
 
+if (isset($_POST["data_3"])) {
+    header("Location: data.php?mode=shark");
+}
+
+if (isset($_POST["data_4"])) {
+    header("Location: data.php?mode=generate");
+}
+
 ?>
 <aside class="index_aside" style="<?php if (get_dm_status() == 0) { echo "background-color: lightgray";} else {echo "background-color:gray";}?>; float: left; width: 15%; height: 100%; position: fixed; text-align: center; left: 0; top: 0; overflow-y: scroll">
     <?php include "externalPHPfiles/rank_selector.php";
@@ -266,6 +274,14 @@ if (isset($_POST["data_2"])) {
                 <legend>Event adatainak lekérése</legend>
                 <input type="text" name="event" placeholder="Event">
                 <input type="submit" value="Adatlekérés" name="data_2">
+            </fieldset>
+            <fieldset>
+                <legend>S.H.A.R.K. adatainak lekérése</legend>
+                <input type="submit" value="Adatlekérés" name="data_3">
+            </fieldset>
+            <fieldset>
+                <legend>Event csapat generálás</legend>
+                <input type="submit" value="Generálás" name="data_4">
             </fieldset>
         </fieldset>
     </form>

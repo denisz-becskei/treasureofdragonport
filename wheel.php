@@ -91,6 +91,8 @@ include "db_connect.php";
         if (isset($_POST["spin-btn"]) && get_wheelturns() != 0) {
             set_wheelturns(get_wheelturns()-1);
             echo "<script src='scripts/wheel.js'></script>";
+        } elseif (isset($_POST["spin-btn"])) {
+            set_wheelturns(get_wheelturns()-1);
         }
     ?>
 </div>

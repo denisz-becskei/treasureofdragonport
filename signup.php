@@ -7,21 +7,34 @@ if (!isset($_SESSION["username"])) {
 include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/event_handler.php";
+include "externalPHPfiles/S.H.A.R.K.php";
 
 if (isset($_POST["signup_1"]) && is_open("Mix League")) {
     signup(1);
+    header("Location: signup.php");
+} elseif (isset($_POST["signup_1"]) && !is_open("Mix League")) {
+    initiate_violation($_SESSION["username"], "attempting signup to a closed event");
     header("Location: signup.php");
 }
 if (isset($_POST["signup_2"]) && is_open("Warriors of Hungary")) {
     signup(2);
     header("Location: signup.php");
+} elseif (isset($_POST["signup_2"]) && !is_open("Warriors of Hungary")) {
+    initiate_violation($_SESSION["username"], "attempting signup to a closed event");
+    header("Location: signup.php");
 }
 if (isset($_POST["signoff_1"]) && is_open("Mix League")) {
     signoff(1);
     header("Location: signup.php");
+} elseif (isset($_POST["signoff_1"]) && !is_open("Mix League")) {
+    initiate_violation($_SESSION["username"], "attempting signoff to a closed event");
+    header("Location: signup.php");
 }
 if (isset($_POST["signoff_2"]) && is_open("Warriors of Hungary")) {
     signoff(2);
+    header("Location: signup.php");
+} elseif (isset($_POST["signoff_2"]) && !is_open("Warriors of Hungary")) {
+    initiate_violation($_SESSION["username"], "attempting signoff to a closed event");
     header("Location: signup.php");
 }
 ?>
