@@ -131,16 +131,16 @@ function get_rarity_for_champion(champion) {
 function get_clean_name(champion) {
     switch (champion) {
         case "Sha_Lin":
-            console.log("Cleaning Sha Lin");
+            //console.log("Cleaning Sha Lin");
             return "Sha Lin";
         case "Bomb_King":
-            console.log("Cleaning Bomb King");
+            //console.log("Cleaning Bomb King");
             return "Bomb King";
         case "MalDamba":
-            console.log("Cleaning Mal'Damba");
+            //console.log("Cleaning Mal'Damba");
             return "Mal'Damba";
         default:
-            console.log("Cleaning " + champion);
+            //console.log("Cleaning " + champion);
             return champion;
     }
 }
