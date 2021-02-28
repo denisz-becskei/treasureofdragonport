@@ -10,26 +10,27 @@ include "db_connect.php";
 include "externalPHPfiles/userDAO.php";
 include "externalPHPfiles/update_new_inventory.php";
 include "externalPHPfiles/trading_functionality.php";
+include "externalPHPfiles/external_userDAO.php";
+include "externalPHPfiles/championDAO.php";
 
-if (get_coins_by_id($_COOKIE['trade_id'])[2] == $_SESSION["username"] || get_amount(get_coins_by_id($_COOKIE['trade_id'])[1]) == 0) {
+if (get_inventory_2($_SESSION["username"])[get_coins_by_id($_COOKIE["trade_id"])[1]] == 0 || get_coins_by_id($_COOKIE["trade_id"])[2] == $_SESSION["username"]) {
     header("Location: ongoing_trades.php");
 }
 
 if (isset($_POST["confirm"])) {
-    remove_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[0]);
-    remove_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[1]);
+    if (get_trade_date()) {
+        remove_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[0]);
+        remove_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[1]);
 
-    add_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[1]);
-    add_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[0]);
+        add_champion(get_coins_by_id($_COOKIE['trade_id'])[2], get_coins_by_id($_COOKIE['trade_id'])[1]);
+        add_champion($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[0]);
 
-    add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
+        add_cronias($_SESSION["username"], get_coins_by_id($_COOKIE['trade_id'])[2], $_COOKIE["trade_id"]);
 
-    change_ongoing_trade_numbers(get_coins_by_id($_COOKIE['trade_id'])[2], "decrease");
-
-    update_trade_date();
-    update_unique($_SESSION["username"]);
-    update_unique(get_coins_by_id($_COOKIE['trade_id'])[2]);
-    remove_trade($_COOKIE["trade_id"]);
+        update_trade_date();
+        decrease_trades(get_coins_by_id($_COOKIE['trade_id'])[2]);
+        remove_trade($_COOKIE["trade_id"]);
+    }
     header("Location: ongoing_trades.php");
 }
 if (isset($_POST["deny"])) {
@@ -100,22 +101,26 @@ if (isset($_POST["deny"])) {
     </form>
 
 </aside>
-<div class="container_push" style="height: 100vh; overflow-y: scroll">
+<div class="container_push" style="display: flex; flex-flow: row wrap; align-content: center; justify-content: center; height: 100vh; overflow-y: scroll">
 
-    <div>
-        <img src="assets/trading-bg.png" style="z-index: -5; position:absolute; top: 10vh; left: 15vw; height: 70vh;">
+    <div style="background-image: url('assets/trading-bg.png'); background-repeat: no-repeat; background-size: contain; height: 75vh; width: 50vw;">
 
-        <img style="width: 12vw; position:absolute; top: 25vh; left: 23%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[0])) ?>">
-        <img style="width: 10vw; position:relative; top: calc(100vh / 2 - 11vw); left: calc(100vw / 2 - 15vw);" src="assets/swap_icon_white.png">
-        <img style="width: 12vw; position:absolute; top: 25vh; right: 42%;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
+        <div style="margin-top: 18vh; display: flex; justify-content: center; align-content: center;">
+            <img style="width: 10vw; margin-right: 3vw;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[0])) ?>">
+            <img style="width: 8vw; margin-right: 3vw;" src="assets/swap_icon_white.png">
+            <img style="width: 10vw;" src="<?php echo get_image_for_name(trim(get_coins_by_id($_COOKIE['trade_id'])[1])) ?>">
+        </div>
 
-        <h3 style="position: absolute; top: calc(100vh / 2 + 2vh); left: calc(100vw / 2 - 22vw); color: white;">Biztos vagy benne, hogy végre szeretnéd a cserét hajtani?</h3>
 
-        <form action="trade_confirmation.php" method="POST" style="position:absolute; top: 60vh; left: calc(100vw / 2 - 475px / 2)">
-            <input type="submit" <?php if (get_trade_date() == false) { echo "disabled"; } ?> value="Igen" name="confirm">
-            <input type="submit" value="Nem" name="deny">
-            <p style="color: <?php if (get_dm_status() == 0) { echo "black";} else { echo "white"; }?>; position:absolute; top: 7vh;" <?php if (get_trade_date() == true) { echo "hidden"; }?>>Napi 1 csere megengedett!</p>
-        </form>
+        <div style="display: flex; flex-flow: column nowrap; align-content: center; justify-content: center; text-align: center">
+            <h3 style="color: white; font-size: 2vh">Biztos vagy benne, hogy végre szeretnéd a cserét hajtani?</h3>
+            <form action="trade_confirmation.php" method="POST">
+                <input type="submit" <?php if (get_trade_date() == false) { echo "disabled"; } ?> value="Igen" name="confirm">
+                <input type="submit" value="Nem" name="deny">
+                <p style="color: white" <?php if (get_trade_date() == true) { echo "hidden"; }?>>Napi 1 csere megengedett!</p>
+            </form>
+        </div>
+
     </div>
 
     <a href="ongoing_trades.php" style="position:absolute; left: 0; bottom: 20px; height: 85px; width: 85px; z-index: 50;">
@@ -134,23 +139,5 @@ if (isset($_POST["deny"])) {
 </body>
 <script src="scripts/preload.js"></script>
 <script>
-    <?php
-    $inventory = get_inventory(); $inventory = explode(",", $inventory);?>
-
-    var inventory = "<?php echo get_inventory()?>";
-    inventory = inventory.split(",");
-    inventory.pop();
-
-    for (let i = 2; i < <?php echo get_trade_count() + 2; ?>; i++) {
-        let btn = document.getElementById("btn" + i);
-        let text = document.getElementById("champion" + i);
-
-        for (let j = 0; j < inventory.length; j++) {
-            if (inventory[j].trim() === text.value) {
-                btn.removeAttribute("disabled");
-                break;
-            }
-        }
-    }
 </script>
 </html>

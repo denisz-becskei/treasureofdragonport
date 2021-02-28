@@ -22,6 +22,7 @@ if (isset($_POST["redir-btn"])) {
     <?php include "externalPHPfiles/dark_mode_checker.php"; if (get_dm_status() == 0) {echo "<link rel='stylesheet' type='text/css' href='css/style.css'>";} else {{echo "<link rel='stylesheet' type='text/css' href='css/style_dark.css'>";}
     } ?>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="scripts/jquery-3.5.1.js"></script>
     <title>Treasure of Dragon Port</title>
 </head>
 <style>
@@ -94,6 +95,5 @@ if (isset($_POST["redir-btn"])) {
 </div>
 </body>
 
-<script src="scripts/jquery-3.5.1.js"></script>
 <script src="scripts/wheel_result.js"></script>
 </html>

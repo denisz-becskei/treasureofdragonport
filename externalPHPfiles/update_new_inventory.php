@@ -47,4 +47,5 @@ function remove_champion($username, $champion) {
     $sql = "UPDATE user_inventory SET $champion = '$champion_amount' WHERE username = '$username'";
     mysqli_query($conn, $sql);
     CloseCon($conn);
+    update_unique($username);
 }

@@ -2,7 +2,7 @@
 session_start();
 include "db_connect.php";
 include "externalPHPfiles/external_userDAO.php";
-if (get_status($_SESSION["username"]) == 0) {
+if (get_status_external($_SESSION["username"]) == 0) {
     header("Location: index.php");
 }
 
@@ -11,24 +11,24 @@ function get_user_data() {
     echo "Username: " . $user . "<br>";
     $email = get_email($user);
     echo "E-mail: " . $email . "<br>";
-    $ign = get_ign($user);
+    $ign = get_ign_external($user);
     echo "IGN: " . $ign . "<br>";
-    $max_ranked = get_rank($user);
+    $max_ranked = get_rank_external($user);
     echo "Max Rank: " . $max_ranked . "<hr>";
     $wheelturns = get_current_wheelturns($user);
     echo "Wheelturns: " . $wheelturns . "<br>";
-    $credits = get_credits($user);
+    $credits = get_credits_external($user);
     echo "Credits: " . $credits . "<br>";
-    $cronias = get_cronias($user);
+    $cronias = get_cronias_external($user);
     echo "Cronias: " . $cronias . "<br>";
-    $uniques = get_unique($user);
+    $uniques = get_unique_external($user);
     echo "Number of Uniques: " . $uniques . "<br>";
 
     $champions = ["Androxus", "Ash", "Atlas", "Barik", "Bomb_King", "Buck", "Cassie", "Corvus", "Dredge", "Drogoz", "Evie", "Fernando", "Furia", "Grohk", "Grover", "Imani",
         "Inara", "Io", "Jenos", "Khan", "Kinessa", "Koga", "Lex", "Lian", "Maeve", "Makoa", "MalDamba", "Moji", "Pip", "Raum", "Ruckus", "Seris", "Sha_Lin", "Skye",
         "Strix", "Talus", "Terminus", "Tiberius", "Torvald", "Tyra", "Viktor", "Vivian", "Vora", "Willo", "Yagorath", "Ying", "Zhin"];
 
-    $inventory = get_inventory($user);
+    $inventory = get_inventory_external($user);
     echo "<br>Inventory: <br>";
     for ($i = 0; $i < 47; $i++) {
        echo $champions[$i] . ": " . $inventory[$champions[$i]] . "<br>";
@@ -51,8 +51,6 @@ function get_event_data() {
     foreach ($players as $p) {
         echo $p . "<br>";
     }
-
-
 
 }
 

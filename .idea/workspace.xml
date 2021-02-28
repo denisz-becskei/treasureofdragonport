@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="Version v1.0">
-      <change afterPath="$PROJECT_DIR$/data.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/externalPHPfiles/external_userDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
+    <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="New Version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/achievements.php" beforeDir="false" afterPath="$PROJECT_DIR$/achievements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin_panel.php" beforeDir="false" afterPath="$PROJECT_DIR$/admin_panel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/achievement_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/achievement_handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/add_coin.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/add_coin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/championDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/event_handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/event_handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/inventory_selling.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/inventory_selling.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/news.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/news.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/register_functionality.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.php" beforeDir="false" afterPath="$PROJECT_DIR$/data.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/externalPHPfiles/external_userDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/external_userDAO.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/trading_functionality.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_inventory.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_new_inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_new_inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/userDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/faq.php" beforeDir="false" afterPath="$PROJECT_DIR$/faq.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/new_trade.php" beforeDir="false" afterPath="$PROJECT_DIR$/new_trade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ongoing_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/ongoing_trades.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/own_trades.php" beforeDir="false" afterPath="$PROJECT_DIR$/own_trades.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/avatar.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/avatar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/captcha.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/captcha.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/check_for_ready.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/faq.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/faq.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/inventory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/new_trade.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/new_trade.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/settings.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/settings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/wheel.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.php" beforeDir="false" afterPath="$PROJECT_DIR$/settings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/signup.php" beforeDir="false" afterPath="$PROJECT_DIR$/signup.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trade_confirmation.php" beforeDir="false" afterPath="$PROJECT_DIR$/trade_confirmation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wheel.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wheel_result.php" beforeDir="false" afterPath="$PROJECT_DIR$/wheel_result.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +107,10 @@
       <workItem from="1614184554242" duration="13720000" />
       <workItem from="1614290176317" duration="288000" />
       <workItem from="1614453544389" duration="9682000" />
-      <workItem from="1614466142174" duration="466000" />
+      <workItem from="1614466142174" duration="568000" />
+      <workItem from="1614520460500" duration="4910000" />
+      <workItem from="1614525436058" duration="125000" />
+      <workItem from="1614536133298" duration="141000" />
     </task>
     <task id="LOCAL-00001" summary="New Trading System Implementation Start">
       <created>1611449420538</created>
@@ -202,7 +175,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612201480995</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="New Version">
+      <created>1614466694905</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1614466694906</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,7 +210,8 @@
     <MESSAGE value="New Backend Spin Logic" />
     <MESSAGE value="Settings Panel and Avatar Rework" />
     <MESSAGE value="Version v1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="Version v1.0" />
+    <MESSAGE value="New Version" />
+    <option name="LAST_COMMIT_MESSAGE" value="New Version" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

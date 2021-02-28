@@ -17,6 +17,7 @@ function get_image_for_name(name) {
         case "Barik":
             return "https://i.imgur.com/4FR5Iae.png";
         case "Bomb King":
+        case "Bomb_King":
             return "https://i.imgur.com/g4B0GIf.png";
         case "Buck":
             return "https://i.imgur.com/NyG2GH8.png";
@@ -74,6 +75,7 @@ function get_image_for_name(name) {
         case "Seris":
             return "https://i.imgur.com/aC8NZWv.png";
         case "Sha Lin":
+        case "Sha_Lin":
             return "https://i.imgur.com/RaH2pvt.png";
         case "Skye":
             return "https://i.imgur.com/9nqqix3.png";
@@ -111,7 +113,7 @@ function get_rarity_for_champion(champion) {
     let legendary = "Yagorath";
     let epic_array = ["Vora", "Corvus", "Raum", "Tiberius"];
     let rare_array = ["Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus"];
-    let uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye"];
+    let uncommon_array = ["Lian", "Tyra", "Bomb_King", "Sha_Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "MalDamba", "Androxus", "Skye"];
 
     if (legendary === champion) {
         return "<Legendás>";
@@ -123,6 +125,23 @@ function get_rarity_for_champion(champion) {
         return "<Egyedi>";
     } else {
         return "<Gyakori>";
+    }
+}
+
+function get_clean_name(champion) {
+    switch (champion) {
+        case "Sha_Lin":
+            console.log("Cleaning Sha Lin");
+            return "Sha Lin";
+        case "Bomb_King":
+            console.log("Cleaning Bomb King");
+            return "Bomb King";
+        case "MalDamba":
+            console.log("Cleaning Mal'Damba");
+            return "Mal'Damba";
+        default:
+            console.log("Cleaning " + champion);
+            return champion;
     }
 }
 
@@ -140,7 +159,6 @@ async function spin() {
         });
         return tmp;
     }();
-    console.log(get_db_spin_status)
     if (get_db_spin_status === "1") {
         let entire_array = ["Yagorath", "Vora", "Corvus", "Raum", "Tiberius", "Atlas", "Dredge", "Io", "Zhin", "Talus", "Imani", "Koga", "Furia", "Strix", "Khan", "Terminus",
             "Lian", "Tyra", "Bomb King", "Sha Lin", "Drogoz", "Makoa", "Ying", "Torvald", "Maeve", "Evie", "Kinessa", "Mal'Damba", "Androxus", "Skye",
@@ -198,9 +216,9 @@ async function spin() {
         item_image2.src = get_image_for_name(final_coins[1]);
         item_image3.src = get_image_for_name(final_coins[2]);
 
-        item_name1.innerHTML = `${final_coins[0]}`;
-        item_name2.innerHTML = `${final_coins[1]}`;
-        item_name3.innerHTML = `${final_coins[2]}`;
+        item_name1.innerHTML = get_clean_name(final_coins[0]);
+        item_name2.innerHTML = get_clean_name(final_coins[1]);
+        item_name3.innerHTML = get_clean_name(final_coins[2]);
 
         let ching = getElement("chinging");
         ching.currentTime = 0;

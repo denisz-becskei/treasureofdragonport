@@ -48,8 +48,9 @@ if (isset($_POST["modification-btn"])) {
     $uncomplete_achievement = $_POST["uncomplete_achievement"];
     $post_news = $_POST["post_news"];
     $add_coin = $_POST["add_coin"];
+    $remove_coin = $_POST["remove_coin"];
 
-    $editing_data = [false, false, false, false, false, false, false, false];
+    $editing_data = [false, false, false, false, false, false, false, false, false];
     $status_to_give = 0;
 
     if ($spins_to_add != "") {
@@ -84,6 +85,10 @@ if (isset($_POST["modification-btn"])) {
 
     if ($add_coin != "") {
         $editing_data[7] = true;
+    }
+
+    if ($remove_coin != "") {
+        $editing_data[8] = true;
     }
 
     $conn = OpenCon();
@@ -136,7 +141,9 @@ if (isset($_POST["modification-btn"])) {
     }
     if ($editing_data[7]) {
         add_champion($user_to_edit, $add_coin);
-        //update_unique($user_to_edit);
+    }
+    if ($editing_data[8]) {
+        remove_champion($user_to_edit, $remove_coin);
     }
     CloseCon($conn);
 }
@@ -225,6 +232,9 @@ if (isset($_POST["data_2"])) {
             <br>
             <label for="add_coin">Érme hozzáadása:</label>
             <input name="add_coin" id="add_coin" type="text">
+            <br>
+            <label for="add_coin">Érme levonása:</label>
+            <input name="remove_coin" id="remove_coin" type="text">
             <br>
             <input type="submit" name="modification-btn" value="Módosítások elvégzése">
         </fieldset>

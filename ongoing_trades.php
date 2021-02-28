@@ -117,6 +117,12 @@ if (isset($_POST["btn"])) {
         }
         $i++;
 
+        if (get_inventory_2($_SESSION["username"])[$row["coin_in_return"]] > 0 && $row["owned_by"] != $_SESSION["username"]) {
+            $disabled_status = "";
+        } else {
+            $disabled_status = "disabled";
+        }
+
         echo "<tr style='background-color: " . $color . "; width: 85%; height: 85px; position:relative; top: " . $top . "px; text-align: center;'>
 <td style='width: 16%;'><img style='width: 80px; height: 80px' alt='champion' src='" . get_image_for_name(trim($row["coin"])) . "'><p style='color: ". get_color_by_champion($row["coin"]) ."'>" . modify_champion($row["coin"]) . "</p></td>
 <td style='width: 16%'><img style='width: 80px; height: 80px' alt='champion_in_return' src='" . get_image_for_name(trim($row["coin_in_return"])) . "'><p style='color: ". get_color_by_champion($row["coin_in_return"]) ."'>" . modify_champion($row["coin_in_return"]) . "</p></td>
@@ -126,7 +132,7 @@ if (isset($_POST["btn"])) {
 <td style='width: 16%;'><form method='POST' action='ongoing_trades.php' style='display: flex; font-size: 20pt; position:relative; left: calc(50% - 25px); top: calc(50% - 12px);'>
                 <input type='text' value='" . $row["coin_in_return"] . "' id='champion". $i . "' hidden name='number'>
                 <input type='text' value='". $row["trade_code"] ."' hidden name='trade_code'>
-                <input type='submit' disabled value='Csere' id='btn". $i . "' name='btn'>
+                <input type='submit' ". $disabled_status ." value='Csere' id='btn". $i . "' name='btn'>
 </form></td>
 </tr>";
         $top += 20;

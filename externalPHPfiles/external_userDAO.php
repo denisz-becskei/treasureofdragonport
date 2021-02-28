@@ -7,21 +7,21 @@ function get_email($username) {
     return mysqli_fetch_array($result)[0];
 }
 
-function get_ign($username) {
+function get_ign_external($username) {
     $conn = OpenCon();
     $sql = "SELECT ign FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }
 
-function get_status($username) {
+function get_status_external($username) {
     $conn = OpenCon();
     $sql = "SELECT user_status FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }
 
-function get_rank($username) {
+function get_rank_external($username) {
     $conn = OpenCon();
     $sql = "SELECT max_rank FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
@@ -35,28 +35,28 @@ function get_current_wheelturns($username) {
     return mysqli_fetch_array($result)[0];
 }
 
-function get_credits($username) {
+function get_credits_external($username) {
     $conn = OpenCon();
     $sql = "SELECT credits FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }
 
-function get_cronias($username) {
+function get_cronias_external($username) {
     $conn = OpenCon();
     $sql = "SELECT cronia FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }
 
-function get_unique($username) {
+function get_unique_external($username) {
     $conn = OpenCon();
     $sql = "SELECT `unique` FROM user WHERE username = '$username'";
     $result = $conn->query($sql);
     return mysqli_fetch_array($result)[0];
 }
 
-function get_inventory($username): array
+function get_inventory_external($username): array
 {
     $conn = OpenCon();
 
