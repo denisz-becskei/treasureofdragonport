@@ -35,7 +35,7 @@ session_start();
             <br>
             <label for="email">E-mail cím (opcionális)</label>
             <br>
-            <input id="email" type="text" name="email" value="">
+            <input id="email" type="email" name="email" value="">
             <br>
             <label for="ign">In-game név</label>
             <p style="position:absolute; font-size: 8pt;">A mező csakis számokat és az angol ábécé betűit tartalmazhatja! Amennyiben Paladinsban ékezetes az ign-ed, annélkül írd le!</p><br><br>

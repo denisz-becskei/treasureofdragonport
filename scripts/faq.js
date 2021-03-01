@@ -1,17 +1,1 @@
-document.getElementById("btn1").onclick = function () {
-    document.getElementById("div1_1").removeAttribute("hidden");
-    document.getElementById("div2_1").setAttribute("hidden", "");
-    document.getElementById("div3_1").setAttribute("hidden", "");
-}
-
-document.getElementById("btn2").onclick = function () {
-    document.getElementById("div2_1").removeAttribute("hidden");
-    document.getElementById("div1_1").setAttribute("hidden", "");
-    document.getElementById("div3_1").setAttribute("hidden", "");
-}
-
-document.getElementById("btn3").onclick = function () {
-    document.getElementById("div3_1").removeAttribute("hidden");
-    document.getElementById("div2_1").setAttribute("hidden", "");
-    document.getElementById("div1_1").setAttribute("hidden", "");
-}
+var _0x4fb2=["\x6F\x6E\x63\x6C\x69\x63\x6B","\x62\x74\x6E\x31","\x67\x65\x74\x45\x6C\x65\x6D\x65\x6E\x74\x42\x79\x49\x64","\x68\x69\x64\x64\x65\x6E","\x72\x65\x6D\x6F\x76\x65\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x64\x69\x76\x31\x5F\x31","","\x73\x65\x74\x41\x74\x74\x72\x69\x62\x75\x74\x65","\x64\x69\x76\x32\x5F\x31","\x64\x69\x76\x33\x5F\x31","\x62\x74\x6E\x32","\x62\x74\x6E\x33"];eval(function(p,a,c,k,e,d){e=function(c){return c.toString(36)};if(!''.replace(/^/,String)){while(c--){d[c.toString(a)]=k[c]||c.toString(a)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('b[a[2]](a[1])[a[0]]=c(){b[a[2]](a[5])[a[4]](a[3]);b[a[2]](a[8])[a[7]](a[3],a[6]);b[a[2]](a[9])[a[7]](a[3],a[6])};b[a[2]](a[e])[a[0]]=c(){b[a[2]](a[8])[a[4]](a[3]);b[a[2]](a[5])[a[7]](a[3],a[6]);b[a[2]](a[9])[a[7]](a[3],a[6])};b[a[2]](a[d])[a[0]]=c(){b[a[2]](a[9])[a[4]](a[3]);b[a[2]](a[8])[a[7]](a[3],a[6]);b[a[2]](a[5])[a[7]](a[3],a[6])}',15,15,'||||||||||_0x4fb2|document|function|11|10'.split('|'),0,{}))

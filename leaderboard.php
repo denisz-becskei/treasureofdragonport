@@ -68,7 +68,7 @@ include "db_connect.php";
 <div class="container_push">
         <?php
         $conn = OpenCon();
-        $sql = "SELECT avatar, username, `unique` FROM user ORDER BY `unique` DESC";
+        $sql = "SELECT avatar, username, `unique` FROM user ORDER BY `unique` DESC, username ASC";
         $result = mysqli_query($conn, $sql);
 
         ?>

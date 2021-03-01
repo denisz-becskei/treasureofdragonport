@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0355bc77-d86e-486b-9595-7aa2bc1df311" name="Default Changelist" comment="New Version">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/dfa73d76-2f47-4114-8dc3-1410f5044858.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" beforeDir="false" afterPath="$PROJECT_DIR$/externalPHPfiles/update_spun.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventory.php" beforeDir="false" afterPath="$PROJECT_DIR$/inventory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/leaderboard.php" beforeDir="false" afterPath="$PROJECT_DIR$/leaderboard.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/faq.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/faq.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/get_image.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/inventory.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/new_trade.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/register_scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/register_scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/wheel_result.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/wheel_result.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +112,8 @@
       <workItem from="1614525436058" duration="125000" />
       <workItem from="1614536133298" duration="4247000" />
       <workItem from="1614542852888" duration="4339000" />
-      <workItem from="1614592602928" duration="3801000" />
+      <workItem from="1614592602928" duration="4037000" />
+      <workItem from="1614605712987" duration="1381000" />
     </task>
     <task id="LOCAL-00001" summary="New Trading System Implementation Start">
       <created>1611449420538</created>
@@ -212,7 +220,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614595266649</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="New Version">
+      <created>1614596665481</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1614596665481</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
