@@ -62,7 +62,7 @@ function get_warns() {
     echo "<h2>S.H.A.R.K.</h2><br>";
 
     while ($row = mysqli_fetch_array($violations)) {
-        echo $row["username"] . " " . $row["time_of_violation"] . " " . $row["cause"];
+        echo $row["username"] . " " . $row["time_of_violation"] . " " . $row["cause"] . "<br>";
     }
 }
 

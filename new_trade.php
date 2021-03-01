@@ -58,7 +58,7 @@ include "db_connect.php";
             }
         }
         header("Location: ongoing_trades.php");
-    } else if (intval(get_inventory_2($_SESSION["username"])[$_POST["to_trade"]]) == 0) {
+    } else if (isset($_POST["submit_trade"]) && intval(get_inventory_2($_SESSION["username"])[$_POST["to_trade"]]) == 0) {
         initiate_violation($_SESSION["username"], "trying to add an impossible trade");
         header("Location: ongoing_trades.php");
     }
@@ -84,6 +84,7 @@ include "db_connect.php";
         echo $is_admin;
     }
     echo "<div class='side_button'><a style='text-decoration: none;' href='faq.php'>GY.I.K.</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='feedback.php'>Visszajelzés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">

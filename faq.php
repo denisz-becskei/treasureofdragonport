@@ -46,6 +46,7 @@ header('Content-type: text/html; charset=UTF-8');
         echo $is_admin;
     }
     echo "<div class='side_button'><a style='text-decoration: none;' href='faq.php'>GY.I.K.</a></div>";
+    echo "<div class='side_button'><a style='text-decoration: none;' href='feedback.php'>Visszajelzés</a></div>";
     echo "<div class='side_button'><a style='text-decoration: none;' href='settings.php'>Beállítások</a></div>";
     ?>
     <form action="externalPHPfiles/logout_functionality.php" method="POST">
