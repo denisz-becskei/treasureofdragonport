@@ -21,15 +21,6 @@ include "externalPHPfiles/trading_functionality.php";
     } ?>
     <title>Treasure of Dragon Port</title>
 </head>
-<?php
-if (isset($_POST["delete"])) {
-    remove_from_inventory($_SESSION["username"], $_POST["item_num"], true);
-    if (get_coins_by_owner($_SESSION["username"])[3] == $_POST["item_num"]) {
-        remove_trade(get_coins_by_owner($_SESSION["username"])[0]);
-    }
-    header("Location: inventory.php");
-}
-?>
 <style>
     table, th, td {
         border: 1px solid <?php if (get_dm_status() == 0) {echo "black";} else {echo "white";} ?>;
@@ -108,10 +99,10 @@ if (isset($_POST["delete"])) {
     <div style="width: 100%; height: 5vh; text-align: center;">
         <h3 style="position:relative; top: 20vh;">Ritkaság:</h3>
         <h4 style="position:relative; top: 20vh;" id="rarity"></h4>
-        <h3 style="position:relative; top: 20vh;">Kreditár:</h3>
-        <div style="display: flex; position:absolute; top: 41vh; right: 47%">
-            <img src="https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png" style="position:relative; height: 20px;">
-            <h4 style="position:absolute;" id="credit_price"></h4>
+        <div style="display: flex; flex-flow: nowrap column; align-content: center; justify-content: center; position:absolute; width: 100%; top: 41vh; text-align: center;">
+            <h3>Kreditár:</h3>
+            <img src="https://static.wikia.nocookie.net/paladins_gamepedia/images/b/b2/Currency_Credits.png" style="position:relative; left: calc(50% - 10px); height: 20px; width: 20px;">
+            <h4 id="credit_price"></h4>
         </div>
         <!--<input type="submit" style="position:relative; top: 20vh;" id="sell" value="Eladás Kreditekért">-->
     </div>
